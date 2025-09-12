@@ -18,35 +18,13 @@ Antes de começar, certifique-se de ter instalado:
 - [Composer](https://getcomposer.org/) (para instalar dependências do Laravel)
 - [MySQL](https://www.mysql.com/) (para o banco de dados)
 
-## 📂 Estrutura de Pastas (Sugerida)
-tana-mao/
-├── backend/ # Código do Laravel
-│ ├── app/
-│ ├── bootstrap/
-│ ├── config/
-│ ├── database/
-│ └── ...
-│
-├── frontend/ # Código do React + TypeScript
-│ ├── src/
-│ │ ├── components/
-│ │ ├── pages/
-│ │ └── utils/
-│ ├── public/
-│ └── ...
-│
-├── .gitignore
-├── README.md
-└── LICENSE
-
-
 ## 📦 Instalação e Configuração
 Para rodar o projeto localmente, siga os passos abaixo.
 
 ### 1️⃣ Clonar o Repositório
 ```bash
 git clone https://github.com/pedrorgc/TaNaMao.git
-cd seu-repositorio
+cd TaNaMao
 ```
 
 ## Configuração do ambiente PHP/Laravel
