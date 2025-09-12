@@ -45,7 +45,7 @@ Para rodar o projeto localmente, siga os passos abaixo.
 
 ### 1️⃣ Clonar o Repositório
 ```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
+git clone https://github.com/pedrorgc/TaNaMao.git
 cd seu-repositorio
 ```
 
