@@ -13,7 +13,6 @@ use const PHP_BINARY;
 use const PHP_SAPI;
 use function array_keys;
 use function array_merge;
-use function array_values;
 use function assert;
 use function fclose;
 use function file_put_contents;
@@ -67,6 +66,7 @@ final readonly class DefaultJobRunner extends JobRunner
                 $job->arguments(),
                 null,
                 $job->redirectErrors(),
+                $job->requiresXdebug(),
             );
         }
 
@@ -127,7 +127,7 @@ final readonly class DefaultJobRunner extends JobRunner
             // @codeCoverageIgnoreEnd
         }
 
-        Facade::emitter()->childProcessStarted();
+        Facade::emitter()->testRunnerStartedChildProcess();
 
         fwrite($pipes[0], $job->code());
         fclose($pipes[0]);
@@ -193,13 +193,17 @@ final readonly class DefaultJobRunner extends JobRunner
                 ),
             );
 
-            if (!CodeCoverage::instance()->isActive() &&
-                xdebug_is_debugger_active() === false) {
+            if (
+                !CodeCoverage::instance()->isActive() &&
+                xdebug_is_debugger_active() === false &&
+                !$job->requiresXdebug()
+            ) {
+                // disable xdebug to speedup test execution
                 $phpSettings['xdebug.mode'] = 'xdebug.mode=off';
             }
         }
 
-        $command = array_merge($command, $this->settingsToParameters(array_values($phpSettings)));
+        $command = array_merge($command, $this->settingsToParameters($phpSettings));
 
         if (PHP_SAPI === 'phpdbg') {
             $command[] = '-qrr';

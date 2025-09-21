@@ -1,0 +1,39 @@
+# Composer dependencies
+/vendor
+
+# Node dependencies (se houver scripts npm no backend)
+node_modules/
+
+# Laravel environment file
+.env
+
+# Backup environment files
+.env.backup
+.env.production
+
+# Laravel storage & cache
+/storage/*.key
+/storage/debugbar
+/storage/framework/cache/data
+/storage/framework/sessions
+/storage/framework/views
+/storage/logs
+
+# Public assets
+/public/storage
+/public/build
+
+# IDEs & system files
+/.idea
+/.vscode
+/.phpstorm.meta.php
+/.DS_Store
+/Thumbs.db
+
+# Testing & PHPunit
+.phpunit.result.cache
+/.phpunit.cache
+
+# Homestead / Vagrant
+Homestead.json
+Homestead.yaml
