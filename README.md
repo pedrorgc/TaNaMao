@@ -4,19 +4,19 @@
 
 ## 🛠️ Tecnologias Utilizadas
 - **Frontend:** [React](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) + [Vite](https://vitejs.dev/)
-- **Backend:** [PHP](https://www.php.net/) com [Laravel](https://laravel.com/)
+- **Backend:** [PHP](https://www.php.net/) com [Laravel 12](https://laravel.com/)
 - **Banco de Dados:** [MySQL](https://www.mysql.com/)
 - **Gerenciador de Pacotes (Frontend):** npm ou yarn
 - **Gerenciador de Dependências (Backend):** Composer
 - **Versionamento:** Git + GitHub
 
 ## 📋 Pré-requisitos
-Antes de começar, certifique-se de ter instalado:
-- [Git](https://git-scm.com/) (para clonar o repositório)
+Certifique-se de ter instalado:
+- [Git](https://git-scm.com/)
 - [Node.js](https://nodejs.org/) (v18 ou superior) + npm (ou [Yarn](https://yarnpkg.com/))
 - [PHP](https://www.php.net/) (>= 8.1)
-- [Composer](https://getcomposer.org/) (para instalar dependências do Laravel)
-- [MySQL](https://www.mysql.com/) (para o banco de dados)
+- [Composer](https://getcomposer.org/)
+- [MySQL](https://www.mysql.com/)
 
 ## 📦 Instalação e Configuração
 Para rodar o projeto localmente, siga os passos abaixo.
@@ -35,9 +35,8 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-## Rode as migrações e inicie o servidor
+## Inicie o servidor
 ```bash
-php artisan migrate
 php artisan serve
 ```
 O backend estará disponível em http://localhost:8000.
@@ -48,5 +47,5 @@ cd frontend
 npm install
 npm run dev
 ```
-
+O frontend estará disponível em http://localhost:5173.
 
