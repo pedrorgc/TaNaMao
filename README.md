@@ -16,7 +16,7 @@ Certifique-se de ter instalado:
 - [Node.js](https://nodejs.org/) (v18 ou superior) + npm (ou [Yarn](https://yarnpkg.com/))
 - [PHP](https://www.php.net/) (>= 8.1)
 - [Composer](https://getcomposer.org/)
-- [MySQL](https://www.mysql.com/)
+- [MySQL](https://www.mysql.com/) - Opcional até o momento
 
 ## 📦 Instalação e Configuração
 Para rodar o projeto localmente, siga os passos abaixo.
@@ -27,25 +27,18 @@ git clone https://github.com/pedrorgc/TaNaMao.git
 cd TaNaMao
 ```
 
-## Configuração do ambiente PHP/Laravel
+## Configuração do ambiente PHP/Laravel e Frontend
 ```bash
 cd backend
 composer install
 cp .env.example .env
 php artisan key:generate
-```
-
-## Inicie o servidor
-```bash
-php artisan serve
-```
-O backend estará disponível em http://localhost:8000.
-
-## Configure o frontend (React + Typescript)
-```bash
-cd frontend
 npm install
 npm run dev
+php artisan serve
+
 ```
+
+
 
 
