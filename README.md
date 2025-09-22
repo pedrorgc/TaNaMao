@@ -34,9 +34,17 @@ composer install
 cp .env.example .env
 php artisan key:generate
 npm install
-npm run dev
-php artisan serve
 
+```
+## Inicialize o servidor Laravel
+```bash
+php artisan serve
+```
+Abra http://127.0.0.1:8000 e deve aparecer “Hello World!”
+
+## Abra outro terminal e inicie o frontend
+```bash
+npm run dev
 ```
 
 
