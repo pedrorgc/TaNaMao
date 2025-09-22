@@ -29,26 +29,16 @@ cd TaNaMao
 
 ## Configuração do ambiente PHP/Laravel e Frontend
 ```bash
-cd backend
 composer install
 cp .env.example .env
 php artisan key:generate
 npm install
 
 ```
-## Abra o terminal e inicie o frontend
+## Rode a aplicação
 ```bash
-npm run dev
+composer run dev
 ```
-
-## Abra um novo terminal e inicialize o servidor Laravel
-```bash
-php artisan serve
-```
-Abra http://127.0.0.1:8000 e deve aparecer “Hello World!”
-
-
-
 
 
 
