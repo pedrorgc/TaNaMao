@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>React SPA</title>
+    @viteReactRefresh
+    @vite('resources/frontend/main.tsx')
 </head>
 <body>
     <div id="root"></div>
-    <script type="module" src="{{ asset('build/main.js') }}"></script>
 </body>
 </html>

@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
 import api from "./api";
 
+type User = {
+  id: number;
+  name: string;
+};
+
 function App() {
-  const [users, setUsers] = useState<any[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
     api.get("/users").then(res => setUsers(res.data));
