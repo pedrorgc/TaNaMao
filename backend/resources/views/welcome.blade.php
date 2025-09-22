@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>React SPA</title>
+    <title>Projeto</title>
     @viteReactRefresh
-    @vite('resources/frontend/main.tsx')
+    @vite('resources/js/app.tsx')
 </head>
 <body>
-    <div id="root"></div>
+    <div id="app"></div>
 </body>
 </html>

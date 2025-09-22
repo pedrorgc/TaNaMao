@@ -1,39 +1,24 @@
-# Composer dependencies
-/vendor
-
-# Node dependencies (se houver scripts npm no backend)
-node_modules/
-
-# Laravel environment file
+*.log
+.DS_Store
 .env
-
-# Backup environment files
 .env.backup
 .env.production
-
-# Laravel storage & cache
-/storage/*.key
-/storage/debugbar
-/storage/framework/cache/data
-/storage/framework/sessions
-/storage/framework/views
-/storage/logs
-
-# Public assets
-/public/storage
-/public/build
-
-# IDEs & system files
-/.idea
-/.vscode
-/.phpstorm.meta.php
-/.DS_Store
-/Thumbs.db
-
-# Testing & PHPunit
+.phpactor.json
 .phpunit.result.cache
+/.fleet
+/.idea
+/.nova
 /.phpunit.cache
-
-# Homestead / Vagrant
+/.vscode
+/.zed
+/auth.json
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+/vendor
 Homestead.json
 Homestead.yaml
+Thumbs.db
