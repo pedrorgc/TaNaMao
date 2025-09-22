@@ -33,7 +33,8 @@ composer install
 cp .env.example .env
 php artisan key:generate
 npm install
-
+touch database/database.sqlite
+php artisan migrate --seed
 ```
 ## Rode a aplicação
 ```bash
