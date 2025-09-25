@@ -21,24 +21,68 @@ Certifique-se de ter instalado:
 ## 📦 Instalação e Configuração
 Para rodar o projeto localmente, siga os passos abaixo.
 
-### 1️⃣ Clonar o Repositório
+## Clonar o Repositório
 ```bash
 git clone https://github.com/pedrorgc/TaNaMao.git
 cd TaNaMao
 ```
 
-## Configuração do ambiente PHP/Laravel e Frontend
+## Instalar Dependências
 ```bash
-composer install
+composer install   # Backend
+npm install        # Frontend
+
+## Configurar o Ambiente
+```bash
 cp .env.example .env
 php artisan key:generate
-npm install
+
+####  Usando MySQL  (opicional)
+Edite o .env para colocar os dados do seu banco:
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=TaNaMao
+DB_USERNAME=root
+DB_PASSWORD=SuaSenha
+
+php artisan key:generate
+
+Crie o banco de dados (caso ainda não exista):
+
+ CREATE DATABASE TaNaMao CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+----------------------------------------------------------------
+####  Usando SQLite (mais simples)
+DB_CONNECTION=sqlite
+DB_DATABASE=/absolute/path/para/seu/projeto/database/database.sqlite
+
+#Crie o arquivo do banco:
+
 touch database/database.sqlite
+
+## Limpar Cache e Configurações
+```bash
+
+php artisan config:clear
+php artisan cache:clear
+composer dump-autoload
+
+#### Rodar Migrations e Seeders 
+```bash
+
+php artisan migrate:fresh --seed
+
+php artisan config:clear
+php artisan cache:clear
+
 php artisan migrate --seed
 ```
 ## Rode a aplicação
 ```bash
-composer run dev
+php artisan serve #backend
+npm run dev #frontend
+
+composer run dev #ambos
 ```
 
 
