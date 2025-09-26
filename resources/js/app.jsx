@@ -1,12 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import { createRoot } from "react-dom/client";
+import { createInertiaApp } from "@inertiajs/inertia-react";
 
-export default function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-      </Routes>
-    </Router>
-  );
-}
+createInertiaApp({
+  resolve: name => import(`./Pages/${name}.jsx`).then(module => module.default), 
+  setup({ el, App, props }) {
+    createRoot(el).render(<App {...props} />);
+  },
+});
