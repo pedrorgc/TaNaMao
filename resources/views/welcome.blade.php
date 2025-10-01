@@ -1,0 +1,25 @@
+<!-- resources/views/layouts/app.blade.php -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title', 'Meu Projeto Laravel')</title>
+    <!-- Aqui você pode adicionar CSS/JS -->
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{{ url('/') }}">Home</a>
+        </nav>
+    </header>
+
+    <main>
+        @yield('content')
+    </main>
+
+    <footer>
+        <p>© {{ date('Y') }} Meu Projeto Laravel</p>
+    </footer>
+</body>
+</html>
