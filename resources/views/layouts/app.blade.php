@@ -16,7 +16,7 @@
     <!-- Navbar -->
     @include('components.navbar')
 
-    <div class="container my-4 container-fluid">
+    <div class="container my-4">
 
 
         <!-- Alertas -->
