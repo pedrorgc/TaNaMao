@@ -59,6 +59,11 @@
                 <i class="bi bi-check-lg fs-1"></i>
                 <h3>3. Contrate</h3>
                 <p>Contrate direto pela plataforma</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="text-center mt-5">
     <h1 class="fw-bold">O que nossos usuários dizem</h1>
     
