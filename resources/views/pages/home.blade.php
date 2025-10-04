@@ -3,6 +3,7 @@
 @section('title', 'Página Inicial')
 
 @section('content')
+
 <div class="text-center mt-5">
     <h1>Encontre o profissional <span class="text-primary">certo para você</span></h1>
     <p>Conectamos você aos melhores prestadores de serviço da sua região.
@@ -21,8 +22,7 @@
     </div>
 </div>
 
-
-<div class="text-center mt-5">
+<div class="fw-bold text-center mt-5">
     <h1>Categorias de Serviços</h1>
 
     <div class="row mt-5">
@@ -41,8 +41,8 @@
     </div>
 </div>
 
-<div>
-    <h1 class='text-center mt-5'>Como Funciona</h1>
+<div class=" mt-5">
+    <h1 class='fw-bold text-center'>Como Funciona</h1>
     <div class="container text-center">
         <div class="row justify-content-center">
             <div class="col-md-4 mt-5">
@@ -66,11 +66,11 @@
 
 <div class="text-center mt-5">
     <h1 class="fw-bold">O que nossos usuários dizem</h1>
-    
-    <div class="row justify-content-center mt-4">
+
+    <div class="row justify-content-center mt-5">
         <!-- Card 1 -->
-        <div class="col-md-3 m-2">
-            <div class="p-4 bg-light rounded-3 shadow-sm h-100">
+        <div class="col-md-3 m-2 mt-5">
+            <div class="p-4 bg-body-secondary rounded-3 shadow-sm h-100">
                 <!-- Estrelas -->
                 <div class="mb-2">
                     <i class="bi bi-star-fill text-dark"></i>
@@ -89,8 +89,8 @@
         </div>
 
         <!-- Card 2 -->
-        <div class="col-md-3 m-2">
-            <div class="p-4 bg-light rounded-3 shadow-sm h-100">
+        <div class="col-md-3 m-2 mt-5">
+            <div class="p-4 bg-body-secondary rounded-3 shadow-sm h-100">
                 <div class="mb-2">
                     <i class="bi bi-star-fill text-dark"></i>
                     <i class="bi bi-star-fill text-dark"></i>
@@ -105,8 +105,8 @@
         </div>
 
         <!-- Card 3 -->
-        <div class="col-md-3 m-2">
-            <div class="p-4 bg-light rounded-3 shadow-sm h-100">
+        <div class="col-md-3 m-2 mt-5">
+            <div class="p-4 bg-body-secondary rounded-3 shadow-sm h-100">
                 <div class="mb-2">
                     <i class="bi bi-star-fill text-dark"></i>
                     <i class="bi bi-star-fill text-dark"></i>
@@ -122,4 +122,22 @@
     </div>
 </div>
 
+<div class="text-center mt-5 py-5">
+    <h1>Sobre Nós</h1>
+    <div class="container mt-2">
+        <div class="d-flex justify-content-center align-items-center">
+            <img src="{{ asset('assets/TaNaMao.png') }}" class="me-2" alt="TaNaMao" style="width: 320px;">
+            <div class="text-start" style="max-width: 320px;">
+                <p class="card-text m-0">
+                    O TaNaMão surgiu com o
+                    propósito de conectar quem
+                    precisa com quem sabe fazer.
+                    Somos um sistema que conecta
+                    clientes e profissionais que
+                    buscam um mesmo propósito.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
