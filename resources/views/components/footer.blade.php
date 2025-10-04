@@ -4,7 +4,7 @@
             <!-- Logo e descrição -->
             <div class="col-md-3 mb-4">
                 <h5 class="fw-bold"> 
-                    <img src="{{ asset('assets/logo_TaNaMao.png') }}" alt="TaNaMão" style="height: 30px;">
+                    <img src="{{ asset('assets/logo_TaNaMao.png') }}" alt="TaNaMão" style="height: 50px;">
                 </h5>
                 <p class="small">
                     Encontre os melhores serviços locais de forma rápida, prática e confiável.

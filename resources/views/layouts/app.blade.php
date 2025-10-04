@@ -18,8 +18,7 @@
 
     <div class="container my-4">
     <!-- Conteúdo principal -->
-    <main class="flex-fill">
-        <div class="container my-4">
+    <main class="flex-fill container my-4">
             <!-- Alertas -->
             @include('components.alert')
 
