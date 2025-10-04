@@ -16,6 +16,7 @@
     <!-- Navbar -->
     @include('components.navbar')
 
+    <div class="container my-4">
     <!-- Conteúdo principal -->
     <main class="flex-fill">
         <div class="container my-4">
