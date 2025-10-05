@@ -20,7 +20,7 @@
                     <a class="nav-link" href="#sobre">Sobre</a>
                 </li>
                 <li class="nav-item mx-3">
-                    <a class="nav-link d-flex align-items-center" href="#entrar">
+                    <a class="nav-link d-flex align-items-center" href="login">
                         <i class="bi bi-person-fill me-2 fs-5"></i> Entrar
                     </a>
                 </li>
