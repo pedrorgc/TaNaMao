@@ -105,11 +105,21 @@
         <div class="table-responsive rounded-3 bg-white shadow-sm p-3">
           <div class="d-flex justify-content-between align-items-center mb-3">
             <h5 class="mb-0">Usuários recentes</h5>
-            <div class="d-flex gap-2">
-              <input class="form-control form-control-sm" placeholder="Buscar usuários" style="min-width:200px;">
-              <button class="btn btn-primary btn-sm">Adicionar usuário</button>
+            <div class="d-flex align-items-center gap-2">
+              <input
+                class="form-control"
+                placeholder="Buscar usuários"
+                style="min-width:200px; max-width:250px;"
+              >
+              <button
+                class="btn btn-primary"
+                style="white-space: nowrap; height: 38px; padding: 0 16px;"
+              >
+                Adicionar usuário
+              </button>
             </div>
           </div>
+
           <table class="table table-borderless mb-0 align-middle">
             <thead>
               <tr>
@@ -194,9 +204,18 @@
         <div class="table-responsive rounded-3 bg-white shadow-sm p-3">
           <div class="d-flex justify-content-between align-items-center mb-3">
             <h5 class="mb-0">Prestadores Recentes</h5>
-            <div class="d-flex gap-2">
-              <input class="form-control form-control-sm" placeholder="Buscar prestadores" style="min-width:200px;">
-              <button class="btn btn-primary btn-sm">Verificar Prestador</button>
+            <div class="d-flex align-items-center">
+              <input
+                class="form-control"
+                placeholder="Buscar prestadores"
+                style="min-width:200px; max-width:250px;"
+              >
+              <button
+                class="btn btn-primary"
+                style="white-space: nowrap; height: 38px; padding: 0 16px; margin-left:8px;"
+              >
+                Verificar Prestador
+              </button>
             </div>
           </div>
           <table class="table table-borderless mb-0 align-middle">
@@ -287,9 +306,18 @@
         <div class="table-responsive rounded-3 bg-white shadow-sm p-3">
           <div class="d-flex justify-content-between align-items-center mb-3">
             <h5 class="mb-0">Serviços Recentes</h5>
-            <div class="d-flex gap-2">
-              <input class="form-control form-control-sm" placeholder="Buscar Serviços..." style="min-width:200px;">
-              <button class="btn btn-primary btn-sm">Gerar Relatório</button>
+            <div class="d-flex align-items-center">
+              <input
+                class="form-control"
+                placeholder="Buscar Serviços..."
+                style="min-width:200px; max-width:250px;"
+              >
+              <button
+                class="btn btn-primary"
+                style="white-space: nowrap; height: 38px; padding: 0 16px; margin-left:8px;"
+              >
+                Gerar Relatório
+              </button>
             </div>
           </div>
           <table class="table table-borderless mb-0 align-middle">
