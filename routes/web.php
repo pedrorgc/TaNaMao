@@ -6,13 +6,8 @@ Route::get('/', function () {
     return view('pages.public.home');
 });
 
-<<<<<<< HEAD
 Route::get('/about', function () {
     return view('pages.public.about');
-=======
-Route::get('/login', function () {
-    return view('pages.login');
->>>>>>> main
 });
 
 Route::get('/contact', function () {
