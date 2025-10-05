@@ -6,8 +6,8 @@ Route::get('/', function () {
     return view('pages.public.home');
 });
 
-Route::get('/about', function () {
-    return view('pages.public.about');
+Route::get('/login', function () {
+    return view('pages.public.login');
 });
 
 Route::get('/contact', function () {
