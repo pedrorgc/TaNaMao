@@ -23,5 +23,5 @@ Route::get('/admin', function () {
 });
 
 Route::get('/profile', function () {
-    return view('pages.profile');
+    return view('pages.public.profile');
 });
