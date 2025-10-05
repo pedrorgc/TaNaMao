@@ -9,15 +9,17 @@
     <p>Conectamos você aos melhores prestadores de serviço da sua região.
        Rápido, confiável e na palma da sua mão.</p>
 
-    <div class="d-flex gap-2 justify-content-center mt-3">
+    <div class="d-flex gap-3 justify-content-center mt-3">
         @include('components.button', [
             'slot' => 'Encontrar Serviços',
-            'class' => 'btn-primary'
+            'class' => 'btn-primary',
+            'style' => 'font-size: 0.9rem; padding: 6px 18px;'
         ])
 
         @include('components.button', [
             'slot' => 'Prestar Serviços',
-            'class' => 'btn-secondary'
+            'class' => 'btn-secondary',
+            'style' => 'font-size: 0.9rem; padding: 6px 18px;'
         ])
     </div>
 </div>
@@ -136,4 +138,15 @@
         </div>
     </div>
 </div>
+
+<style>
+  /* diminui os botões apenas nesta página */
+  .custom-btn {
+    min-width: 160px !important;
+    min-height: 35px !important;
+    padding: 6px 0 !important;
+    font-size: 0.95rem !important;
+  }
+</style>
+
 @endsection
