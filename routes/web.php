@@ -35,6 +35,10 @@ Route::get('/servicos/create', function () {
     return view('pages.public.service-create');
 });
 
+Route::get('/servicos', function () {
+    return view('pages.public.service-area');
+});
+
 Route::get('/admin', function () {
     return view('pages.admin.profile');
 });
