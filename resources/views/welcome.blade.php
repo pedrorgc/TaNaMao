@@ -18,8 +18,6 @@
         @yield('content')
     </main>
 
-    <footer>
-        <p>© {{ date('Y') }} Meu Projeto Laravel</p>
-    </footer>
+    @include('components.footer')
 </body>
 </html>

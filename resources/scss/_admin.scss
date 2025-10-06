@@ -1,0 +1,66 @@
+/* Styles específicos do painel admin */
+
+.admin-tabs-wrap{
+  background: #eceff1; // tom levemente acinzentado
+  padding: 10px 12px; // espaço visual maior no contêiner
+  border-radius: 999px;
+}
+
+.admin-tabs-wrap .nav{
+  display:flex;
+  gap:0;
+  justify-content:space-between;
+  align-items:center;
+  width:100%;
+}
+.admin-tabs-wrap .nav .nav-item{
+  flex: 1 1 0; // cada item ocupa espaço igual
+  display:flex;
+  justify-content:center; // centraliza o botão dentro da célula
+  padding: 0 6px; // espaço interno entre células
+}
+
+.admin-pill{
+  display:inline-block;
+  background: transparent;
+  border: 0;
+  color: #6c757d;
+  padding: 6px 36px; // pílula mais alongada horizontalmente
+  border-radius: 999px;
+  box-shadow: none;
+  transition: transform .12s ease-in-out, box-shadow .12s ease-in-out;
+  font-weight: 600;
+  width: auto; // largura definida pelo padding, não pelo container
+  text-align: center;
+  white-space: nowrap;
+}
+
+.admin-pill.active{
+  background: #ffffff;
+  color: #212529;
+  box-shadow: 0 8px 20px rgba(16,24,40,0.08);
+  transform: translateY(-2px);
+}
+
+.admin-pill:focus{
+  outline: none;
+  box-shadow: 0 8px 20px rgba(16,24,40,0.08);
+}
+
+.admin-pill:hover{
+  transform: translateY(-2px);
+}
+
+// Espaçamento e compactação das métricas e tabelas
+.admin-metrics { gap: 12px; }
+.metric-card { padding: 14px; }
+.metric-card .fs-4 { font-size: 1.2rem; }
+.table-responsive .table td, .table-responsive .table th { padding: 10px 12px; }
+.table-responsive .table thead th { color: #6c757d; font-size: 0.9rem; }
+.form-control.form-control-sm { padding: 6px 10px; }
+.btn-sm { padding: 6px 10px; }
+
+@media (max-width: 767px){
+  .admin-pill{padding:6px 12px;font-size:14px}
+  .metric-card { padding:10px }
+}

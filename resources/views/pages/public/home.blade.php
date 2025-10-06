@@ -9,15 +9,17 @@
     <p>Conectamos você aos melhores prestadores de serviço da sua região.
        Rápido, confiável e na palma da sua mão.</p>
 
-    <div class="d-flex gap-2 justify-content-center mt-3">
+    <div class="d-flex gap-3 justify-content-center mt-3">
         @include('components.button', [
             'slot' => 'Encontrar Serviços',
-            'class' => 'btn-primary'
+            'class' => 'btn-primary',
+            'style' => 'font-size: 0.9rem; padding: 6px 18px;'
         ])
 
         @include('components.button', [
             'slot' => 'Prestar Serviços',
-            'class' => 'btn-secondary'
+            'class' => 'btn-secondary',
+            'style' => 'font-size: 0.9rem; padding: 6px 18px;'
         ])
     </div>
 </div>
@@ -41,7 +43,7 @@
     </div>
 </div>
 
-<div class=" mt-5">
+<div class=" bg bg-body-secondary mt-5">
     <h1 class='fw-bold text-center'>Como Funciona</h1>
     <div class="container text-center">
         <div class="row justify-content-center">
@@ -122,22 +124,29 @@
     </div>
 </div>
 
-<div class="text-center mt-5 py-5">
+<div class="bg bg-body-secondary text-center mt-5 py-5">
     <h1>Sobre Nós</h1>
     <div class="container mt-2">
         <div class="d-flex justify-content-center align-items-center">
-            <img src="{{ asset('assets/TaNaMao.png') }}" class="me-2" alt="TaNaMao" style="width: 320px;">
-            <div class="text-start" style="max-width: 320px;">
-                <p class="card-text m-0">
-                    O TaNaMão surgiu com o
-                    propósito de conectar quem
-                    precisa com quem sabe fazer.
-                    Somos um sistema que conecta
-                    clientes e profissionais que
-                    buscam um mesmo propósito.
+            <img src="{{ asset('assets/TaNaMao-3D.png') }}" class="me-5" alt="TaNaMao" style="width: 350px;">
+            <div class="text-start" style="max-width: 400px;">
+                <p class="fs-4 card-text m-0">
+                    O TaNaMão surgiu com o propósito de conectar quem precisa com quem sabe fazer.
+                    Somos um sistema que conecta clientes e profissionais que buscam um mesmo propósito.
                 </p>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+  /* diminui os botões apenas nesta página */
+  .custom-btn {
+    min-width: 160px !important;
+    min-height: 35px !important;
+    padding: 6px 0 !important;
+    font-size: 0.95rem !important;
+  }
+</style>
+
 @endsection
