@@ -27,12 +27,16 @@ Route::get('/contact', function () {
 
 // Sua rota de cadastro
 Route::get('/cadastro', function () {
-    return view('pages.cadastro');
+    return view('pages.public.cadastro');
 });
 
 // Rotas que vieram da branch main
 Route::get('/servicos/create', function () {
     return view('pages.public.service-create');
+});
+
+Route::get('/servicos', function () {
+    return view('pages.public.service-area');
 });
 
 Route::get('/admin', function () {

@@ -16,22 +16,10 @@
     <div class="row mb-3">
       <div class="col-12">
         <div class="d-flex gap-3">
-          <div class="p-3 bg-white rounded-3 shadow-sm flex-fill text-center">
-            <div class="fw-bold">Total de Usuários</div>
-            <div class="fs-4">0.000</div>
-          </div>
-          <div class="p-3 bg-white rounded-3 shadow-sm flex-fill text-center">
-            <div class="fw-bold">Prestadores Ativos</div>
-            <div class="fs-4">0.000</div>
-          </div>
-          <div class="p-3 bg-white rounded-3 shadow-sm flex-fill text-center">
-            <div class="fw-bold">Serviços ativos</div>
-            <div class="fs-4">00</div>
-          </div>
-          <div class="p-3 bg-white rounded-3 shadow-sm flex-fill text-center">
-            <div class="fw-bold">Receita Mensal</div>
-            <div class="fs-4">R$ 00.000</div>
-          </div>
+          <x-metric-card title="Total de Usuários" value="0.000" />
+          <x-metric-card title="Prestadores Ativos" value="0.000" />
+          <x-metric-card title="Serviços ativos" value="00" />
+          <x-metric-card title="Receita Mensal" value="R$ 00.000" />
         </div>
       </div>
     </div>
@@ -133,13 +121,7 @@
             <tbody>
               <tr>
                 <td>
-                  <div class="d-flex align-items-center gap-3">
-                    <div class="rounded-circle bg-primary text-white d-inline-flex justify-content-center align-items-center" style="width:40px;height:40px;">MD</div>
-                    <div>
-                      <div class="fw-bold mb-0">Maria Oliveira</div>
-                      <small class="text-muted">maria@email.com</small>
-                    </div>
-                  </div>
+                  <x-avatar-cell name="Maria Oliveira" email="maria@email.com" src="https://i.pravatar.cc/150?u=maria@example.com" bg="bg-primary" />
                 </td>
                 <td>Cliente</td>
                 <td>24/01/2024</td>
@@ -154,13 +136,7 @@
 
               <tr>
                 <td>
-                  <div class="d-flex align-items-center gap-3">
-                    <div class="rounded-circle bg-secondary text-white d-inline-flex justify-content-center align-items-center" style="width:40px;height:40px;">JS</div>
-                    <div>
-                      <div class="fw-bold mb-0">João Silva</div>
-                      <small class="text-muted">joao@email.com</small>
-                    </div>
-                  </div>
+                  <x-avatar-cell name="João Silva" email="joao@email.com" src="https://www.petz.com.br/blog/wp-content/uploads/2022/06/lagarto-troca-de-pele-3.jpg" bg="bg-secondary" />
                 </td>
                 <td>Prestador</td>
                 <td>23/01/2024</td>
@@ -175,13 +151,7 @@
 
               <tr>
                 <td>
-                  <div class="d-flex align-items-center gap-3">
-                    <div class="rounded-circle bg-primary text-white d-inline-flex justify-content-center align-items-center" style="width:40px;height:40px;">JP</div>
-                    <div>
-                      <div class="fw-bold mb-0">José Felipe</div>
-                      <small class="text-muted">jose@email.com</small>
-                    </div>
-                  </div>
+                  <x-avatar-cell name="José Felipe" email="jose@email.com" bg="bg-primary" />
                 </td>
                 <td>Cliente</td>
                 <td>22/01/2024</td>
@@ -233,11 +203,7 @@
               <tr>
                 <td>
                   <div class="d-flex align-items-center gap-3">
-                    <div class="rounded-circle bg-primary text-white d-inline-flex justify-content-center align-items-center" style="width:44px;height:44px;">CO</div>
-                    <div>
-                      <div class="fw-bold mb-0">Carlos Oliveira</div>
-                      <small class="text-muted">19/01/2024</small>
-                    </div>
+                    <x-avatar-cell name="Carlos Oliveira" email="" bg="bg-primary" :size="44" />
                   </div>
                 </td>
                 <td>Encanador</td>
@@ -255,11 +221,7 @@
               <tr>
                 <td>
                   <div class="d-flex align-items-center gap-3">
-                    <div class="rounded-circle bg-secondary text-white d-inline-flex justify-content-center align-items-center" style="width:44px;height:44px;">LM</div>
-                    <div>
-                      <div class="fw-bold mb-0">Laura Mendes</div>
-                      <small class="text-muted">18/01/2024</small>
-                    </div>
+                    <x-avatar-cell name="Laura Mendes" email="" bg="bg-secondary" :size="44" />
                   </div>
                 </td>
                 <td>Diarista</td>
@@ -277,11 +239,7 @@
               <tr>
                 <td>
                   <div class="d-flex align-items-center gap-3">
-                    <div class="rounded-circle bg-primary text-white d-inline-flex justify-content-center align-items-center" style="width:44px;height:44px;">RS</div>
-                    <div>
-                      <div class="fw-bold mb-0">Roberto Silva</div>
-                      <small class="text-muted">17/01/2024</small>
-                    </div>
+                    <x-avatar-cell name="Roberto Silva" email="" bg="bg-primary" :size="44" />
                   </div>
                 </td>
                 <td>Eletricista</td>
