@@ -33,11 +33,7 @@
                             <p class="mb-1 text-muted">Cliente</p>
                             <small class="text-muted"><i class="bi bi-calendar"></i> Membro desde Janeiro 2024</small>
                         </div>
-                    </div>
-
-                    <button class="btn btn-outline-primary">
-                        <i class="bi bi-pencil-square me-1"></i> Editar Perfil
-                    </button>
+                    </div> 
                 </div>
             </div>
 
@@ -65,42 +61,96 @@
                         <div class="card-body">
                             <h5 class="fw-bold mb-4">Informações Pessoais</h5>
 
-                            <div class="row mb-3">
+                            <div class="row mb-3 info-inputs"> <!-- Classe para CSS de não-seleção -->
                                 <div class="col-md-6">
                                     <label class="form-label">Nome Completo</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-person"></i></span>
-                                        <input type="text" class="form-control" value="Maria Oliveira" readonly>
+                                        <input type="text" class="form-control" id="displayNome" value="Maria Oliveira" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">E-mail</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                                        <input type="email" class="form-control" value="maria.oliveira@email.com" readonly>
+                                        <input type="email" class="form-control" id="displayEmail" value="maria.oliveira@email.com" readonly>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row info-inputs"> <!-- Classe para CSS de não-seleção -->
                                 <div class="col-md-6">
                                     <label class="form-label">Telefone</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-telephone"></i></span>
-                                        <input type="text" class="form-control" value="(99) 99999-9999" readonly>
+                                        <input type="text" class="form-control" id="displayTelefone" value="(99) 99999-9999" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Localização</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
-                                        <input type="text" class="form-control" value="Almenara - MG" readonly>
+                                        <input type="text" class="form-control" id="displayLocalizacao" value="Almenara - MG" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Botão Editar Perfil (agora abre o modal) -->
+                            <div class="text-end mt-4">
+                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                                    <i class="bi bi-pencil-square me-1"></i> Editar Perfil
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal para Editar Perfil (adicionado aqui) -->
+                            <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="editProfileModalLabel">
+                                                <i class="bi bi-pencil-square me-1"></i> Editar Informações Pessoais
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="editProfileForm">
+                                                <div class="mb-3">
+                                                    <label for="editNome" class="form-label">Nome Completo</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                                        <input type="text" class="form-control" id="editNome" required>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="editEmail" class="form-label">E-mail</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                                        <input type="email" class="form-control" id="editEmail" required>
+                                                    </div>
+                                                </div>
+                                            <div class="mb-3">
+                                                <label for="editTelefone" class="form-label">Telefone</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                                                    <input type="tel" class="form-control" id="editTelefone" required pattern="\([0-9]{2}\) [0-9]{5}-[0-9]{4}">
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="editLocalizacao" class="form-label">Localização</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+                                                    <input type="text" class="form-control" id="editLocalizacao" required>
+                                                </div>
+                                            </div>
+                                            </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-primary" id="saveProfileBtn">Salvar Alterações</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
                     <!-- Configurações da Conta -->
                     <div class="bg-white shadow-sm rounded p-4 mt-4 mb-5">
                         <h5 class="fw-bold mb-3">Configurações da Conta</h5>
@@ -275,4 +325,34 @@
             </div>
         </div>
     </div>
+<script>
+        // Preencher modal com valores atuais ao abrir
+        const editProfileModal = document.getElementById('editProfileModal');
+        editProfileModal.addEventListener('show.bs.modal', function (event) {
+            const nome = document.getElementById('displayNome').value;
+            const email = document.getElementById('displayEmail').value;
+            const telefone = document.getElementById('displayTelefone').value;
+            const localizacao = document.getElementById('displayLocalizacao').value;
+            document.getElementById('editNome').value = nome;
+            document.getElementById('editEmail').value = email;
+            document.getElementById('editTelefone').value = telefone;
+            document.getElementById('editLocalizacao').value = localizacao;
+        });
+        // Salvar alterações ao clicar no botão
+        document.getElementById('saveProfileBtn').addEventListener('click', function () {
+            const form = document.getElementById('editProfileForm');
+            if (form.checkValidity()) { // Validação básica do formulário
+                document.getElementById('displayNome').value = document.getElementById('editNome').value;
+                document.getElementById('displayEmail').value = document.getElementById('editEmail').value;
+                document.getElementById('displayTelefone').value = document.getElementById('editTelefone').value;
+                document.getElementById('displayLocalizacao').value = document.getElementById('editLocalizacao').value;
+                // Aqui você pode adicionar código para enviar ao servidor (ex.: fetch/AJAX no Laravel)
+                // alert('Alterações salvas!'); // Feedback opcional
+                                const modal = bootstrap.Modal.getInstance(editProfileModal);
+                modal.hide();
+            } else {
+                form.reportValidity(); // Mostra erros de validação
+            }
+        });
+    </script>
 @endsection
