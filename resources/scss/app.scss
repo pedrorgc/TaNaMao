@@ -2,7 +2,8 @@ $primary: #0d6efd;
 
 @import "bootstrap/scss/bootstrap";
 
-// seus estilos customizados abaixo
+@import 'components/cadastro';
+
 body {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
 }

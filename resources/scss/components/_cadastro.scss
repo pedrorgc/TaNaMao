@@ -1,0 +1,286 @@
+// Variáveis de Cor e Estilo para fácil customização
+$primary-color: #4A69E2;
+$background-color: #f0f2f5;
+$card-background-color: #ffffff;
+$text-color: #333;
+$label-color: #555;
+$border-color: #e0e0e0;
+$input-background: #f7f7f7;
+$light-grey: #ccc;
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: $background-color;
+    color: $text-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 450px;
+}
+
+.auth-card {
+    background: $card-background-color;
+    padding: 20px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+
+    .logo {
+        width: 150px;
+        height: 150px;
+        border-radius: 8px;
+        margin-bottom: 0px;
+    }
+
+    h1 {
+        margin: 0 0 5px 0;
+        font-size: 38px;
+    }
+
+    p {
+        margin: 0;
+        color: $label-color;
+    }
+}
+
+// COLE ESTE NOVO BLOCO DE CÓDIGO NO LUGAR DO ANTIGO
+.tab-switcher {
+    display: flex;
+    background-color: $input-background;
+    border-radius: 50px; // <-- Aumentei aqui para arredondar a caixa cinza
+    padding: 4px;
+    margin-bottom: 30px;
+
+    .tab-button {
+        flex: 1;
+        padding: 6px 10px;
+        border: none;
+        background-color: transparent;
+        border-radius: 50px; // <-- Aumentei aqui para arredondar os botões internos
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+        color: $label-color;
+
+        &.active {
+            background-color: $card-background-color;
+            color: $text-color;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+    }
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    
+    label {
+        margin-bottom: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        color: $label-color;
+    }
+    
+    .input-with-icon {
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        i {
+            position: absolute;
+            left: 15px;
+            font-size: 20px;
+            color: $light-grey;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 15px 12px 45px; // Espaço para o ícone
+            border: 1px solid $border-color;
+            border-radius: 12px;
+            background-color: $input-background;
+            font-size: 16px;
+            box-sizing: border-box;
+            
+            &:focus {
+                outline: none;
+                border-color: $primary-color;
+                box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+            }
+        }
+        
+        select {
+            appearance: none;
+            padding-right: 15px;
+        }
+    }
+}
+
+.btn {
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    &-primary {
+        background-color: $primary-color;
+        color: white;
+
+        &:hover {
+            background-color: darken($primary-color, 10%);
+            box-shadow: 0 4px 15px rgba($primary-color, 0.3);
+        }
+    }
+
+    &-secondary {
+        background-color: $input-background;
+        color: $text-color;
+        border: 1px solid $border-color;
+        
+        &:hover {
+            background-color: #e9e9e9;
+        }
+    }
+    
+    .google-icon {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 30px;
+    
+    p {
+        color: $label-color;
+        a {
+            color: $primary-color;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    }
+}
+
+.input-like-button {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid $border-color;
+    border-radius: 12px;
+    background-color: $input-background;
+    font-size: 16px;
+    text-align: left;
+    color: $label-color;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-family: inherit;
+
+     i {
+        font-size: 20px;
+        color: $light-grey;
+    }
+    
+    &:hover {
+        cursor: pointer;
+        border-color: $primary-color;
+    }
+}
+
+/* ESTILOS DO DIALOG (MODAL) */
+.dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none; // Começa escondido
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+    &.show {
+        display: flex; // Mostra o dialog
+    }
+
+    .dialog-overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .dialog-content {
+        position: relative;
+        background: white;
+        padding: 30px;
+        border-radius: 16px;
+        width: 100%;
+        max-width: 500px;
+        z-index: 1001;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .dialog-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        h2 { margin: 0; }
+
+        .close-button {
+            border: none;
+            background: none;
+            font-size: 60px;
+            font-weight: bold;
+            color: $light-grey;
+            cursor: pointer;
+        }
+    }
+    
+    .dialog-body {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .form-group-row {
+        display: flex;
+        gap: 15px;
+        .form-group {
+            flex: 1;
+        }
+    }
+
+    .dialog-footer {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
