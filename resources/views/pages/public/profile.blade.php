@@ -6,7 +6,7 @@
         <!-- Navbar superior azul -->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #1D4ED8;">
             <div class="container d-flex justify-content-between align-items-center">
-                <a href="#" class="text-white text-decoration-none">
+                <a href="home" class="text-white text-decoration-none">
                     <i class="bi bi-arrow-left"></i> Voltar
                 </a>
 
@@ -14,7 +14,7 @@
                     <img src="{{ asset('assets/logo_TaNaMao.png') }}" alt="TaNaMão" height="40" class="me-2">
                 </a>
 
-                <a href="#" class="text-white text-decoration-none d-none d-md-inline">Sair</a>
+                <a href="login" class="text-white text-decoration-none d-none d-md-inline">Sair</a>
             </div>
         </nav>
 

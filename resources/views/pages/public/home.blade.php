@@ -13,13 +13,15 @@
         @include('components.button', [
             'slot' => 'Encontrar Serviços',
             'class' => 'btn-primary',
-            'style' => 'font-size: 0.9rem; padding: 6px 18px;'
+            'style' => 'font-size: 0.9rem; padding: 6px 18px;',
+            'href' => '/login'
         ])
 
         @include('components.button', [
             'slot' => 'Prestar Serviços',
             'class' => 'btn-secondary',
-            'style' => 'font-size: 0.9rem; padding: 6px 18px;'
+            'style' => 'font-size: 0.9rem; padding: 6px 18px;',
+            'href' => '/login'
         ])
     </div>
 </div>
