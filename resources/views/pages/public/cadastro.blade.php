@@ -8,14 +8,12 @@
     @vite(['resources/scss/app.scss', 'resources/js/dialog.js'])
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-    {{-- CSS específico para dialog --}}
     @include('layouts.styles.dialog')
 </head>
 <body>
     <div class="auth-container">
         <div class="auth-card">
         <div class="auth-header">
-            {{-- A função asset() cria o link correto para a pasta public --}}
             <img src="{{ asset('Imagem/logo.png') }}" alt="Logo TaNaMao" class="logo">
             <h1>Criar Conta</h1>
             <p>Escolha o tipo de conta</p>
