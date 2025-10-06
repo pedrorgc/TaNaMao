@@ -45,7 +45,7 @@
     </div>
 </div>
 
-<div class=" bg bg-body-secondary mt-5">
+<div class="bg mt-5">
     <h1 class='fw-bold text-center'>Como Funciona</h1>
     <div class="container text-center">
         <div class="row justify-content-center">
@@ -126,13 +126,13 @@
     </div>
 </div>
 
-<div class="bg bg-body-secondary text-center mt-5 py-5">
+<div class="bg text-center mt-5 py-5">
     <h1>Sobre Nós</h1>
     <div class="container mt-2">
         <div class="d-flex justify-content-center align-items-center">
             <img src="{{ asset('assets/TaNaMao-3D.png') }}" class="me-5" alt="TaNaMao" style="width: 350px;">
             <div class="text-start" style="max-width: 400px;">
-                <p class="fs-4 card-text m-0">
+                <p class="fs-3 card-text m-0">
                     O TaNaMão surgiu com o propósito de conectar quem precisa com quem sabe fazer.
                     Somos um sistema que conecta clientes e profissionais que buscam um mesmo propósito.
                 </p>

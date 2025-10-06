@@ -95,7 +95,7 @@
                     </x-button>
 
                     <p class="text-center small mt-3">
-                        Não tem uma conta? <a href="#" class="text-primary text-decoration-none">Cadastre-se</a>
+                        Não tem uma conta? <a href="cadastro" class="text-primary text-decoration-none">Cadastre-se</a>
                     </p>
                 </form>
             </div>

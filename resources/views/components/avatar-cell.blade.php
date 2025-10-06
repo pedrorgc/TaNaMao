@@ -10,7 +10,6 @@
 ])
 
 @php
-    // compute initials automatically from name if not provided
     $computedInitials = $initials;
     if (empty($computedInitials) && !empty($name)) {
         $parts = preg_split('/\s+/', trim($name));
@@ -26,7 +25,6 @@
         $computedInitials = strtoupper($computedInitials);
     }
 
-    // map Bootstrap bg classes to hex colors for SVG fallback
     $bgMap = [
         'bg-primary' => '#0d6efd',
         'bg-secondary' => '#6c757d',
@@ -39,7 +37,6 @@
     ];
     $fill = $bgMap[$bg] ?? '#6c757d';
 
-    // prepare SVG data URL fallback
     $svgSize = max(24, (int)$size);
     $fontSize = (int)floor($svgSize * 0.45);
     $svg = "<svg xmlns='http://www.w3.org/2000/svg' width='{$svgSize}' height='{$svgSize}'><rect width='100%' height='100%' rx='50%' ry='50%' fill='{$fill}'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Segoe UI, Roboto, Helvetica, Arial, sans-serif' font-size='{$fontSize}' fill='%23ffffff'>".htmlspecialchars($computedInitials)."</text></svg>";
@@ -47,7 +44,7 @@
 @endphp
 
 @php
-  // wrapper
+
   $wrapperTag = !empty($href) ? 'a' : 'div';
   $wrapperAttrs = !empty($href)
       ? 'href="' . e($href) . '" class="text-decoration-none d-inline-flex align-items-center gap-3"'
