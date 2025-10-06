@@ -11,19 +11,14 @@
     @include('layouts.styles.dialog')
 </head>
 <body>
-    <div class="auth-container">
-        <div class="auth-card">
-        <div class="auth-header">
-            <img src="{{ asset('Imagem/logo.png') }}" alt="Logo TaNaMao" class="logo">
-            <h1>Criar Conta</h1>
-            <p>Escolha o tipo de conta</p>
-        </div>
-
-            @include('components.auth-header')
-            @include('components.tab-switcher')
-            @include('components.auth-form')
-            @include('components.auth-footer')
-
+    <div class="container d-flex align-items-center justify-content-center min-vh-100">
+        <div class="row w-100 justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                @include('components.auth-header')
+                @include('components.tab-switcher')
+                @include('components.auth-form')
+                @include('components.auth-footer')
+            </div>
         </div>
     </div>
 

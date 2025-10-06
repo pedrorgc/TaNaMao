@@ -132,7 +132,7 @@
         <div class="d-flex justify-content-center align-items-center">
             <img src="{{ asset('assets/TaNaMao-3D.png') }}" class="me-5" alt="TaNaMao" style="width: 350px;">
             <div class="text-start" style="max-width: 400px;">
-                <p class="fs-4 card-text m-0">
+                <p class="fs-3 card-text m-0">
                     O TaNaMão surgiu com o propósito de conectar quem precisa com quem sabe fazer.
                     Somos um sistema que conecta clientes e profissionais que buscam um mesmo propósito.
                 </p>

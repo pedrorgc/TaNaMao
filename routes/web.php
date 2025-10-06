@@ -47,5 +47,3 @@ Route::get('/profile', function () {
     return view('pages.public.profile');
 });
 
-// A rota de perfilUsuario que você já tinha
-Route::view('/perfilUsuario', 'pages.profile')->name('pages.profile');
