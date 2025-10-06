@@ -6,14 +6,161 @@ $primary: #0d6efd;
 
 body {
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
-  }
-.hover-shadow-lg:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  transform: translateY(-3px);
-  transition: all 0.25s ease;
 }
-.hover-shadow-sm:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
-  transition: all 0.25s ease;
+/* === Dialog base === */
+.dialog {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  transition: all 0.25s ease-in-out;
+}
+
+.dialog.show {
+  display: flex;
+}
+
+/* === Overlay === */
+.dialog-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.25s ease-in-out;
+}
+
+.dialog.show .dialog-overlay {
+  opacity: 1;
+}
+
+/* === Conteúdo do diálogo === */
+.dialog-content {
+  position: relative;
+  z-index: 10;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  width: 95%;
+  max-width: 450px;
+  padding: 1.5rem;
+  transform: translateY(40px);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.dialog.show .dialog-content {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* === Cabeçalho === */
+.dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+
+  h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #0d6efd;
+    margin: 0;
+  }
+
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    line-height: 1;
+    color: #6c757d;
+    cursor: pointer;
+    transition: color 0.2s;
+    
+    &:hover {
+      color: #0d6efd;
+    }
+  }
+}
+
+/* === Corpo === */
+.dialog-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      font-weight: 500;
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+      color: #212529;
+    }
+
+    input {
+      border: 1px solid #ced4da;
+      border-radius: 10px;
+      padding: 0.6rem 0.75rem;
+      font-size: 0.95rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+
+      &:focus {
+        outline: none;
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+      }
+    }
+  }
+
+  .form-group-row {
+    display: flex;
+    gap: 0.75rem;
+
+    .form-group {
+      flex: 1;
+    }
+  }
+}
+
+/* === Rodapé === */
+.dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.25rem;
+
+  .btn-primary {
+    background-color: #0d6efd;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 500;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #0b5ed7;
+    }
+
+    &:active {
+      background-color: #0a58ca;
+    }
+  }
+}
+
+/* === Responsividade === */
+@media (max-width: 480px) {
+  .dialog-content {
+    width: 90%;
+    padding: 1rem;
+  }
+
+  .dialog-header h2 {
+    font-size: 1.1rem;
+  }
 }
