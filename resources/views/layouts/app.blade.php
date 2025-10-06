@@ -11,22 +11,22 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100" style="overflow-x: hidden; padding-top: 50px; ">
 
     <!-- Navbar -->
     @include('components.navbar')
 
-    <div class="container my-4">
-    <!-- Conteúdo principal -->
-    <main class="flex-fill container my-4">
-            <!-- Alertas -->
-            @include('components.alert')
+    <div class="container">
+        <!-- Conteúdo principal -->
+        <main class="flex-fill container ">
+                <!-- Alertas -->
+                @include('components.alert')
 
-            <!-- Conteúdo da página -->
-            @yield('content')
-        </div>
-    </main>
+                <!-- Conteúdo da página -->
+                @yield('content')
 
+        </main>
+    </div>
     <!-- Footer -->
     @include('components.footer')
 

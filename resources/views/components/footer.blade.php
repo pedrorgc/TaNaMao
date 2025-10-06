@@ -3,7 +3,7 @@
         <div class="row">
             <!-- Logo e descrição -->
             <div class="col-md-3 mb-4">
-                <h5 class="fw-bold"> 
+                <h5 class="fw-bold">
                     <img src="{{ asset('assets/logo_TaNaMao.png') }}" alt="TaNaMão" style="height: 50px;">
                 </h5>
                 <p class="small">

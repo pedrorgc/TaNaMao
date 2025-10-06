@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="text-center mt-5">
+<div class="bg bg-body-secondary text-center mt-3 full-width-bg d-flex flex-column justify-content-center" style="min-height: 400px;">
     <h1>Encontre o profissional <span class="text-primary">certo para você</span></h1>
     <p>Conectamos você aos melhores prestadores de serviço da sua região.
        Rápido, confiável e na palma da sua mão.</p>
@@ -26,7 +26,7 @@
     </div>
 </div>
 
-<div class="fw-bold text-center mt-5">
+<div class="fw-bold text-center mt-5 d-flex flex-column justify-content-center" style="min-height: 400px;">
     <h1>Categorias de Serviços</h1>
 
     <div class="row mt-5">
@@ -45,7 +45,7 @@
     </div>
 </div>
 
-<div class=" bg bg-body-secondary mt-5">
+<div class=" bg bg-body-secondary full-width-bg d-flex flex-column justify-content-center" style="min-height: 400px;">
     <h1 class='fw-bold text-center'>Como Funciona</h1>
     <div class="container text-center">
         <div class="row justify-content-center">
@@ -68,7 +68,7 @@
     </div>
 </div>
 
-<div class="text-center mt-5">
+<div class="text-center mt-5 d-flex flex-column justify-content-center" style="min-height: 400px;">
     <h1 class="fw-bold">O que nossos usuários dizem</h1>
 
     <div class="row justify-content-center mt-5">
@@ -126,7 +126,7 @@
     </div>
 </div>
 
-<div class="bg bg-body-secondary text-center mt-5 py-5">
+<div class="bg bg-body-secondary text-center mt-3 py-3 full-width-bg d-flex flex-column justify-content-center" style="min-height: 400px;">
     <h1>Sobre Nós</h1>
     <div class="container mt-2">
         <div class="d-flex justify-content-center align-items-center">
@@ -148,6 +148,16 @@
     min-height: 35px !important;
     padding: 6px 0 !important;
     font-size: 0.95rem !important;
+  }
+
+  .full-width-bg {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    overflow-x: hidden;
   }
 </style>
 
