@@ -27,7 +27,7 @@ Route::get('/contact', function () {
 
 // Sua rota de cadastro
 Route::get('/cadastro', function () {
-    return view('pages.cadastro');
+    return view('pages.public.cadastro');
 });
 
 // Rotas que vieram da branch main
