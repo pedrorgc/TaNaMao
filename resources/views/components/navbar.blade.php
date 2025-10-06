@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1D4ED8;">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #1D4ED8;">
     <div class="container">
         <!-- Logo -->
         <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
