@@ -14,6 +14,12 @@
 <body>
     <div class="auth-container">
         <div class="auth-card">
+        <div class="auth-header">
+            {{-- A função asset() cria o link correto para a pasta public --}}
+            <img src="{{ asset('Imagem/logo.png') }}" alt="Logo TaNaMao" class="logo">
+            <h1>Criar Conta</h1>
+            <p>Escolha o tipo de conta</p>
+        </div>
 
             @include('components.auth-header')
             @include('components.tab-switcher')
