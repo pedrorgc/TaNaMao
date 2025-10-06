@@ -47,3 +47,6 @@ Route::get('/profile', function () {
     return view('pages.public.profile');
 });
 
+Route::get('/profile/prestador', function () {
+    return view('pages.public.profile-prestador');
+});
