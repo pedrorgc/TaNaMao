@@ -72,10 +72,8 @@
     <h1 class="fw-bold">O que nossos usuários dizem</h1>
 
     <div class="row justify-content-center mt-5">
-        <!-- Card 1 -->
         <div class="col-md-3 m-2 mt-5">
             <div class="p-4 bg-body-secondary rounded-3 shadow-sm h-100">
-                <!-- Estrelas -->
                 <div class="mb-2">
                     <i class="bi bi-star-fill text-dark"></i>
                     <i class="bi bi-star-fill text-dark"></i>
@@ -83,16 +81,12 @@
                     <i class="bi bi-star-fill text-dark"></i>
                     <i class="bi bi-star-fill text-dark"></i>
                 </div>
-                <!-- Depoimento -->
                 <p class="fst-italic">“Encontrei um eletricista excelente em poucos minutos”</p>
-                <!-- Nome -->
                 <p class="fw-bold mb-0">Raí</p>
-                <!-- Tipo de usuário -->
                 <a href="#" class="text-primary text-decoration-none">Cliente</a>
             </div>
         </div>
 
-        <!-- Card 2 -->
         <div class="col-md-3 m-2 mt-5">
             <div class="p-4 bg-body-secondary rounded-3 shadow-sm h-100">
                 <div class="mb-2">
@@ -108,7 +102,6 @@
             </div>
         </div>
 
-        <!-- Card 3 -->
         <div class="col-md-3 m-2 mt-5">
             <div class="p-4 bg-body-secondary rounded-3 shadow-sm h-100">
                 <div class="mb-2">
@@ -142,7 +135,6 @@
 </div>
 
 <style>
-  /* diminui os botões apenas nesta página */
   .custom-btn {
     min-width: 160px !important;
     min-height: 35px !important;

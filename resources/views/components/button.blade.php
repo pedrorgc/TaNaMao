@@ -20,7 +20,6 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   }
 
-  /* Aparência do botão Google */
   .btn-google {
     background-color: #fff;
     border: 1px solid #ddd;

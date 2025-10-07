@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entrar - TaNaMão</title>
 
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
@@ -43,7 +42,6 @@
     <div class="container-fluid login-wrapper d-flex align-items-center justify-content-center">
         <div class="row w-100 d-flex justify-content-center align-items-center">
 
-            <!-- Lado Esquerdo - Formulário -->
             <div class="col-lg-4 col-md-6 bg-white p-5 shadow-sm login-box mx-3">
                 <div class="text-center mb-4">
                     <img src="{{ asset('assets/TANAMAO_AZUL.png') }}" alt="TaNaMão" class="login-logo mb-3">
@@ -54,7 +52,6 @@
                 <form method="POST">
                     @csrf
 
-                    <!-- E-mail -->
                     <div class="mb-3">
                         <label for="email" class="form-label fw-semibold">E-mail ou Telefone</label>
                         <div class="input-group">
@@ -63,7 +60,6 @@
                         </div>
                     </div>
 
-                    <!-- Senha -->
                     <div class="mb-3">
                         <label for="password" class="form-label fw-semibold">Senha</label>
                         <div class="input-group">
@@ -82,14 +78,12 @@
                         <a href="#" class="small text-primary text-decoration-none">Esqueci a senha</a>
                     </div>
 
-                    <!-- Botão principal -->
                     <x-button class="btn-primary w-100 py-2 mb-1" :fixed="false">
                         Entrar
                     </x-button>
 
                     <hr>
 
-                    <!-- Botão Google -->
                     <x-button class="btn-google py-2 mb-3" :fixed="false">
                         <i class="bi bi-google"></i> Continuar com Google
                     </x-button>
@@ -100,7 +94,6 @@
                 </form>
             </div>
 
-            <!-- Lado Direito - Imagem -->
             <div class="col-lg-5 d-none d-lg-flex justify-content-center align-items-center">
                 <img src="{{ asset('assets/TaNaMao-3D.png') }}" alt="TaNaMão" class="img-fluid" style="max-width: 420px;">
             </div>

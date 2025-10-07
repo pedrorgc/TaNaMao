@@ -8,7 +8,6 @@
     @vite(['resources/scss/app.scss', 'resources/js/dialog.js'])
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-    @include('layouts.styles.dialog')
 </head>
 <body>
     <div class="container d-flex align-items-center justify-content-center min-vh-100">

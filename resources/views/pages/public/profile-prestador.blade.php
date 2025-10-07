@@ -18,12 +18,9 @@
             </div>
         </nav>
 
-        <!-- Conteúdo principal -->
         <div class="container my-5">
-            <!-- Card do usuário -->
             @include('components.card-pessoa',['sigla' => 'LF', 'nome' => 'Luiz Felipe', 'ocupacao' => 'Prestador', 'data' => 'Membro desde janeiro de 2024', 'status' => 'Status do perfil: Ativo'])
 
-            <!-- Abas -->
             <ul class="nav nav-pills mb-4 bg-white p-2 rounded-4 shadow-sm justify-content-center gap-5" id="profileTabs">
                 <li class="nav-item mx-5">
                     <button class="nav-link active rounded-5 px-5 py-2 fw-semibold" id="info-tab" data-bs-toggle="pill"
@@ -43,15 +40,13 @@
                 </li>
             </ul>
 
-            <!-- Conteúdo das abas -->
             <div class="tab-content">
-                <!-- Aba 1: Informações Pessoais -->
                 <div class="tab-pane fade show active" id="info">
                     <div class="card border-0 shadow-sm rounded-4 mb-4">
                         <div class="card-body">
                             <h5 class="fw-bold mb-4">Informações Pessoais</h5>
 
-                            <div class="row mb-3 info-inputs"> <!-- Classe para CSS de não-seleção -->
+                            <div class="row mb-3 info-inputs">
                                 <div class="col-md-6">
                                     <label class="form-label">Nome Completo</label>
                                     <div class="input-group">
@@ -68,7 +63,7 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-3 info-inputs"> <!-- Classe para CSS de não-seleção -->
+                            <div class="row mb-3 info-inputs"> 
                                 <div class="col-md-6">
                                     <label class="form-label">Telefone</label>
                                     <div class="input-group">
@@ -85,7 +80,7 @@
                                 </div>
                             </div>
 
-                            <div class="row info-inputs"> <!-- Classe para CSS de não-seleção -->
+                            <div class="row info-inputs">
                                 <div class="col-md-6">
                                     <label class="form-label">Descrição Profissional</label>
                                     <div class="input-group">
@@ -101,7 +96,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Botão Editar Perfil (agora abre o modal) -->
                             <div class="text-end mt-4">
                                 <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editProfileModal">
                                     <i class="bi bi-pencil-square me-1"></i> Editar Perfil
@@ -172,7 +166,6 @@
                                 </div>
                             </div>
                         </div>
-                    <!-- Configurações da Conta -->
                     <div class="bg-white shadow-sm rounded p-4 mt-4 mb-5">
                         <h5 class="fw-bold mb-3">Configurações da Conta</h5>
 
@@ -212,11 +205,9 @@
                     </div>
                 </div>
 
-                <!-- Aba 2: Histórico -->
                 <div class="tab-pane fade" id="history">
                     <div class="card border-0 shadow-sm rounded-4 mb-4">
                         <div class="card-body">
-                            <!-- Serviços contratados -->
 
                             <h5 class="fw-bold mb-4 mt-3">Histórico de Serviços Contratados</h5>
                             <div class="row gy-4 mb-4">
@@ -237,7 +228,6 @@
 
                     <div class="card border-0 shadow-sm rounded-4 mb-4">
                         <div class="card-body">
-                             <!-- Serviços prestados -->
                             <h5 class="fw-bold mb-4 mt-3">Histórico de Serviços Prestados</h5>
                             <div class="row gy-4 mb-4">
                                 <div class="col-12">
@@ -256,7 +246,6 @@
                     </div>
                 </div>
 
-                <!-- Aba 3: Avaliações -->
                 <div class="tab-pane fade" id="reviews">
                     <div class="card border-0 shadow-sm rounded-4 mb-4">
                         <div class="card-body">
@@ -293,7 +282,6 @@
                         </div>
                     </div>
                 </div>
-                 <!-- Aba 4: Portfolio -->
                 <div class="tab-pane fade" id="portfolio">
                     <div class="card border-0 shadow-sm rounded-4 mb-4">
                         <div class="card-body">

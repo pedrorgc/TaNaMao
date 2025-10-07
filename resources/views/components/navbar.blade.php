@@ -1,16 +1,13 @@
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #1D4ED8;">
     <div class="container">
-        <!-- Logo -->
-        <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
+        <a class="navbar-brand d-flex align-items-center" href="home">
             <img src="{{ asset('assets/logo_TaNaMao.png') }}" alt="TaNaMao" height="40" class="me-2">
         </a>
 
-        <!-- Menu Hamburger -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Links -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto align-items-center">
                 <li class="nav-item mx-3">

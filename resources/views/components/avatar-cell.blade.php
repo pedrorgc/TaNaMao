@@ -6,7 +6,7 @@
   'bg' => 'bg-primary',
   'size' => 40,
   'href' => null,
-  'showName' => true, {{-- 👈 nova prop opcional --}}
+  'showName' => true,
 ])
 
 @php
@@ -62,7 +62,7 @@
     @endif
   </div>
 
-  {{-- 👇 Mostra nome e e-mail só se showName = true --}}
+  {{-- Mostra nome e e-mail só se showName = true --}}
   @if($showName)
     <div>
       <div class="fw-bold mb-0">{{ $name }}</div>
