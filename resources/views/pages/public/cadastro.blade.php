@@ -13,10 +13,21 @@
     <div class="container d-flex align-items-center justify-content-center min-vh-100">
         <div class="row w-100 justify-content-center">
             <div class="col-12 col-md-8 col-lg-6">
-                @include('components.auth-header')
-                @include('components.tab-switcher')
+                <div class="auth-header">
+    
+    <img src="{{ asset('assets/TaNaMao-3D.png') }}" class="logo" alt="TaNaMao">
+    <h1>Criar Conta</h1>
+    <p>Escolha o tipo de conta</p>
+</div>
+<div class="tab-switcher">
+    <button class="tab-button active" data-tab-button="cliente">Cliente</button>
+    <button class="tab-button" data-tab-button="prestador">Prestador</button>
+</div>
+
                 @include('components.auth-form')
-                @include('components.auth-footer')
+                <div class="auth-footer">
+    <p>Já tem uma conta? <a href="login">Entrar</a></p>
+</div>
             </div>
         </div>
     </div>
