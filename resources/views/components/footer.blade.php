@@ -5,7 +5,7 @@
                 <h5 class="fw-bold">
                     <img src="{{ asset('assets/logo_TaNaMao.png') }}" alt="TaNaMão" style="height: 50px;">
                 </h5>
-                <p class="small">
+                <p>
                     Encontre os melhores serviços locais de forma rápida, prática e confiável.
                 </p>
                 <div class="d-flex gap-3">
@@ -32,7 +32,7 @@
             </div>
             <div class="col-md-3 mb-4">
                 <h6 class="fw-bold">Contato</h6>
-                <ul class="list-unstyled small">
+                <ul class="list-unstyled">
                     <li><i class="bi bi-envelope me-2"></i> contato@tanamao.com.br</li>
                     <li><i class="bi bi-telephone me-2"></i> (33) 99123-4567</li>
                     <li><i class="bi bi-geo-alt me-2"></i> Almenara, MG - Brasil</li>
