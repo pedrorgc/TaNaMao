@@ -87,13 +87,14 @@
                                     <div class="mb-3">
 
                                         <span class="input-group-text"><i class="bi bi-briefcase"></i></span>
-                                        <textarea class="form-control" id="displayDescricao" rows="4" cols="100" disabled>Fale sobre a sua experiência</textarea>
+                                        <textarea class="form-control" placeholder="Fale sobre a sua experiência" id="displayDescricao" rows="4" cols="100" disabled></textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Categoria</label>
                                 <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-tags"></i></span>
                                     <input type="text" class="form-control" id="displayCategoria" value="Selecione" disabled>
                                 </div>
                             </div>
