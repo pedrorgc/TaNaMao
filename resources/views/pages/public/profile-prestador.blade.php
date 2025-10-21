@@ -221,27 +221,6 @@
             <div class="tab-pane fade" id="history">
                 <div class="card border-0 shadow-sm rounded-4 mb-4">
                     <div class="card-body">
-
-                        <h5 class="fw-bold mb-4 mt-3">Histórico de Serviços Contratados</h5>
-                        <div class="row gy-4 mb-4">
-                            <div class="col-12">
-                                @include('components.bloco-historic-concluido', ['servico' => 'Reparo de Encanamento', 'prestador' => 'João silva', 'valor' => '150,00', 'data' => '24/02/24', 'stars' => '5'])
-                            </div>
-
-                            <div class="col-12">
-                                @include('components.bloco-historic-concluido', ['servico' => 'Instalação Elétrica', 'prestador' => 'Maria Santos', 'valor' => '280,00', 'data' => '19/01/2024', 'stars' => '4'])
-                            </div>
-
-                            <div class="col-12">
-                                @include('components.bloco-historic-andamento', ['servico' => 'Limpeza Residencial', 'prestador' => 'Ana Costa', 'valor' => '280,00', 'data' => '24/01/2024'])
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card border-0 shadow-sm rounded-4 mb-4">
-                    <div class="card-body">
                         <h5 class="fw-bold mb-4 mt-3">Histórico de Serviços Prestados</h5>
                         <div class="row gy-4 mb-4">
                             <div class="col-12">
@@ -259,25 +238,7 @@
                     </div>
                 </div>
             </div>
-
             <div class="tab-pane fade" id="reviews">
-                <div class="card border-0 shadow-sm rounded-4 mb-4">
-                    <div class="card-body">
-                        <h5 class="fw-bold mb-4 mt-3">Minhas Avaliações</h5>
-
-                        <div class="row gy-4 mb-4">
-                            <div class="col-12">
-                                @include('components.bloco-avaliacao', ['nome' => 'João Silva', 'servico' => 'Reparo de Encanamento', 'avaliacao' => 'Excelente profissional, pontual e muito competente!',
-                                'data' => '14/01/24', 'stars' => '5'])
-                            </div>
-
-                            <div class="col-12">
-                                @include('components.bloco-avaliacao', ['nome' => 'João Silva', 'servico' => 'Reparo de Encanamento', 'avaliacao' => 'Excelente profissional, pontual e muito competente!',
-                                'data' => '14/01/24', 'stars' => '5'])
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="card border-0 shadow-sm rounded-4 mb-4">
                     <div class="card-body">
                         <h5 class="fw-bold mb-4 mt-3">Avaliações do meu Serviço</h5>
