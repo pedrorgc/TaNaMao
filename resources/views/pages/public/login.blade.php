@@ -49,8 +49,12 @@
                     <p class="text-muted small">Acesse sua conta</p>
                 </div>
 
-                <form method="POST">
+                <form method="POST" action="{{ route('login.perform') }}">
                     @csrf
+
+                    @if($errors->any())
+                        <div class="alert alert-danger">{{ $errors->first() }}</div>
+                    @endif
 
                     <div class="mb-3">
                         <label for="email" class="form-label fw-semibold">E-mail ou Telefone</label>
@@ -78,9 +82,7 @@
                         <a href="#" class="small text-primary text-decoration-none">Esqueci a senha</a>
                     </div>
 
-                    <x-button class="btn-primary w-100 py-2 mb-1" :fixed="false">
-                        Entrar
-                    </x-button>
+                    <button type="submit" class="btn btn-primary w-100 py-2 mb-1">Entrar</button>
 
                     <hr>
 

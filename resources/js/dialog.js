@@ -1,15 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
     const tabButtons = document.querySelectorAll('.tab-button');
     const categoriaField = document.getElementById('categoria-field');
+    const accountTypeInput = document.getElementById('account_type');
 
     tabButtons.forEach(button => {
         button.addEventListener('click', () => {
             tabButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
 
-            categoriaField.style.display = (button.dataset.tabButton === 'prestador') ? 'block' : 'none';
+            const isPrestador = button.dataset.tabButton === 'prestador';
+            categoriaField.style.display = isPrestador ? 'block' : 'none';
+            if (accountTypeInput) {
+                accountTypeInput.value = isPrestador ? 'prestador' : 'cliente';
+            }
         });
     });
+
+    // ensure default
+    if (accountTypeInput && !accountTypeInput.value) {
+        accountTypeInput.value = 'cliente';
+    }
 
     const addressDialog = document.getElementById('address-dialog');
     document.getElementById('open-address-dialog').addEventListener('click', () => addressDialog.classList.add('show'));

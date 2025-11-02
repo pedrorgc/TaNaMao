@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\Endereco;
 
 class Cliente extends Model
 {
@@ -30,5 +32,10 @@ class Cliente extends Model
     public function endereco()
     {
         return $this->belongsTo(Endereco::class, 'endereco_id');
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(\App\Models\Role::class, 'role_id');
     }
 }
