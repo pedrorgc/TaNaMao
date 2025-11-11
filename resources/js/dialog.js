@@ -1,26 +1,40 @@
 document.addEventListener('DOMContentLoaded', () => {
     const tabButtons = document.querySelectorAll('.tab-button');
     const categoriaField = document.getElementById('categoria-field');
+    const roleInput = document.getElementById('role-input');
 
     tabButtons.forEach(button => {
         button.addEventListener('click', () => {
             tabButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
 
-            categoriaField.style.display = (button.dataset.tabButton === 'prestador') ? 'block' : 'none';
+            const role = button.dataset.tabButton;
+            roleInput.value = role;
+            categoriaField.style.display = (role === 'prestador') ? 'block' : 'none';
         });
     });
 
     const addressDialog = document.getElementById('address-dialog');
     document.getElementById('open-address-dialog').addEventListener('click', () => addressDialog.classList.add('show'));
     document.getElementById('close-address-dialog').addEventListener('click', () => addressDialog.classList.remove('show'));
-    document.getElementById('confirm-address-button').addEventListener('click', () => addressDialog.classList.remove('show'));
+    document.getElementById('confirm-address-button').addEventListener('click', () => {
+        document.getElementById('endereco_logradouro').value = document.getElementById('rua').value;
+        document.getElementById('endereco_numero').value = document.getElementById('numero').value;
+        document.getElementById('endereco_complemento').value = document.getElementById('referencia').value;
+        document.getElementById('endereco_bairro').value = document.getElementById('bairro').value;
+        document.getElementById('endereco_cidade').value = document.getElementById('cidade').value;
+        document.getElementById('endereco_estado').value = 'MG';
+        document.getElementById('endereco_cep').value = document.getElementById('cep').value;
+
+        const cidade = document.getElementById('cidade').value;
+        const estado = 'MG';
+        document.getElementById('endereco-display').textContent = `${cidade}, ${estado}`;
+
+        addressDialog.classList.remove('show');
+    });
     addressDialog.querySelector('.dialog-overlay').addEventListener('click', () => addressDialog.classList.remove('show'));
 });
 
-// Função para abrir o modal de edição de perfil
-
-// Preencher modal com valores atuais ao abrir
 const editProfileModal = document.getElementById('editProfileModal');
 editProfileModal.addEventListener('show.bs.modal', function (event) {
     const nome = document.getElementById('displayNome').value;
@@ -32,19 +46,17 @@ editProfileModal.addEventListener('show.bs.modal', function (event) {
     document.getElementById('editTelefone').value = telefone;
     document.getElementById('editLocalizacao').value = localizacao;
 });
-// Salvar alterações ao clicar no botão
 document.getElementById('saveProfileBtn').addEventListener('click', function () {
     const form = document.getElementById('editProfileForm');
-    if (form.checkValidity()) { // Validação básica do formulário
+    if (form.checkValidity()) {
         document.getElementById('displayNome').value = document.getElementById('editNome').value;
         document.getElementById('displayEmail').value = document.getElementById('editEmail').value;
         document.getElementById('displayTelefone').value = document.getElementById('editTelefone').value;
         document.getElementById('displayLocalizacao').value = document.getElementById('editLocalizacao').value;
-        // Aqui você pode adicionar código para enviar ao servidor (ex.: fetch/AJAX no Laravel)
-        // alert('Alterações salvas!'); // Feedback opcional
-                        const modal = bootstrap.Modal.getInstance(editProfileModal);
+
+        const modal = bootstrap.Modal.getInstance(editProfileModal);
         modal.hide();
     } else {
-        form.reportValidity(); // Mostra erros de validação
+        form.reportValidity();
     }
 });

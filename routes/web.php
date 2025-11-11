@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 Route::get('/', function () {
     return view('pages.public.home');
@@ -16,12 +17,17 @@ Route::get('/contact', function () {
     return view('pages.public.contact');
 });
 
-// Sua rota de cadastro
 Route::get('/cadastro', function () {
     return view('pages.public.cadastro');
 });
 
-// Rotas que vieram da branch main
+Route::middleware('guest')->group(function () {
+    Route::get('register', [RegisteredUserController::class, 'create'])
+        ->name('register');
+
+    Route::post('register', [RegisteredUserController::class, 'store']);
+});
+
 Route::get('/servicos/create', function () {
     return view('pages.public.service-create');
 });

@@ -23,9 +23,21 @@ class RegistrationTest extends TestCase
             'email' => 'test@example.com',
             'password' => 'password',
             'password_confirmation' => 'password',
+            'telefone' => '(11) 99999-9999',
+            'role' => 'cliente',
+            'endereco' => [
+                'logradouro' => 'Rua Teste',
+                'numero' => '123',
+                'complemento' => 'Apto 1',
+                'bairro' => 'Centro',
+                'cidade' => 'Almenara',
+                'estado' => 'MG',
+                'cep' => '01000-000',
+                'pais' => 'Brasil',
+            ],
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(route('dashboard', absolute: false));
+        $response->assertRedirect('/home');
     }
 }

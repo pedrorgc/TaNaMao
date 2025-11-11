@@ -4,6 +4,6 @@
         @if($icon)
             <i class="ph {{ $icon }}"></i>
         @endif
-        <input type="{{ $type }}" id="{{ $id }}" placeholder="{{ $placeholder }}">
+        <input type="{{ $type }}" id="{{ $id }}" name="{{ $name ?? '' }}" placeholder="{{ $placeholder }}" value="{{ $value ?? '' }}">
     </div>
 </div>
