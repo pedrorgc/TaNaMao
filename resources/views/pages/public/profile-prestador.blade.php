@@ -1,7 +1,8 @@
-@extends('layouts.app_no_nav')
+@extends('components.layouts.app')
 
 @section('content')
-<div style="background-color: #EAEAEA; min-height: 100vh; padding-top: 100px;">
+<!-- Reduzido padding-top de 100px para 80px e ajustado min-height -->
+<div style="background-color: #EAEAEA; min-height: calc(100vh - 60px); padding-top: 80px; padding-bottom: 40px;">
 
     <!-- Navbar superior azul -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #1D4ED8;">
@@ -18,7 +19,8 @@
         </div>
     </nav>
 
-    <div class="container my-5">
+    <!-- Reduzido margin-top de my-5 para my-4 -->
+    <div class="container my-4">
         @include('components.card-pessoa',['sigla' => 'LF', 'nome' => 'Luiz Felipe', 'ocupacao' => 'Prestador', 'data' => 'Membro desde janeiro de 2024', 'status' => 'Status do perfil: Ativo'])
 
         <ul class="nav nav-pills mb-4 bg-white p-2 rounded-4 shadow-sm justify-content-center gap-5" id="profileTabs">
@@ -84,11 +86,8 @@
                             <div class="col-md-6">
                                 <label class="form-label">Descrição Profissional</label>
                                 <div class="input-group">
-                                    <div class="mb-3">
-
-                                        <span class="input-group-text"><i class="bi bi-briefcase"></i></span>
-                                        <textarea class="form-control" placeholder="Fale sobre a sua experiência" id="displayDescricao" rows="4" cols="100" disabled></textarea>
-                                    </div>
+                                    <span class="input-group-text align-self-start"><i class="bi bi-briefcase"></i></span>
+                                    <textarea class="form-control" placeholder="Fale sobre a sua experiência" id="displayDescricao" rows="4" disabled></textarea>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -106,7 +105,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- Modal para Editar Perfil (adicionado aqui) -->
+                
+                <!-- Modal para Editar Perfil - ESTRUTURA CORRIGIDA -->
                 <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable">
                         <div class="modal-content">
@@ -149,8 +149,8 @@
                                     <div class="mb-3">
                                         <label for="editDescricao" class="form-label">Descrição Profissional</label>
                                         <div class="input-group">
-                                            <span class="input-group-text"><i class="bi bi-briefcase"></i></span>
-                                            <textarea class="form-control" id="editDescricao" required></textarea>
+                                            <span class="input-group-text align-self-start"><i class="bi bi-briefcase"></i></span>
+                                            <textarea class="form-control" id="editDescricao" rows="4" required></textarea>
                                         </div>
                                     </div>
                                     <div class="mb-3">
@@ -162,84 +162,57 @@
                                             </select>
                                         </div>
                                     </div>
-
                                 </form>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-primary" id="saveProfileBtn">Salvar Alterações</button>
+                            <!-- modal-footer MOVIDO PARA DENTRO de modal-content -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" id="saveProfileBtn">Salvar Alterações</button>
+                            </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="bg-white shadow-sm rounded p-4 mt-4 mb-5">
+                    <h5 class="fw-bold mb-3">Configurações da Conta</h5>
+
+                    <div class="border-bottom py-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>Notificações por Email</strong>
+                                <p class="text-muted small mb-0">Receber notificações sobre serviços e atualizações</p>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" checked>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-bottom py-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>Notificações Push</strong>
+                                <p class="text-muted small mb-0">Receber notificações em tempo real</p>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" checked>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button class="btn btn-outline-secondary w-100 py-2" data-bs-toggle="modal" data-bs-target="#privacySettingsModal">
+                                <i class="bi bi-shield-lock me-2"></i> Privacidade de Perfil
+                            </button>
+                        </div>
+                    </div>
+
+                    <x-privacySettingsModal />
                 </div>
             </div>
-            <div class="bg-white shadow-sm rounded p-4 mt-4 mb-5">
-                <h5 class="fw-bold mb-3">Configurações da Conta</h5>
-
-                <div class="border-bottom py-2">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <strong>Notificações por Email</strong>
-                            <p class="text-muted small mb-0">Receber notificações sobre serviços e atualizações</p>
-                        </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" checked>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="border-bottom py-2">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <strong>Notificações Push</strong>
-                            <p class="text-muted small mb-0">Receber notificações em tempo real</p>
-                        </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" checked>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="pt-2">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <!-- <div>
-                            <strong>Privacidade do Perfil</strong>
-                            <p class="text-muted small mb-0">Controlar a visibilidade das suas informações</p>
-
-                        </div> -->
-                        <button class="btn btn-outline-secondary w-100 py-2" data-bs-toggle="modal" data-bs-target="#privacySettingsModal">
-                            <i class="bi bi-shield-lock me-2"></i> Privacidade de Perfil
-                        </button>
-
-                    </div>
-                </div>
-
-                <x-privacySettingsModal />
-            </div>
-
 
             <div class="tab-pane fade" id="history">
-                <div class="card border-0 shadow-sm rounded-4 mb-4">
-                    <div class="card-body">
-
-                        <h5 class="fw-bold mb-4 mt-3">Histórico de Serviços Contratados</h5>
-                        <div class="row gy-4 mb-4">
-                            <div class="col-12">
-                                @include('components.bloco-historic-concluido', ['servico' => 'Reparo de Encanamento', 'prestador' => 'João silva', 'valor' => '150,00', 'data' => '24/02/24', 'stars' => '5'])
-                            </div>
-
-                            <div class="col-12">
-                                @include('components.bloco-historic-concluido', ['servico' => 'Instalação Elétrica', 'prestador' => 'Maria Santos', 'valor' => '280,00', 'data' => '19/01/2024', 'stars' => '4'])
-                            </div>
-
-                            <div class="col-12">
-                                @include('components.bloco-historic-andamento', ['servico' => 'Limpeza Residencial', 'prestador' => 'Ana Costa', 'valor' => '280,00', 'data' => '24/01/2024'])
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
                 <div class="card border-0 shadow-sm rounded-4 mb-4">
                     <div class="card-body">
                         <h5 class="fw-bold mb-4 mt-3">Histórico de Serviços Prestados</h5>
@@ -263,23 +236,6 @@
             <div class="tab-pane fade" id="reviews">
                 <div class="card border-0 shadow-sm rounded-4 mb-4">
                     <div class="card-body">
-                        <h5 class="fw-bold mb-4 mt-3">Minhas Avaliações</h5>
-
-                        <div class="row gy-4 mb-4">
-                            <div class="col-12">
-                                @include('components.bloco-avaliacao', ['nome' => 'João Silva', 'servico' => 'Reparo de Encanamento', 'avaliacao' => 'Excelente profissional, pontual e muito competente!',
-                                'data' => '14/01/24', 'stars' => '5'])
-                            </div>
-
-                            <div class="col-12">
-                                @include('components.bloco-avaliacao', ['nome' => 'João Silva', 'servico' => 'Reparo de Encanamento', 'avaliacao' => 'Excelente profissional, pontual e muito competente!',
-                                'data' => '14/01/24', 'stars' => '5'])
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card border-0 shadow-sm rounded-4 mb-4">
-                    <div class="card-body">
                         <h5 class="fw-bold mb-4 mt-3">Avaliações do meu Serviço</h5>
 
                         <div class="row gy-4 mb-4">
@@ -296,6 +252,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="tab-pane fade" id="portfolio">
                 <!-- AGENDA DE HORÁRIOS -->
                 <div class="card border-0 shadow-sm rounded-4 mb-4">
@@ -345,16 +302,17 @@
                             </button>
                         </div>
 
-                        <div class="row gy-4 ">
+                        <div class="row gy-4">
                             @for ($i = 0; $i < 4; $i++)
-                                <div class="col-md-6">
+                            <div class="col-md-6">
                                 <x-service-card-provider
                                     servico="Limpeza Residencial"
                                     descricao="Limpeza completa da casa"
                                     categoria="Limpeza"
                                     valor="150,00" />
+                            </div>
+                            @endfor
                         </div>
-                        @endfor
                     </div>
                 </div>
             </div>
@@ -362,6 +320,7 @@
     </div>
 
 </div>
+
 <script>
     const editProfileModal = document.getElementById('editProfileModal');
     if (editProfileModal) {
@@ -381,6 +340,7 @@
             document.getElementById('editLocalizacao').value = localizacao;
         });
     }
+    
     document.getElementById('saveProfileBtn').addEventListener('click', function() {
         const form = document.getElementById('editProfileForm');
         if (form.checkValidity()) {
@@ -391,13 +351,13 @@
             document.getElementById('displayCategoria').value = document.getElementById('editCategoria').value;
             document.getElementById('displayDescricao').value = document.getElementById('editDescricao').value;
 
-
             const modal = bootstrap.Modal.getInstance(editProfileModal);
             modal.hide();
         } else {
             form.reportValidity();
         }
     });
+    
     // Carregar categorias do JSON
     fetch('{{ asset("data/categorias.json") }}')
         .then(response => response.json())

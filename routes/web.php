@@ -41,3 +41,7 @@ Route::get('/profile', function () {
 Route::get('/profile/prestador', function () {
     return view('pages.public.profile-prestador');
 });
+
+Route::get('/pre-cadastro', function () {
+    return view('pages.public.pre-cadastro');
+});

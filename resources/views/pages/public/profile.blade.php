@@ -1,7 +1,8 @@
-@extends('layouts.app_no_nav')
+@extends('components.layouts.app')
 
 @section('content')
-    <div style="background-color: #EAEAEA; min-height: 100vh; padding-top: 100px;">
+    <!-- Reduzido padding-top de 100px para 80px e ajustado min-height -->
+    <div style="background-color: #EAEAEA; min-height: calc(100vh - 60px); padding-top: 80px; padding-bottom: 40px;">
 
         <!-- Navbar superior azul -->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #1D4ED8;">
@@ -18,7 +19,8 @@
             </div>
         </nav>
 
-        <div class="container my-5">
+        <!-- Reduzido margin-top de my-5 para my-4 -->
+        <div class="container my-4">
             <div class="card border-0 shadow-sm rounded-4 mb-4">
                 <div class="card-body d-flex flex-wrap justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
@@ -139,7 +141,7 @@
                 <div class="tab-pane fade" id="history">
                     <div class="card border-0 shadow-sm rounded-4 mb-4">
                         <div class="card-body">
-                            <h5 class="fw-bold mb-4">Histórico de Serviços</h5>
+                            <h5 class="fw-bold mb-4">Histórico de Serviços Contratados</h5>
 
                             <div class="row gy-4">
                                 <div class="col-12">
@@ -207,7 +209,7 @@
                 <div class="tab-pane fade" id="reviews">
                     <div class="card border-0 shadow-sm rounded-4 mb-4">
                         <div class="card-body">
-                            <h5 class="fw-bold mb-4">Minhas Avaliações</h5>
+                            <h5 class="fw-bold mb-4">Avaliações em Serviços</h5>
 
                             <div class="row gy-4">
                                 <div class="col-12">
