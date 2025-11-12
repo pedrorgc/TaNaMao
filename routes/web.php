@@ -16,12 +16,6 @@ Route::get('/contact', function () {
     return view('pages.public.contact');
 });
 
-// Sua rota de cadastro
-Route::get('/cadastro', function () {
-    return view('pages.public.cadastro');
-});
-
-// Rotas que vieram da branch main
 Route::get('/servicos/create', function () {
     return view('pages.public.service-create');
 });
