@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cadastro - Prestador de Serviço</title>
+
+    @vite(['resources/scss/app.scss', 'resources/js/dialog.js'])
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <style>
+    .logo {
+        width: 150px;
+        height: auto;
+    }
+
+/* ====== LAYOUT GERAL ====== */
+body {
+  background-color: #f8f9fb;
+  font-family: "Inter", sans-serif;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.auth-body {
+  background: #fff;
+  padding: 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* ====== TÍTULOS ====== */
+.auth-body h1 {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+.auth-body p {
+  text-align: center;
+  color: #6c757d;
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+}
+
+/* ====== CAMPOS ====== */
+.form-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 1.25rem; /* espaçamento entre campos */
+}
+
+.input-group i {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #adb5bd;
+  font-size: 1.1rem;
+  pointer-events: none;
+}
+
+.input-group .form-control,
+.input-group select {
+  width: 100%;
+  padding: 0.85rem 0.75rem 0.85rem 2.5rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.6rem;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background-color: #fff;
+}
+
+.input-group .form-control:focus,
+.input-group select:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.1);
+  outline: none;
+}
+
+/* ====== SEÇÃO DE ENDEREÇO ====== */
+.section-divider {
+  margin: 2.5rem 0 1.5rem;
+  border-top: 2px solid #e9ecef;
+  position: relative;
+}
+
+.section-title {
+  background: #fff;
+  padding: 0 1rem;
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 600;
+  color: #495057;
+  font-size: 0.85rem;
+}
+
+/* ====== CAMPOS EM LINHA ====== */
+.row-field {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.row-field > div {
+  flex: 1;
+}
+
+/* ====== BOTÃO ====== */
+.btn-primary {
+  width: 100%;
+  background-color: #6c63ff;
+  border: none;
+  border-radius: 0.6rem;
+  padding: 0.9rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: #5a52e0;
+}
+
+/* ====== RESPONSIVIDADE ====== */
+@media (max-width: 768px) {
+  .auth-body {
+    padding: 2rem 1.5rem;
+  }
+
+  .row-field {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+</style>
+
+</head>
+<body>
+    <div class="container d-flex align-items-center justify-content-center min-vh-100">
+        <div class="row w-100 justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="auth-header">
+                    <img src="{{ asset('assets/TaNaMao-3D.png') }}" class="logo" alt="TaNaMao">
+                </div>
+                <div class="auth-body">
+                    <h1>Cadastro - Prestador de Serviço</h1>
+                    <p>Preencha os dados abaixo para criar sua conta</p>
+                    <form>
+                        <!-- Dados Pessoais/Empresariais -->
+                        @include('components.input-field', ['label' => 'Nome Completo / Razão Social', 'icon' => 'ph-user', 'type' => 'text', 'id' => 'nome', 'placeholder' => 'Seu nome ou nome da empresa'])
+
+                        @include('components.input-field', ['label' => 'E-mail', 'icon' => 'ph-envelope-simple', 'type' => 'email', 'id' => 'email', 'placeholder' => 'seu@email.com'])
+
+                        @include('components.input-field', ['label' => 'CPF/CNPJ', 'icon' => 'ph-identification-card', 'type' => 'text', 'id' => 'documento', 'placeholder' => 'CPF ou CNPJ'])
+
+                        @include('components.input-field', ['label' => 'Telefone', 'icon' => 'ph-phone', 'type' => 'tel', 'id' => 'telefone', 'placeholder' => '(99) 99999-9999'])
+
+                        <div class="mb-3">
+                            <label for="categoria" class="form-label">Categoria de Serviço</label>
+                            <div class="input-group">
+                                <i class="ph ph-briefcase"></i>
+                                <select class="form-control form-select" id="categoria" required>
+                                    <option value="">Selecione uma categoria</option>
+                                    <option value="eletricista">Eletricista</option>
+                                    <option value="encanador">Encanador</option>
+                                    <option value="pedreiro">Pedreiro</option>
+                                    <option value="pintor">Pintor</option>
+                                    <option value="marceneiro">Marceneiro</option>
+                                    <option value="jardineiro">Jardineiro</option>
+                                    <option value="limpeza">Limpeza e Conservação</option>
+                                    <option value="climatizacao">Climatização (Ar Condicionado)</option>
+                                    <option value="chaveiro">Chaveiro</option>
+                                    <option value="vidraceiro">Vidraceiro</option>
+                                    <option value="mecanico">Mecânico</option>
+                                    <option value="eletrodomesticos">Conserto de Eletrodomésticos</option>
+                                    <option value="ti">Técnico em Informática</option>
+                                    <option value="outros">Outros</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        @include('components.input-field', ['label' => 'Senha', 'icon' => 'ph-lock', 'type' => 'password', 'id' => 'senha', 'placeholder' => 'Mínimo 8 caracteres'])
+
+                        @include('components.input-field', ['label' => 'Confirmar Senha', 'icon' => 'ph-lock', 'type' => 'password', 'id' => 'confirmar-senha', 'placeholder' => 'Confirme sua senha'])
+
+                        <!-- Divisor de Seção -->
+                        <div class="section-divider">
+                            <span class="section-title">ENDEREÇO</span>
+                        </div>
+
+                        <!-- Endereço -->
+                        @include('components.input-field', ['label' => 'CEP', 'icon' => 'ph-map-pin', 'type' => 'text', 'id' => 'cep', 'placeholder' => '00000-000'])
+
+                        <div class="row-field mb-3">
+                            <div class="col-large">
+                                <label for="rua" class="form-label">Rua</label>
+                                <div class="input-group">
+                                    <i class="ph ph-road-horizon"></i>
+                                    <input type="text" class="form-control" id="rua" placeholder="Nome da rua">
+                                </div>
+                            </div>
+                            <div class="col-small">
+                                <label for="numero" class="form-label">Número</label>
+                                <div class="input-group">
+                                    <i class="ph ph-hash"></i>
+                                    <input type="text" class="form-control" id="numero" placeholder="123">
+                                </div>
+                            </div>
+                        </div>
+
+                        @include('components.input-field', ['label' => 'Complemento', 'icon' => 'ph-info', 'type' => 'text', 'id' => 'complemento', 'placeholder' => 'Sala, andar, etc (opcional)'])
+
+                        @include('components.input-field', ['label' => 'Bairro', 'icon' => 'ph-buildings', 'type' => 'text', 'id' => 'bairro', 'placeholder' => 'Nome do bairro'])
+
+                        <div class="row-field mb-3">
+                            <div class="col-large">
+                                <label for="cidade" class="form-label">Cidade</label>
+                                <div class="input-group">
+                                    <i class="ph ph-buildings"></i>
+                                    <input type="text" class="form-control" id="cidade" placeholder="Sua cidade">
+                                </div>
+                            </div>
+                            <div class="col-small">
+                                <label for="estado" class="form-label">Estado</label>
+                                <div class="input-group">
+                                    <i class="ph ph-map-trifold"></i>
+                                    <select class="form-control form-select" id="estado">
+                                        <option value="">UF</option>
+                                        <option value="AC">AC</option>
+                                        <option value="AL">AL</option>
+                                        <option value="AP">AP</option>
+                                        <option value="AM">AM</option>
+                                        <option value="BA">BA</option>
+                                        <option value="CE">CE</option>
+                                        <option value="DF">DF</option>
+                                        <option value="ES">ES</option>
+                                        <option value="GO">GO</option>
+                                        <option value="MA">MA</option>
+                                        <option value="MT">MT</option>
+                                        <option value="MS">MS</option>
+                                        <option value="MG">MG</option>
+                                        <option value="PA">PA</option>
+                                        <option value="PB">PB</option>
+                                        <option value="PR">PR</option>
+                                        <option value="PE">PE</option>
+                                        <option value="PI">PI</option>
+                                        <option value="RJ">RJ</option>
+                                        <option value="RN">RN</option>
+                                        <option value="RS">RS</option>
+                                        <option value="RO">RO</option>
+                                        <option value="RR">RR</option>
+                                        <option value="SC">SC</option>
+                                        <option value="SP">SP</option>
+                                        <option value="SE">SE</option>
+                                        <option value="TO">TO</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 mt-3">Cadastrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Formatação de CPF/CNPJ
+        document.getElementById('documento').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            
+            // CPF (11 dígitos)
+            if (value.length <= 11) {
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            }
+            // CNPJ (14 dígitos)
+            else if (value.length <= 14) {
+                value = value.replace(/^(\d{2})(\d)/, '$1.$2');
+                value = value.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
+                value = value.replace(/\.(\d{3})(\d)/, '.$1/$2');
+                value = value.replace(/(\d{4})(\d)/, '$1-$2');
+            }
+            
+            e.target.value = value;
+        });
+
+        // Formatação de CEP
+        document.getElementById('cep').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            
+            if (value.length <= 8) {
+                value = value.replace(/(\d{5})(\d)/, '$1-$2');
+            }
+            
+            e.target.value = value;
+        });
+
+        // Formatação de Telefone
+        document.getElementById('telefone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            
+            if (value.length <= 11) {
+                value = value.replace(/(\d{2})(\d)/, '($1) $2');
+                value = value.replace(/(\d{5})(\d)/, '$1-$2');
+            }
+            
+            e.target.value = value;
+        });
+
+        // Busca automática de endereço por CEP (ViaCEP)
+        document.getElementById('cep').addEventListener('blur', function(e) {
+            const cep = e.target.value.replace(/\D/g, '');
+            
+            if (cep.length === 8) {
+                fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.erro) {
+                            document.getElementById('rua').value = data.logradouro;
+                            document.getElementById('bairro').value = data.bairro;
+                            document.getElementById('cidade').value = data.localidade;
+                            document.getElementById('estado').value = data.uf;
+                            document.getElementById('numero').focus();
+                        }
+                    })
+                    .catch(error => console.error('Erro ao buscar CEP:', error));
+            }
+        });
+    </script>
+</body>
+</html>

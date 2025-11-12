@@ -181,7 +181,7 @@
     </div>
 
     <footer>
-        Copyright © 2024 TaNaMão. Todos os direitos reservados.
+        Copyright © 2025 TaNaMão. Todos os direitos reservados.
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
@@ -197,9 +197,9 @@
         function irParaCadastro(tipo) {
             // Redireciona para a página de cadastro com o tipo selecionado
             if (tipo === 'cliente') {
-                window.location.href = 'cadastro?tipo=cliente';
+                window.location.href = 'cadastro-cliente';
             } else if (tipo === 'prestador') {
-                window.location.href = 'cadastro?tipo=prestador';
+                window.location.href = 'cadastro-prestador';
             }
         }
     </script>

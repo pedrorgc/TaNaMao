@@ -45,3 +45,11 @@ Route::get('/profile/prestador', function () {
 Route::get('/pre-cadastro', function () {
     return view('pages.public.pre-cadastro');
 });
+
+Route::get('/cadastro-cliente', function () {
+    return view('pages.public.cadastro-cliente');
+});
+
+Route::get('/cadastro-prestador', function () {
+    return view('pages.public.cadastro-prestador');
+});

@@ -130,7 +130,7 @@
                     </button>
 
                     <p class="text-center small mt-3">
-                        Não tem uma conta? <a href="cadastro" class="text-primary text-decoration-none fw-semibold">Cadastre-se</a>
+                        Não tem uma conta? <a href="pre-cadastro" class="text-primary text-decoration-none fw-semibold">Cadastre-se</a>
                     </p>
                 </form>
             </div>
