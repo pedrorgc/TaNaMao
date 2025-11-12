@@ -16,12 +16,6 @@ Route::get('/contact', function () {
     return view('pages.public.contact');
 });
 
-// Sua rota de cadastro
-Route::get('/cadastro', function () {
-    return view('pages.public.cadastro');
-});
-
-// Rotas que vieram da branch main
 Route::get('/servicos/create', function () {
     return view('pages.public.service-create');
 });
@@ -40,4 +34,16 @@ Route::get('/profile', function () {
 
 Route::get('/profile/prestador', function () {
     return view('pages.public.profile-prestador');
+});
+
+Route::get('/pre-cadastro', function () {
+    return view('pages.public.pre-cadastro');
+});
+
+Route::get('/cadastro-cliente', function () {
+    return view('pages.public.cadastro-cliente');
+});
+
+Route::get('/cadastro-prestador', function () {
+    return view('pages.public.cadastro-prestador');
 });
