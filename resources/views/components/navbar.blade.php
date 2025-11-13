@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #1D4ED8; min-height: 70px;">
     <div class="container">
-        <!-- Logo maior e mais à esquerda -->
+        <!-- Logo -->
         <a class="navbar-brand d-flex align-items-center" href="home" style="margin-right: auto;">
             <img src="{{ asset('assets/logo_TaNaMao.png') }}" alt="TaNaMao" height="55" class="me-2">
         </a>
@@ -9,6 +9,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
+        <!-- Itens da navbar -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto align-items-center">
                 <li class="nav-item mx-3">
@@ -17,11 +18,43 @@
                 <li class="nav-item mx-3">
                     <a class="nav-link" href="#sobre" style="font-size: 1.1rem;">Sobre</a>
                 </li>
-                <li class="nav-item mx-3">
-                    <a class="nav-link d-flex align-items-center" href="login" style="font-size: 1.1rem;">
-                        <i class="bi bi-person-fill me-2 fs-5"></i> Entrar
-                    </a>
-                </li>
+                @auth
+                    
+                    @php
+                        $tipo = auth()->user()->tipo ?? 'user'; 
+                    @endphp
+
+                    <li class="nav-item dropdown mx-3">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown"
+                           role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 1.1rem;">
+                            <i class="bi bi-person-circle me-2 fs-5"></i> 
+                            {{ auth()->user()->name ?? 'Usuário' }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            @if ($tipo === 'admin')
+                                <li><a class="dropdown-item" href="{{ url('/admin') }}">Painel Administrativo</a></li>
+                            @elseif ($tipo === 'prestador')
+                                <li><a class="dropdown-item" href="{{ url('/perfil-prestador') }}">Meu Perfil de Prestador</a></li>
+                            @else
+                                <li><a class="dropdown-item" href="{{ url('/profile') }}">Meu Perfil</a></li>
+                            @endif
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item text-danger">Sair</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                @else
+                    <!-- Quando o usuário NÃO está logado -->
+                    <li class="nav-item mx-3">
+                        <a class="nav-link d-flex align-items-center" href="{{ route('login') }}" style="font-size: 1.1rem;">
+                            <i class="bi bi-person-fill me-2 fs-5"></i> Entrar
+                        </a>
+                    </li>
+                @endauth
             </ul>
         </div>
     </div>

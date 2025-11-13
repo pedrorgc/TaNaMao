@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,6 +72,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container-fluid login-wrapper d-flex align-items-center justify-content-center">
         <div class="row w-100 d-flex justify-content-center align-items-center">
@@ -83,21 +85,30 @@
                 </div>
 
                 <form method="POST">
+                    @csrf
                     <div class="mb-3">
                         <label for="email" class="form-label fw-semibold">E-mail ou Telefone</label>
                         <div class="input-group">
                             <span class="input-group-text bg-light"><i class="bi bi-envelope"></i></span>
-                            <input type="text" id="email" name="email" class="form-control" placeholder="seu@email.com" required>
+                            <input type="text" id="email" name="email" class="form-control"
+                                placeholder="seu@email.com" required>
                         </div>
+                        @error('email')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
                         <label for="password" class="form-label fw-semibold">Senha</label>
                         <div class="input-group">
                             <span class="input-group-text bg-light"><i class="bi bi-lock"></i></span>
-                            <input type="password" id="password" name="password" class="form-control" placeholder="Sua senha" required>
+                            <input type="password" id="password" name="password" class="form-control"
+                                placeholder="Sua senha" required>
                             <span class="input-group-text bg-light"><i class="bi bi-eye"></i></span>
                         </div>
+                        @error('password')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
 
                     <!-- Lembrar e Esqueci -->

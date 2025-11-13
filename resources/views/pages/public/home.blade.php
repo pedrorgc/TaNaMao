@@ -4,153 +4,176 @@
 
 @section('content')
 
-<div class="bg bg-body-secondary text-center mt-3 full-width-bg d-flex flex-column justify-content-center" style="min-height: 400px;">
-    <h1>Encontre o profissional <span class="text-primary">certo para você</span></h1>
-    <p>Conectamos você aos melhores prestadores de serviço da sua região.
-       Rápido, confiável e na palma da sua mão.</p>
+    <div class="bg bg-body-secondary text-center mt-3 full-width-bg d-flex flex-column justify-content-center"
+        style="min-height: 400px;">
+        <h1>Encontre o profissional <span class="text-primary">certo para você</span></h1>
+        <p>Conectamos você aos melhores prestadores de serviço da sua região.
+            Rápido, confiável e na palma da sua mão.</p>
 
-    <div class="d-flex gap-3 justify-content-center mt-3">
-        @include('components.button', [
-            'slot' => 'Encontrar Serviços',
-            'class' => 'btn-primary',
-            'style' => 'font-size: 0.9rem; padding: 6px 18px;',
-            'href' => '/login'
-        ])
+        <div class="d-flex gap-3 justify-content-center mt-3">
+            @include('components.button', [
+                'slot' => 'Encontrar Serviços',
+                'class' => 'btn-primary',
+                'style' => 'font-size: 0.9rem; padding: 6px 18px;',
+                'href' => '/login',
+            ])
 
-        @include('components.button', [
-            'slot' => 'Prestar Serviços',
-            'class' => 'btn-secondary',
-            'style' => 'font-size: 0.9rem; padding: 6px 18px;',
-            'href' => '/login'
-        ])
-    </div>
-</div>
-
-<div class="fw-bold text-center mt-5 d-flex flex-column justify-content-center" style="min-height: 400px;">
-    <h1>Categorias de Serviços</h1>
-
-    <div class="row mt-5">
-        <div class="col-md-3 mt-5">
-            @include('components.card', ['icon' => 'bi-wrench', 'title' => 'Encanador', 'slot' => 'Reparos hidráulicos'])
-        </div>
-        <div class="col-md-3 mt-5">
-            @include('components.card', ['icon' => 'bi-lightning-charge-fill', 'title' => 'Eletricista', 'slot' => 'Instalações elétricas'])
-        </div>
-        <div class="col-md-3 mt-5">
-            @include('components.card', ['icon' => 'bi-house-door-fill', 'title' => 'Diarista', 'slot' => 'Limpeza Residencial'])
-        </div>
-        <div class="col-md-3 mt-5">
-            @include('components.card', ['icon' => 'bi-gear-fill', 'title' => 'Mecânico', 'slot' => 'Manutenção Automotiva'])
+            @include('components.button', [
+                'slot' => 'Prestar Serviços',
+                'class' => 'btn-secondary',
+                'style' => 'font-size: 0.9rem; padding: 6px 18px;',
+                'href' => '/login',
+            ])
         </div>
     </div>
-</div>
 
-<div class=" bg bg-body-secondary full-width-bg d-flex flex-column justify-content-center" style="min-height: 400px;">
-    <h1 class='fw-bold text-center'>Como Funciona</h1>
-    <div class="container text-center">
-        <div class="row justify-content-center">
-            <div class="col-md-4 mt-5">
-                <i class="bi bi-geo-alt-fill fs-1"></i>
-                <h3>1. Busque</h3>
-                <p>Procure o serviço que precisa na sua região</p>
+    <div class="fw-bold text-center mt-5 d-flex flex-column justify-content-center" style="min-height: 400px;">
+        <h1>Categorias de Serviços</h1>
+
+        <div class="row mt-5">
+            <div class="col-md-3 mt-5">
+                @include('components.card', [
+                    'icon' => 'bi-wrench',
+                    'title' => 'Encanador',
+                    'slot' => 'Reparos hidráulicos',
+                ])
             </div>
-            <div class="col-md-4 mt-5">
-                <i class="bi bi-people-fill fs-1"></i>
-                <h3>2. Compare</h3>
-                <p>Veja perfis, avaliações e escolha o melhor</p>
+            <div class="col-md-3 mt-5">
+                @include('components.card', [
+                    'icon' => 'bi-lightning-charge-fill',
+                    'title' => 'Eletricista',
+                    'slot' => 'Instalações elétricas',
+                ])
             </div>
-            <div class="col-md-4 mt-5">
-                <i class="bi bi-check-lg fs-1"></i>
-                <h3>3. Contrate</h3>
-                <p>Contrate direto pela plataforma</p>
+            <div class="col-md-3 mt-5">
+                @include('components.card', [
+                    'icon' => 'bi-house-door-fill',
+                    'title' => 'Diarista',
+                    'slot' => 'Limpeza Residencial',
+                ])
+            </div>
+            <div class="col-md-3 mt-5">
+                @include('components.card', [
+                    'icon' => 'bi-gear-fill',
+                    'title' => 'Mecânico',
+                    'slot' => 'Manutenção Automotiva',
+                ])
             </div>
         </div>
     </div>
-</div>
-
-<div class="text-center mt-5 d-flex flex-column justify-content-center" style="min-height: 400px;">
-    <h1 class="fw-bold">O que nossos usuários dizem</h1>
-
-    <div class="row justify-content-center mt-5">
-        <div class="col-md-3 m-2 mt-5">
-            <div class="p-4 bg-body-secondary rounded-3 shadow-sm h-100">
-                <div class="mb-2">
-                    <i class="bi bi-star-fill text-dark"></i>
-                    <i class="bi bi-star-fill text-dark"></i>
-                    <i class="bi bi-star-fill text-dark"></i>
-                    <i class="bi bi-star-fill text-dark"></i>
-                    <i class="bi bi-star-fill text-dark"></i>
+    <div id="como-funciona" class="bg bg-body-secondary full-width-bg d-flex flex-column justify-content-center"
+        style="min-height: 400px;">
+        <h1 class='fw-bold text-center'>Como Funciona</h1>
+        <div class="container text-center">
+            <div class="row justify-content-center">
+                <div class="col-md-4 mt-5">
+                    <i class="bi bi-geo-alt-fill fs-1"></i>
+                    <h3>1. Busque</h3>
+                    <p>Procure o serviço que precisa na sua região</p>
                 </div>
-                <p class="fst-italic">“Encontrei um eletricista excelente em poucos minutos”</p>
-                <p class="fw-bold mb-0">Raí</p>
-                <a href="#" class="text-primary text-decoration-none">Cliente</a>
-            </div>
-        </div>
-
-        <div class="col-md-3 m-2 mt-5">
-            <div class="p-4 bg-body-secondary rounded-3 shadow-sm h-100">
-                <div class="mb-2">
-                    <i class="bi bi-star-fill text-dark"></i>
-                    <i class="bi bi-star-fill text-dark"></i>
-                    <i class="bi bi-star-fill text-dark"></i>
-                    <i class="bi bi-star-fill text-dark"></i>
-                    <i class="bi bi-star-fill text-dark"></i>
+                <div class="col-md-4 mt-5">
+                    <i class="bi bi-people-fill fs-1"></i>
+                    <h3>2. Compare</h3>
+                    <p>Veja perfis, avaliações e escolha o melhor</p>
                 </div>
-                <p class="fst-italic">“Consegui mais clientes e organizei melhor meu negócio”</p>
-                <p class="fw-bold mb-0">Pedro</p>
-                <a href="#" class="text-primary text-decoration-none">Prestador</a>
-            </div>
-        </div>
-
-        <div class="col-md-3 m-2 mt-5">
-            <div class="p-4 bg-body-secondary rounded-3 shadow-sm h-100">
-                <div class="mb-2">
-                    <i class="bi bi-star-fill text-dark"></i>
-                    <i class="bi bi-star-fill text-dark"></i>
-                    <i class="bi bi-star-fill text-dark"></i>
-                    <i class="bi bi-star-fill text-dark"></i>
-                    <i class="bi bi-star-fill text-dark"></i>
+                <div class="col-md-4 mt-5">
+                    <i class="bi bi-check-lg fs-1"></i>
+                    <h3>3. Contrate</h3>
+                    <p>Contrate direto pela plataforma</p>
                 </div>
-                <p class="fst-italic">“Serviço rápido e confiável, recomendo”</p>
-                <p class="fw-bold mb-0">Luiz</p>
-                <a href="#" class="text-primary text-decoration-none">Cliente</a>
             </div>
         </div>
     </div>
-</div>
 
-<div class="bg bg-body-secondary text-center mt-3 py-3 full-width-bg d-flex flex-column justify-content-center" style="min-height: 400px;">
-    <h1>Sobre Nós</h1>
-    <div class="container mt-2">
-        <div class="d-flex justify-content-center align-items-center">
-            <img src="{{ asset('assets/TaNaMao-3D.png') }}" class="me-5" alt="TaNaMao" style="width: 350px;">
-            <div class="text-start" style="max-width: 400px;">
-                <p class="fs-3 card-text m-0">
-                    O TaNaMão surgiu com o propósito de conectar quem precisa com quem sabe fazer.
-                    Somos um sistema que conecta clientes e profissionais que buscam um mesmo propósito.
-                </p>
+    <div class="text-center mt-5 d-flex flex-column justify-content-center" style="min-height: 400px;">
+        <h1 class="fw-bold">O que nossos usuários dizem</h1>
+
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-3 m-2 mt-5">
+                <div class="p-4 bg-body-secondary rounded-3 shadow-sm h-100">
+                    <div class="mb-2">
+                        <i class="bi bi-star-fill text-dark"></i>
+                        <i class="bi bi-star-fill text-dark"></i>
+                        <i class="bi bi-star-fill text-dark"></i>
+                        <i class="bi bi-star-fill text-dark"></i>
+                        <i class="bi bi-star-fill text-dark"></i>
+                    </div>
+                    <p class="fst-italic">“Encontrei um eletricista excelente em poucos minutos”</p>
+                    <p class="fw-bold mb-0">Raí</p>
+                    <a href="#" class="text-primary text-decoration-none">Cliente</a>
+                </div>
+            </div>
+
+            <div class="col-md-3 m-2 mt-5">
+                <div class="p-4 bg-body-secondary rounded-3 shadow-sm h-100">
+                    <div class="mb-2">
+                        <i class="bi bi-star-fill text-dark"></i>
+                        <i class="bi bi-star-fill text-dark"></i>
+                        <i class="bi bi-star-fill text-dark"></i>
+                        <i class="bi bi-star-fill text-dark"></i>
+                        <i class="bi bi-star-fill text-dark"></i>
+                    </div>
+                    <p class="fst-italic">“Consegui mais clientes e organizei melhor meu negócio”</p>
+                    <p class="fw-bold mb-0">Pedro</p>
+                    <a href="#" class="text-primary text-decoration-none">Prestador</a>
+                </div>
+            </div>
+
+            <div class="col-md-3 m-2 mt-5">
+                <div class="p-4 bg-body-secondary rounded-3 shadow-sm h-100">
+                    <div class="mb-2">
+                        <i class="bi bi-star-fill text-dark"></i>
+                        <i class="bi bi-star-fill text-dark"></i>
+                        <i class="bi bi-star-fill text-dark"></i>
+                        <i class="bi bi-star-fill text-dark"></i>
+                        <i class="bi bi-star-fill text-dark"></i>
+                    </div>
+                    <p class="fst-italic">“Serviço rápido e confiável, recomendo”</p>
+                    <p class="fw-bold mb-0">Luiz</p>
+                    <a href="#" class="text-primary text-decoration-none">Cliente</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<style>
-  .custom-btn {
-    min-width: 160px !important;
-    min-height: 35px !important;
-    padding: 6px 0 !important;
-    font-size: 0.95rem !important;
-  }
+    <div id="sobre"
+        class="bg bg-body-secondary text-center mt-3 py-3 full-width-bg d-flex flex-column justify-content-center"
+        style="min-height: 400px;">
+        <h1>Sobre Nós</h1>
+        <div class="container mt-2">
+            <div class="d-flex justify-content-center align-items-center">
+                <img src="{{ asset('assets/TaNaMao-3D.png') }}" class="me-5" alt="TaNaMao" style="width: 350px;">
+                <div class="text-start" style="max-width: 400px;">
+                    <p class="fs-3 card-text m-0">
+                        O TaNaMão surgiu com o propósito de conectar quem precisa com quem sabe fazer.
+                        Somos um sistema que conecta clientes e profissionais que buscam um mesmo propósito.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  .full-width-bg {
-    position: relative;
-    width: 100vw;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    overflow-x: hidden;
-  }
-</style>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .custom-btn {
+            min-width: 160px !important;
+            min-height: 35px !important;
+            padding: 6px 0 !important;
+            font-size: 0.95rem !important;
+        }
+
+        .full-width-bg {
+            position: relative;
+            width: 100vw;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            overflow-x: hidden;
+        }
+    </style>
 
 @endsection
