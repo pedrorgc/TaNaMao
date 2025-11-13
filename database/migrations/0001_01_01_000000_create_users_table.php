@@ -9,24 +9,34 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+ public function up(): void
     {
+        // 1. Tabela USERS (Com as modificações da [T-03])
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
+            // ⬇️ --- INÍCIO DA MODIFICAÇÃO [T-03] --- ⬇️
+            $table->string('cpf_cnpj')->unique()->nullable();
+            $table->string('telefone')->nullable();
+            $table->enum('role', ['client', 'provider', 'admin'])->default('client');
+            // ⬆️ --- FIM DA MODIFICAÇÃO [T-03] --- ⬆️
+
             $table->rememberToken();
             $table->timestamps();
         });
 
+        // 2. Tabela PASSWORD_RESET_TOKENS (Original do Breeze)
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });
 
+        // 3. Tabela SESSIONS (Original do Breeze)
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->foreignId('user_id')->nullable()->index();
@@ -36,7 +46,6 @@ return new class extends Migration
             $table->integer('last_activity')->index();
         });
     }
-
     /**
      * Reverse the migrations.
      */

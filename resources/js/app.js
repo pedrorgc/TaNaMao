@@ -1,5 +1,7 @@
-// importa o SCSS (Vite compila)
-import '../scss/app.scss';
+import './bootstrap';
 
-// importa o JS do Bootstrap (já inclui popper)
-import 'bootstrap/dist/js/bootstrap.bundle';
+import Alpine from 'alpinejs';
+
+window.Alpine = Alpine;
+
+Alpine.start();

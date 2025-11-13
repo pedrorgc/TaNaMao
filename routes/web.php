@@ -1,43 +1,31 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('pages.public.home');
-});
-Route::get('/home', function () {
-    return view('pages.public.home');
-});
-Route::get('/login', function () {
-    return view('pages.public.login');
+    return view('welcome');
 });
 
-Route::get('/contact', function () {
-    return view('pages.public.contact');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Sua rota de cadastro
-Route::get('/cadastro', function () {
-    return view('pages.public.cadastro');
-});
+require __DIR__.'/auth.php';
 
-// Rotas que vieram da branch main
-Route::get('/servicos/create', function () {
-    return view('pages.public.service-create');
-});
+// ... (rotas do Breeze, como /dashboard)
 
-Route::get('/servicos', function () {
-    return view('pages.public.service-area');
-});
+// Rotas que SÓ utilizadores logados com a 'role' de 'client' podem aceder.
+Route::middleware(['auth', 'role:client'])->group(function () {
+    
 
-Route::get('/admin', function () {
-    return view('pages.admin.profile');
 });
-
-Route::get('/profile', function () {
-    return view('pages.public.profile');
-});
-
-Route::get('/profile/prestador', function () {
-    return view('pages.public.profile-prestador');
+Route::middleware(['auth', 'role:provider'])->group(function () {
+    
 });

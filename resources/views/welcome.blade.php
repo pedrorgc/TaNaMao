@@ -10,7 +10,7 @@
 <body>
     <header>
         <nav>
-            <a href="{{ url('/') }}">Home</a>
+            <a href="{{ url('/') }}">Dashboard</a>
         </nav>
     </header>
 
