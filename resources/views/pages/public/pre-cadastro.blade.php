@@ -146,7 +146,7 @@
                     </div>
                     <h2 class="profile-title">Cliente</h2>
                     <p class="profile-description">
-                        Encontre profissionais qualificados para realizar serviços que você precisa. 
+                        Encontre profissionais qualificados para realizar serviços que você precisa.
                         Contrate com segurança e praticidade.
                     </p>
                     <button class="btn btn-select w-100" onclick="event.stopPropagation(); irParaCadastro('cliente')">
@@ -163,7 +163,7 @@
                     </div>
                     <h2 class="profile-title">Prestador</h2>
                     <p class="profile-description">
-                        Ofereça seus serviços e encontre novos clientes. 
+                        Ofereça seus serviços e encontre novos clientes.
                         Gerencie sua agenda e aumente seus ganhos.
                     </p>
                     <button class="btn btn-select w-100" onclick="event.stopPropagation(); irParaCadastro('prestador')">
@@ -185,7 +185,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <script>
         function selecionarPerfil(tipo) {
             // Adiciona feedback visual ao clicar no card
@@ -197,9 +197,9 @@
         function irParaCadastro(tipo) {
             // Redireciona para a página de cadastro com o tipo selecionado
             if (tipo === 'cliente') {
-                window.location.href = 'cadastro-cliente';
+                window.location.href = 'cadastro/cliente';
             } else if (tipo === 'prestador') {
-                window.location.href = 'cadastro-prestador';
+                window.location.href = 'cadastro/prestador';
             }
         }
     </script>
