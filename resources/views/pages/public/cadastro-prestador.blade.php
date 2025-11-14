@@ -8,7 +8,7 @@
 
     @vite(['resources/scss/app.scss', 'resources/js/dialog.js'])
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    
+
     <style>
     .logo {
         width: 150px;
@@ -161,21 +161,43 @@ body {
                 <div class="auth-body">
                     <h1>Cadastro - Prestador de Serviço</h1>
                     <p>Preencha os dados abaixo para criar sua conta</p>
-                    <form>
+                    <form method="POST" action="{{ route('cadastro.prestador') }}">
+                        @csrf
+                        <!-- Campo oculto para role -->
+                        <input type="hidden" name="role" value="moderator">
+
+                        <!-- Exibir erros de validação gerais -->
+                        @if ($errors->any())
+                            <div class="alert alert-danger mt-3">
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        <!-- Exibir mensagem de sucesso -->
+                        @if(session('success'))
+                            <div class="alert alert-success mt-3">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
                         <!-- Dados Pessoais/Empresariais -->
-                        @include('components.input-field', ['label' => 'Nome Completo / Razão Social', 'icon' => 'ph-user', 'type' => 'text', 'id' => 'nome', 'placeholder' => 'Seu nome ou nome da empresa'])
+                        @include('components.input-field', ['label' => 'Nome Completo / Razão Social', 'icon' => 'ph-user', 'type' => 'text', 'id' => 'nome', 'name' => 'name', 'placeholder' => 'Seu nome ou nome da empresa'])
 
-                        @include('components.input-field', ['label' => 'E-mail', 'icon' => 'ph-envelope-simple', 'type' => 'email', 'id' => 'email', 'placeholder' => 'seu@email.com'])
+                        @include('components.input-field', ['label' => 'E-mail', 'icon' => 'ph-envelope-simple', 'type' => 'email', 'id' => 'email', 'name' => 'email', 'placeholder' => 'seu@email.com'])
 
-                        @include('components.input-field', ['label' => 'CPF/CNPJ', 'icon' => 'ph-identification-card', 'type' => 'text', 'id' => 'documento', 'placeholder' => 'CPF ou CNPJ'])
+                        @include('components.input-field', ['label' => 'CPF/CNPJ', 'icon' => 'ph-identification-card', 'type' => 'text', 'id' => 'documento', 'name' => 'documento', 'placeholder' => 'CPF ou CNPJ'])
 
-                        @include('components.input-field', ['label' => 'Telefone', 'icon' => 'ph-phone', 'type' => 'tel', 'id' => 'telefone', 'placeholder' => '(99) 99999-9999'])
+                        @include('components.input-field', ['label' => 'Telefone', 'icon' => 'ph-phone', 'type' => 'tel', 'id' => 'telefone', 'name' => 'telefone', 'placeholder' => '(99) 99999-9999'])
 
                         <div class="mb-3">
                             <label for="categoria" class="form-label">Categoria de Serviço</label>
                             <div class="input-group">
                                 <i class="ph ph-briefcase"></i>
-                                <select class="form-control form-select" id="categoria" required>
+                                <select class="form-control form-select" id="categoria" name="categoria" required>
                                     <option value="">Selecione uma categoria</option>
                                     <option value="eletricista">Eletricista</option>
                                     <option value="encanador">Encanador</option>
@@ -195,9 +217,9 @@ body {
                             </div>
                         </div>
 
-                        @include('components.input-field', ['label' => 'Senha', 'icon' => 'ph-lock', 'type' => 'password', 'id' => 'senha', 'placeholder' => 'Mínimo 8 caracteres'])
+                        @include('components.input-field', ['label' => 'Senha', 'icon' => 'ph-lock', 'type' => 'password', 'id' => 'senha', 'name' => 'password', 'placeholder' => 'Mínimo 8 caracteres'])
 
-                        @include('components.input-field', ['label' => 'Confirmar Senha', 'icon' => 'ph-lock', 'type' => 'password', 'id' => 'confirmar-senha', 'placeholder' => 'Confirme sua senha'])
+                        @include('components.input-field', ['label' => 'Confirmar Senha', 'icon' => 'ph-lock', 'type' => 'password', 'id' => 'confirmar-senha', 'name' => 'password_confirmation', 'placeholder' => 'Confirme sua senha'])
 
                         <!-- Divisor de Seção -->
                         <div class="section-divider">
@@ -280,12 +302,12 @@ body {
             </div>
         </div>
     </div>
-    
+
     <script>
         // Formatação de CPF/CNPJ
         document.getElementById('documento').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
-            
+
             // CPF (11 dígitos)
             if (value.length <= 11) {
                 value = value.replace(/(\d{3})(\d)/, '$1.$2');
@@ -299,37 +321,37 @@ body {
                 value = value.replace(/\.(\d{3})(\d)/, '.$1/$2');
                 value = value.replace(/(\d{4})(\d)/, '$1-$2');
             }
-            
+
             e.target.value = value;
         });
 
         // Formatação de CEP
         document.getElementById('cep').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
-            
+
             if (value.length <= 8) {
                 value = value.replace(/(\d{5})(\d)/, '$1-$2');
             }
-            
+
             e.target.value = value;
         });
 
         // Formatação de Telefone
         document.getElementById('telefone').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
-            
+
             if (value.length <= 11) {
                 value = value.replace(/(\d{2})(\d)/, '($1) $2');
                 value = value.replace(/(\d{5})(\d)/, '$1-$2');
             }
-            
+
             e.target.value = value;
         });
 
         // Busca automática de endereço por CEP (ViaCEP)
         document.getElementById('cep').addEventListener('blur', function(e) {
             const cep = e.target.value.replace(/\D/g, '');
-            
+
             if (cep.length === 8) {
                 fetch(`https://viacep.com.br/ws/${cep}/json/`)
                     .then(response => response.json())

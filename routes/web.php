@@ -40,10 +40,8 @@ Route::get('/pre-cadastro', function () {
     return view('pages.public.pre-cadastro');
 });
 
-Route::get('/cadastro-cliente', function () {
-    return view('pages.public.cadastro-cliente');
-});
+Route::get('/cadastro-cliente', [App\Http\Controllers\Auth\RegisterController::class, 'createCliente'])->name('cadastro.cliente.create');
+Route::get('/cadastro-prestador', [App\Http\Controllers\Auth\RegisterController::class, 'createPrestador'])->name('cadastro.prestador.create');
 
-Route::get('/cadastro-prestador', function () {
-    return view('pages.public.cadastro-prestador');
-});
+Route::post('/cadastro-cliente', [App\Http\Controllers\Auth\RegisterController::class, 'store'])->name('cadastro.cliente');
+Route::post('/cadastro-prestador', [App\Http\Controllers\Auth\RegisterController::class, 'store'])->name('cadastro.prestador');
