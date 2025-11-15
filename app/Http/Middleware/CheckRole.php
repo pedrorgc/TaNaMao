@@ -10,15 +10,21 @@ class CheckRole
 {
     public function handle(Request $request, Closure $next, $role): Response
     {
-        if ($role === 'prestador' && !auth()->user()->isPrestador()) {
+        $user = $request->user();
+
+        if (!$user) {
             abort(403);
         }
 
-        if ($role === 'cliente' && !auth()->user()->isCliente()) {
+        if ($role === 'prestador' && !$user->isPrestador()) {
             abort(403);
         }
 
-        if ($role === 'admin' && !auth()->user()->isAdmin()) {
+        if ($role === 'cliente' && !$user->isCliente()) {
+            abort(403);
+        }
+
+        if ($role === 'admin' && !$user->isAdmin()) {
             abort(403);
         }
 
