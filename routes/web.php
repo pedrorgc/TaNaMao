@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -10,11 +11,11 @@ Route::get('/home', function () {
 });
 Route::get('/login', function () {
     return view('pages.public.login');
-});
+})->name('login');
 
 Route::get('/contact', function () {
     return view('pages.public.contact');
-});
+})->name('contact');
 
 Route::get('/servicos/create', function () {
     return view('pages.public.service-create');
@@ -36,7 +37,7 @@ Route::get('/profile/prestador', function () {
     return view('pages.public.profile-prestador');
 });
 
-Route::get('/pre-cadastro', function () {
+Route::get('/cadastro', function () {
     return view('pages.public.pre-cadastro');
 })->name('cadastro');
 
@@ -47,3 +48,5 @@ Route::get('/cadastro/cliente', function () {
 Route::get('/cadastro/prestador', function () {
     return view('pages.public.cadastro-prestador');
 })->name('cadastro.prestador');
+
+Route::post('/prestadores', [ProfileController::class, 'storePrestador'])->name('prestadores.store');

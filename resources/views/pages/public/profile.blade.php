@@ -33,7 +33,7 @@
                             <p class="mb-1 text-muted">Cliente</p>
                             <small class="text-muted"><i class="bi bi-calendar"></i> Membro desde Janeiro 2024</small>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </div>
 

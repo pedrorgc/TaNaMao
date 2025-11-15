@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,149 +9,150 @@
 
     @vite(['resources/scss/app.scss', 'resources/js/dialog.js'])
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    
+
     <style>
-    .logo {
-        width: 150px;
-        height: auto;
-    }
+        .logo {
+            width: 150px;
+            height: auto;
+        }
 
-/* ====== LAYOUT GERAL ====== */
-body {
-  background-color: #f8f9fb;
-  font-family: "Inter", sans-serif;
-}
+        /* ====== LAYOUT GERAL ====== */
+        body {
+            background-color: #f8f9fb;
+            font-family: "Inter", sans-serif;
+        }
 
-.auth-header {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
+        .auth-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
 
-.auth-body {
-  background: #fff;
-  padding: 2.5rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-}
+        .auth-body {
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
 
-/* ====== TÍTULOS ====== */
-.auth-body h1 {
-  text-align: center;
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin-bottom: 0.3rem;
-}
+        /* ====== TÍTULOS ====== */
+        .auth-body h1 {
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
 
-.auth-body p {
-  text-align: center;
-  color: #6c757d;
-  font-size: 0.95rem;
-  margin-bottom: 2rem;
-}
+        .auth-body p {
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
 
-/* ====== CAMPOS ====== */
-.form-label {
-  font-weight: 600;
-  font-size: 0.9rem;
-  margin-bottom: 0.3rem;
-}
+        /* ====== CAMPOS ====== */
+        .form-label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
 
-.input-group {
-  position: relative;
-  margin-bottom: 1.25rem; /* espaçamento entre campos */
-}
+        .input-group {
+            position: relative;
+            margin-bottom: 1.25rem;
+            /* espaçamento entre campos */
+        }
 
-.input-group i {
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #adb5bd;
-  font-size: 1.1rem;
-  pointer-events: none;
-}
+        .input-group i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #adb5bd;
+            font-size: 1.1rem;
+            pointer-events: none;
+        }
 
-.input-group .form-control,
-.input-group select {
-  width: 100%;
-  padding: 0.85rem 0.75rem 0.85rem 2.5rem;
-  border: 1px solid #dee2e6;
-  border-radius: 0.6rem;
-  font-size: 0.95rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  background-color: #fff;
-}
+        .input-group .form-control,
+        .input-group select {
+            width: 100%;
+            padding: 0.85rem 0.75rem 0.85rem 2.5rem;
+            border: 1px solid #dee2e6;
+            border-radius: 0.6rem;
+            font-size: 0.95rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background-color: #fff;
+        }
 
-.input-group .form-control:focus,
-.input-group select:focus {
-  border-color: #6c63ff;
-  box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.1);
-  outline: none;
-}
+        .input-group .form-control:focus,
+        .input-group select:focus {
+            border-color: #6c63ff;
+            box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.1);
+            outline: none;
+        }
 
-/* ====== SEÇÃO DE ENDEREÇO ====== */
-.section-divider {
-  margin: 2.5rem 0 1.5rem;
-  border-top: 2px solid #e9ecef;
-  position: relative;
-}
+        /* ====== SEÇÃO DE ENDEREÇO ====== */
+        .section-divider {
+            margin: 2.5rem 0 1.5rem;
+            border-top: 2px solid #e9ecef;
+            position: relative;
+        }
 
-.section-title {
-  background: #fff;
-  padding: 0 1rem;
-  position: absolute;
-  top: -13px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-weight: 600;
-  color: #495057;
-  font-size: 0.85rem;
-}
+        .section-title {
+            background: #fff;
+            padding: 0 1rem;
+            position: absolute;
+            top: -13px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.85rem;
+        }
 
-/* ====== CAMPOS EM LINHA ====== */
-.row-field {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1.25rem;
-}
+        /* ====== CAMPOS EM LINHA ====== */
+        .row-field {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
 
-.row-field > div {
-  flex: 1;
-}
+        .row-field>div {
+            flex: 1;
+        }
 
-/* ====== BOTÃO ====== */
-.btn-primary {
-  width: 100%;
-  background-color: #6c63ff;
-  border: none;
-  border-radius: 0.6rem;
-  padding: 0.9rem;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
+        /* ====== BOTÃO ====== */
+        .btn-primary {
+            width: 100%;
+            background-color: #6c63ff;
+            border: none;
+            border-radius: 0.6rem;
+            padding: 0.9rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
 
-.btn-primary:hover {
-  background-color: #5a52e0;
-}
+        .btn-primary:hover {
+            background-color: #5a52e0;
+        }
 
-/* ====== RESPONSIVIDADE ====== */
-@media (max-width: 768px) {
-  .auth-body {
-    padding: 2rem 1.5rem;
-  }
+        /* ====== RESPONSIVIDADE ====== */
+        @media (max-width: 768px) {
+            .auth-body {
+                padding: 2rem 1.5rem;
+            }
 
-  .row-field {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-}
-
-</style>
+            .row-field {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+        }
+    </style>
 
 </head>
+
 <body>
     <div class="container d-flex align-items-center justify-content-center min-vh-100">
         <div class="row w-100 justify-content-center">
@@ -161,7 +163,8 @@ body {
                 <div class="auth-body">
                     <h1>Cadastro - Prestador de Serviço</h1>
                     <p>Preencha os dados abaixo para criar sua conta</p>
-                    <form>
+                    <form method="POST" action="{{ route('prestadores.store') }}">
+                        @csrf
                         <!-- Dados Pessoais/Empresariais -->
                         @include('components.input-field', ['label' => 'Nome Completo / Razão Social', 'icon' => 'ph-user', 'type' => 'text', 'id' => 'nome', 'placeholder' => 'Seu nome ou nome da empresa'])
 
@@ -280,12 +283,12 @@ body {
             </div>
         </div>
     </div>
-    
+
     <script>
         // Formatação de CPF/CNPJ
         document.getElementById('documento').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
-            
+
             // CPF (11 dígitos)
             if (value.length <= 11) {
                 value = value.replace(/(\d{3})(\d)/, '$1.$2');
@@ -299,37 +302,37 @@ body {
                 value = value.replace(/\.(\d{3})(\d)/, '.$1/$2');
                 value = value.replace(/(\d{4})(\d)/, '$1-$2');
             }
-            
+
             e.target.value = value;
         });
 
         // Formatação de CEP
         document.getElementById('cep').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
-            
+
             if (value.length <= 8) {
                 value = value.replace(/(\d{5})(\d)/, '$1-$2');
             }
-            
+
             e.target.value = value;
         });
 
         // Formatação de Telefone
         document.getElementById('telefone').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
-            
+
             if (value.length <= 11) {
                 value = value.replace(/(\d{2})(\d)/, '($1) $2');
                 value = value.replace(/(\d{5})(\d)/, '$1-$2');
             }
-            
+
             e.target.value = value;
         });
 
         // Busca automática de endereço por CEP (ViaCEP)
         document.getElementById('cep').addEventListener('blur', function(e) {
             const cep = e.target.value.replace(/\D/g, '');
-            
+
             if (cep.length === 8) {
                 fetch(`https://viacep.com.br/ws/${cep}/json/`)
                     .then(response => response.json())
@@ -347,4 +350,5 @@ body {
         });
     </script>
 </body>
+
 </html>
