@@ -39,7 +39,7 @@ class ProfileController extends Controller
    public function storePrestador(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255', // Mudei de 'nome' para 'name'
+            'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'documento' => 'required|string|unique:users,documento',
             'telefone' => 'required|string',
@@ -52,7 +52,7 @@ class ProfileController extends Controller
             'bairro' => 'required|string',
             'cidade' => 'required|string',
             'estado' => 'required|string|size:2',
-             
+
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
@@ -68,6 +68,39 @@ class ProfileController extends Controller
 
         return redirect()->route('prestadores.create')
                         ->with('success', 'Prestador cadastrado com sucesso!');
+    }
+     public function storeCliente(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'documento' => 'required|string|unique:users,documento',
+            'telefone' => 'required|string',
+            'categoria_id' => 'required|exists:categorias,id',
+            'password' => 'required|min:8|confirmed',
+            'cep' => 'required|string',
+            'rua' => 'required|string',
+            'numero' => 'required|string',
+            'complemento' => 'nullable|string',
+            'bairro' => 'required|string',
+            'cidade' => 'required|string',
+            'estado' => 'required|string|size:2',
+
+        ]);
+
+        $validated['password'] = Hash::make($validated['password']);
+        $validated['role_id'] = 3;
+
+        $user = User::create($validated);
+
+        if ($user) {
+            Log::info('Usuário criado com sucesso:', $user->toArray());
+        } else {
+            Log::error('Falha ao criar usuário');
+        }
+
+        return redirect()->route('clientes.create')
+                        ->with('success', 'Cliente cadastrado com sucesso!');
     }
 
 

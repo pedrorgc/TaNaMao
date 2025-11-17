@@ -50,3 +50,5 @@ Route::get('/cadastro/prestador', function () {
 })->name('cadastro.prestador');
 
 Route::post('/prestadores', [ProfileController::class, 'storePrestador'])->name('prestadores.store');
+Route::post('/clientes', [ProfileController::class, 'storeCliente'])->name('clientes.store');
+

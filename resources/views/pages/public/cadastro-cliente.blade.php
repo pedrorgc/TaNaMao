@@ -8,7 +8,7 @@
 
     @vite(['resources/scss/app.scss', 'resources/js/dialog.js'])
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    
+
 <style>
     .logo {
         width: 150px;
@@ -161,7 +161,8 @@ body {
                 <div class="auth-body">
                     <h1>Cadastro - Cliente</h1>
                     <p>Preencha os dados abaixo para criar sua conta</p>
-                    <form>
+                    <form method="POST" action="{{ route('clientes.store') }}">
+                        @csrf
                         <!-- Dados Pessoais -->
                         @include('components.input-field', ['label' => 'Nome Completo', 'icon' => 'ph-user', 'type' => 'text', 'id' => 'nome', 'placeholder' => 'Seu nome completo'])
 
@@ -256,48 +257,48 @@ body {
             </div>
         </div>
     </div>
-    
+
     <script>
         // Formatação de CPF
         document.getElementById('cpf').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
-            
+
             if (value.length <= 11) {
                 value = value.replace(/(\d{3})(\d)/, '$1.$2');
                 value = value.replace(/(\d{3})(\d)/, '$1.$2');
                 value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
             }
-            
+
             e.target.value = value;
         });
 
         // Formatação de CEP
         document.getElementById('cep').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
-            
+
             if (value.length <= 8) {
                 value = value.replace(/(\d{5})(\d)/, '$1-$2');
             }
-            
+
             e.target.value = value;
         });
 
         // Formatação de Telefone
         document.getElementById('telefone').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
-            
+
             if (value.length <= 11) {
                 value = value.replace(/(\d{2})(\d)/, '($1) $2');
                 value = value.replace(/(\d{5})(\d)/, '$1-$2');
             }
-            
+
             e.target.value = value;
         });
 
         // Busca automática de endereço por CEP (ViaCEP)
         document.getElementById('cep').addEventListener('blur', function(e) {
             const cep = e.target.value.replace(/\D/g, '');
-            
+
             if (cep.length === 8) {
                 fetch(`https://viacep.com.br/ws/${cep}/json/`)
                     .then(response => response.json())
