@@ -8,7 +8,22 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script>
+        function togglePassword(id, icon) {
+            const input = document.getElementById(id);
 
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.remove("ph-eye");
+                icon.classList.add("ph-eye-slash");
+            } else {
+                input.type = "password";
+                icon.classList.remove("ph-eye-slash");
+                icon.classList.add("ph-eye");
+            }
+        }
+    </script>
     <style>
         body {
             background-color: #f8f9fa;
@@ -72,6 +87,7 @@
         }
     </style>
 </head>
+
 <body>
     <x-form-errors />
     <x-flash-success />
@@ -88,37 +104,17 @@
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
 
-                    <div class="mb-3">
-                        <label for="email" class="form-label fw-semibold">E-mail</label>
-                        <div class="input-group">
-                            <span class="input-group-text bg-light"><i class="bi bi-envelope"></i></span>
-                            <input type="email" id="email" name="email" class="form-control" placeholder="seu@email.com" value="{{ old('email') }}" required autofocus>
-                        </div>
-                        @error('email')
-                        <div class="text-danger small mt-1">{{ $message }}</div>
-                        @enderror
-                    </div>
+                    @include('components.input-field', ['label' => 'E-mail', 'icon' => 'ph-envelope-simple', 'type' => 'email', 'id' => 'email', 'placeholder' => 'seu@email.com', 'name' => 'email'])
 
-                    <div class="mb-3">
-                        <label for="password" class="form-label fw-semibold">Senha</label>
-                        <div class="input-group">
-                            <span class="input-group-text bg-light"><i class="bi bi-lock"></i></span>
-                            <input type="password" id="password" name="password" class="form-control" placeholder="Sua senha" required>
-                            <button type="button" class="input-group-text bg-light toggle-password">
-                                <i class="bi bi-eye"></i>
-                            </button>
-                        </div>
-                        @error('password')
-                        <div class="text-danger small mt-1">{{ $message }}</div>
-                        @enderror
-                    </div>
+
+                    @include('components.input-field', ['label' => 'Senha', 'icon' => 'ph-lock', 'type' => 'password', 'id' => 'senha', 'placeholder' => 'Mínimo 8 caracteres', 'name' => 'password'])
 
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                             <label class="form-check-label small" for="remember">Lembrar de mim</label>
                         </div>
-                        <a  class="small text-primary text-decoration-none">Esqueci a senha</a>
+                        <a class="small text-primary text-decoration-none">Esqueci a senha</a>
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100 py-2 mb-3">
