@@ -195,29 +195,49 @@
                         <div class="section-divider">
                             <span class="section-title">ENDEREÇO</span>
                         </div>
+
+
+                        @include('components.input-field', [
+                        'label' => 'CEP',
+                        'icon' => 'ph-map-pin',
+                        'type' => 'text',
+                        'id' => 'cep',
+                        'placeholder' => '00000-000',
+                        'name' => 'cep'
+                        ])
+
                         <div class="row-field mb-1">
 
                             <div class="col-small">
                                 <label for="estado" class="form-label">Estado</label>
                                 <div class="input-group">
                                     <i class="ph ph-map-trifold"></i>
-                                    <select class="form-control" id="estado" name="estado">
-                                        <option value="">Selecione o estado</option>
-                                    </select>
-
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="estado"
+                                        name="estado"
+                                        placeholder="Estado"
+                                        readonly
+                                        disabled>
                                 </div>
                             </div>
+
                             <div class="col-small">
+                                <label for="cidade" class="form-label">Cidade</label>
                                 <div class="input-group">
                                     <i class="ph ph-buildings"></i>
-                                    <label for="cidade" class="form-label">Cidade</label>
-                                    <select class="form-control" id="cidade" name="cidade">
-                                        <option value="">Selecione o estado primeiro</option>
-                                    </select>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="cidade"
+                                        name="cidade"
+                                        placeholder="Cidade"
+                                        readonly
+                                        disabled>
                                 </div>
                             </div>
                         </div>
-                        @include('components.input-field', ['label' => 'CEP', 'icon' => 'ph-map-pin', 'type' => 'text', 'id' => 'cep', 'placeholder' => '00000-000', 'name' => 'cep'])
 
                         <div class="row-field mb-3">
                             <div class="col-large">

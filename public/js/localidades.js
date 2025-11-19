@@ -1,43 +1,30 @@
-document.addEventListener('DOMContentLoaded', async () => {
-    const estadoSelect = document.getElementById('estado');
-    const cidadeSelect = document.getElementById('cidade');
+document.addEventListener('DOMContentLoaded', () => {
 
-    async function carregarEstados() {
-        const response = await fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados');
-        const estados = await response.json();
+    const campoCep = document.getElementById('cep');
+    const campoEstado = document.getElementById('estado');
+    const campoCidade = document.getElementById('cidade');
 
-        estados.sort((a, b) => a.sigla.localeCompare(b.sigla));
+    campoEstado.setAttribute('readonly', true);
+    campoCidade.setAttribute('readonly', true);
 
-        estados.forEach(estado => {
-            const option = document.createElement('option');
-            option.value = estado.sigla;
-            option.textContent = estado.sigla;
-            estadoSelect.appendChild(option);
-        });
-    }
+    campoCep.addEventListener('blur', () => {
+        const cep = campoCep.value.replace(/\D/g, '');
 
-    async function carregarCidades(uf) {
-        cidadeSelect.innerHTML = '<option value="">Carregando...</option>';
+        if (cep.length !== 8) return;
 
-        const response = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`);
-        const cidades = await response.json();
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.erro) {
+                    console.error("CEP não encontrado.");
+                    return;
+                }
 
-        cidadeSelect.innerHTML = '<option value="">Selecione a cidade</option>';
-
-        cidades.forEach(cidade => {
-            const option = document.createElement('option');
-            option.value = cidade.nome;
-            option.textContent = cidade.nome;
-            cidadeSelect.appendChild(option);
-        });
-    }
-
-    estadoSelect.addEventListener('change', () => {
-        const uf = estadoSelect.value;
-        if (uf) {
-            carregarCidades(uf);
-        }
+                // Preenche os inputs automaticamente
+                campoEstado.value = data.uf;
+                campoCidade.value = data.localidade;
+            })
+            .catch(err => console.error("Erro ao consultar ViaCEP:", err));
     });
 
-    carregarEstados();
 });
