@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\StoreClienteRequest;
+use App\Models\Categoria;
+use App\Models\Cliente;
+use App\Models\Endereco;
+use App\Models\Prestador;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,6 +22,14 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
+
+    public function createPrestador()
+    {
+        $categorias = Categoria::all();
+
+        return view('pages.public.cadastro-prestador', compact('categorias'));
+    }
+
     public function edit(Request $request): View
     {
         $user = $request->user();
@@ -35,74 +48,6 @@ class ProfileController extends Controller
             'user' => $user,
         ]);
     }
-
-   public function storePrestador(Request $request): RedirectResponse
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'documento' => 'required|string|unique:users,documento',
-            'telefone' => 'required|string',
-            'categoria_id' => 'required|exists:categorias,id',
-            'password' => 'required|min:8|confirmed',
-            'cep' => 'required|string',
-            'rua' => 'required|string',
-            'numero' => 'required|string',
-            'complemento' => 'nullable|string',
-            'bairro' => 'required|string',
-            'cidade' => 'required|string',
-            'estado' => 'required|string|size:2',
-
-        ]);
-
-        $validated['password'] = Hash::make($validated['password']);
-        $validated['role_id'] = 2;
-
-        $user = User::create($validated);
-
-        if ($user) {
-            Log::info('Usuário criado com sucesso:', $user->toArray());
-        } else {
-            Log::error('Falha ao criar usuário');
-        }
-
-        return redirect()->route('prestadores.create')
-                        ->with('success', 'Prestador cadastrado com sucesso!');
-    }
-     public function storeCliente(Request $request): RedirectResponse
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'documento' => 'required|string|unique:users,documento',
-            'telefone' => 'required|string',
-            'categoria_id' => 'required|exists:categorias,id',
-            'password' => 'required|min:8|confirmed',
-            'cep' => 'required|string',
-            'rua' => 'required|string',
-            'numero' => 'required|string',
-            'complemento' => 'nullable|string',
-            'bairro' => 'required|string',
-            'cidade' => 'required|string',
-            'estado' => 'required|string|size:2',
-
-        ]);
-
-        $validated['password'] = Hash::make($validated['password']);
-        $validated['role_id'] = 3;
-
-        $user = User::create($validated);
-
-        if ($user) {
-            Log::info('Usuário criado com sucesso:', $user->toArray());
-        } else {
-            Log::error('Falha ao criar usuário');
-        }
-
-        return redirect()->route('clientes.create')
-                        ->with('success', 'Cliente cadastrado com sucesso!');
-    }
-
 
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {

@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Models\Role; // CORREÇÃO: Import do model Role
-
+use App\Models\Role;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -22,16 +20,6 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',
-        'documento',
-        'telefone',
-        'categoria_id',
-        'cep',
-        'rua',
-        'numero',
-        'complemento',
-        'bairro',
-        'cidade',
-        'estado',
     ];
 
     protected $attributes = [

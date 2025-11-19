@@ -5,29 +5,32 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cliente extends Model
+class Prestador extends Model
 {
     use HasFactory;
 
-    protected $table = 'clientes';
+    protected $table = 'prestadores';
 
     protected $fillable = [
         'user_id',
-        'cpf',
-        'rg',
-        'data_nascimento',
-        'genero',
+        'documento',
         'telefone',
+        'categoria_id',
         'endereco_id',
     ];
 
+
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
+
 
     public function endereco()
     {
-        return $this->belongsTo(Endereco::class, 'endereco_id');
+        return $this->belongsTo(Endereco::class);
     }
+
+
+
 }

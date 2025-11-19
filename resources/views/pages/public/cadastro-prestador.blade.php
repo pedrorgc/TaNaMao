@@ -166,84 +166,71 @@
                     <form method="POST" action="{{ route('prestadores.store') }}">
                         @csrf
                         <!-- Dados Pessoais/Empresariais -->
-                        @include('components.input-field', ['label' => 'Nome Completo / Razão Social', 'icon' => 'ph-user', 'type' => 'text', 'id' => 'nome', 'placeholder' => 'Seu nome ou nome da empresa'])
+                        @include('components.input-field', ['label' => 'Nome Completo / Razão Social', 'icon' => 'ph-user', 'type' => 'text', 'id' => 'nome', 'placeholder' => 'Seu nome ou nome da empresa', 'name' => 'name'])
 
-                        @include('components.input-field', ['label' => 'E-mail', 'icon' => 'ph-envelope-simple', 'type' => 'email', 'id' => 'email', 'placeholder' => 'seu@email.com'])
+                        @include('components.input-field', ['label' => 'E-mail', 'icon' => 'ph-envelope-simple', 'type' => 'email', 'id' => 'email', 'placeholder' => 'seu@email.com', 'name' => 'email'])
 
-                        @include('components.input-field', ['label' => 'CPF/CNPJ', 'icon' => 'ph-identification-card', 'type' => 'text', 'id' => 'documento', 'placeholder' => 'CPF ou CNPJ'])
+                        @include('components.input-field', ['label' => 'CPF/CNPJ', 'icon' => 'ph-identification-card', 'type' => 'text', 'id' => 'documento', 'placeholder' => 'CPF ou CNPJ', 'name' => 'documento'])
 
-                        @include('components.input-field', ['label' => 'Telefone', 'icon' => 'ph-phone', 'type' => 'tel', 'id' => 'telefone', 'placeholder' => '(99) 99999-9999'])
+                        @include('components.input-field', ['label' => 'Telefone', 'icon' => 'ph-phone', 'type' => 'tel', 'id' => 'telefone', 'placeholder' => '(99) 99999-9999', 'name' => 'telefone'])
 
                         <div class="mb-3">
                             <label for="categoria" class="form-label">Categoria de Serviço</label>
                             <div class="input-group">
                                 <i class="ph ph-briefcase"></i>
-                                <select class="form-control form-select" id="categoria" required>
+                                <select class="form-control form-select" id="categoria" required name="categoria_id">
                                     <option value="">Selecione uma categoria</option>
-                                    <option value="eletricista">Eletricista</option>
-                                    <option value="encanador">Encanador</option>
-                                    <option value="pedreiro">Pedreiro</option>
-                                    <option value="pintor">Pintor</option>
-                                    <option value="marceneiro">Marceneiro</option>
-                                    <option value="jardineiro">Jardineiro</option>
-                                    <option value="limpeza">Limpeza e Conservação</option>
-                                    <option value="climatizacao">Climatização (Ar Condicionado)</option>
-                                    <option value="chaveiro">Chaveiro</option>
-                                    <option value="vidraceiro">Vidraceiro</option>
-                                    <option value="mecanico">Mecânico</option>
-                                    <option value="eletrodomesticos">Conserto de Eletrodomésticos</option>
-                                    <option value="ti">Técnico em Informática</option>
-                                    <option value="outros">Outros</option>
+                                    @foreach ($categorias as $categoria)
+                                    <option value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
 
-                        @include('components.input-field', ['label' => 'Senha', 'icon' => 'ph-lock', 'type' => 'password', 'id' => 'senha', 'placeholder' => 'Mínimo 8 caracteres'])
+                        @include('components.input-field', ['label' => 'Senha', 'icon' => 'ph-lock', 'type' => 'password', 'id' => 'senha', 'placeholder' => 'Mínimo 8 caracteres', 'name' => 'password'])
 
-                        @include('components.input-field', ['label' => 'Confirmar Senha', 'icon' => 'ph-lock', 'type' => 'password', 'id' => 'confirmar-senha', 'placeholder' => 'Confirme sua senha'])
+                        @include('components.input-field', ['label' => 'Confirmar Senha', 'icon' => 'ph-lock', 'type' => 'password', 'id' => 'confirmar-senha', 'placeholder' => 'Confirme sua senha', 'name' => 'password_confirmation'])
 
-                        <!-- Divisor de Seção -->
                         <div class="section-divider">
                             <span class="section-title">ENDEREÇO</span>
                         </div>
 
-                        <!-- Endereço -->
-                        @include('components.input-field', ['label' => 'CEP', 'icon' => 'ph-map-pin', 'type' => 'text', 'id' => 'cep', 'placeholder' => '00000-000'])
+                        @include('components.input-field', ['label' => 'CEP', 'icon' => 'ph-map-pin', 'type' => 'text', 'id' => 'cep', 'placeholder' => '00000-000', 'name' => 'cep'])
 
                         <div class="row-field mb-3">
                             <div class="col-large">
                                 <label for="rua" class="form-label">Rua</label>
                                 <div class="input-group">
                                     <i class="ph ph-road-horizon"></i>
-                                    <input type="text" class="form-control" id="rua" placeholder="Nome da rua">
+                                    <input type="text" class="form-control" id="rua" placeholder="Nome da rua" name="logradouro">
                                 </div>
                             </div>
                             <div class="col-small">
                                 <label for="numero" class="form-label">Número</label>
                                 <div class="input-group">
                                     <i class="ph ph-hash"></i>
-                                    <input type="text" class="form-control" id="numero" placeholder="123">
+                                    <input type="text" class="form-control" id="numero" placeholder="123" name="numero">
                                 </div>
                             </div>
                         </div>
 
-                        @include('components.input-field', ['label' => 'Complemento', 'icon' => 'ph-info', 'type' => 'text', 'id' => 'complemento', 'placeholder' => 'Sala, andar, etc (opcional)'])
+                        @include('components.input-field', ['label' => 'Complemento', 'icon' => 'ph-info', 'type' => 'text', 'id' => 'complemento', 'placeholder' => 'Sala, andar, etc (opcional)', 'name' => 'complemento'])
 
-                        @include('components.input-field', ['label' => 'Bairro', 'icon' => 'ph-buildings', 'type' => 'text', 'id' => 'bairro', 'placeholder' => 'Nome do bairro'])
+                        @include('components.input-field', ['label' => 'Bairro', 'icon' => 'ph-buildings', 'type' => 'text', 'id' => 'bairro', 'placeholder' => 'Nome do bairro', 'name' => 'bairro'])
 
                         <div class="row-field mb-3">
                             <div class="col-large">
                                 <label for="cidade" class="form-label">Cidade</label>
                                 <div class="input-group">
                                     <i class="ph ph-buildings"></i>
-                                    <input type="text" class="form-control" id="cidade" placeholder="Sua cidade">
+                                    <input type="text" class="form-control" id="cidade" placeholder="Sua cidade" name="cidade">
                                 </div>
                             </div>
                             <div class="col-small">
                                 <label for="estado" class="form-label">Estado</label>
                                 <div class="input-group">
                                     <i class="ph ph-map-trifold"></i>
-                                    <select class="form-control form-select" id="estado">
+                                    <select class="form-control form-select" id="estado" name="estado">
                                         <option value="">UF</option>
                                         <option value="AC">AC</option>
                                         <option value="AL">AL</option>
@@ -285,18 +272,15 @@
     </div>
 
     <script>
-        // Formatação de CPF/CNPJ
         document.getElementById('documento').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
 
-            // CPF (11 dígitos)
+
             if (value.length <= 11) {
                 value = value.replace(/(\d{3})(\d)/, '$1.$2');
                 value = value.replace(/(\d{3})(\d)/, '$1.$2');
                 value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-            }
-            // CNPJ (14 dígitos)
-            else if (value.length <= 14) {
+            } else if (value.length <= 14) {
                 value = value.replace(/^(\d{2})(\d)/, '$1.$2');
                 value = value.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
                 value = value.replace(/\.(\d{3})(\d)/, '.$1/$2');
@@ -306,7 +290,7 @@
             e.target.value = value;
         });
 
-        // Formatação de CEP
+
         document.getElementById('cep').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
 
@@ -317,7 +301,7 @@
             e.target.value = value;
         });
 
-        // Formatação de Telefone
+
         document.getElementById('telefone').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
 
@@ -329,7 +313,7 @@
             e.target.value = value;
         });
 
-        // Busca automática de endereço por CEP (ViaCEP)
+
         document.getElementById('cep').addEventListener('blur', function(e) {
             const cep = e.target.value.replace(/\D/g, '');
 

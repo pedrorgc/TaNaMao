@@ -1,54 +1,33 @@
 <?php
 
+use App\Http\Controllers\PublicController;
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\PrestadorController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('pages.public.home');
-});
-Route::get('/home', function () {
-    return view('pages.public.home');
-});
-Route::get('/login', function () {
-    return view('pages.public.login');
-})->name('login');
 
-Route::get('/contact', function () {
-    return view('pages.public.contact');
-})->name('contact');
+Route::get('/', [PublicController::class, 'home']);
+Route::get('/home', [PublicController::class, 'home'])->name('home');
+Route::get('/login', [PublicController::class, 'login'])->name('login');
+Route::get('/contact', [PublicController::class, 'contact'])->name('contact');
 
-Route::get('/servicos/create', function () {
-    return view('pages.public.service-create');
-});
+Route::get('/servicos/create', [PublicController::class, 'serviceCreate']);
+Route::get('/servicos', [PublicController::class, 'serviceArea']);
 
-Route::get('/servicos', function () {
-    return view('pages.public.service-area');
-});
+Route::get('/admin', [PublicController::class, 'adminProfile']);
+Route::get('/profile', [PublicController::class, 'profile']);
+Route::get('/profile/prestador', [PublicController::class, 'profilePrestador']);
 
-Route::get('/admin', function () {
-    return view('pages.admin.profile');
-});
 
-Route::get('/profile', function () {
-    return view('pages.public.profile');
-});
+Route::get('/cadastro', [PublicController::class, 'preCadastro'])->name('cadastro');
+Route::get('/cadastro/cliente', [PublicController::class, 'cadastroCliente'])->name('cadastro.cliente');
+Route::get('/cadastro/prestador', [ProfileController::class, 'createPrestador'])
+    ->name('cadastro.prestador');
 
-Route::get('/profile/prestador', function () {
-    return view('pages.public.profile-prestador');
-});
 
-Route::get('/cadastro', function () {
-    return view('pages.public.pre-cadastro');
-})->name('cadastro');
+Route::post('/prestadores', [PrestadorController::class, 'storePrestador'])
+    ->name('prestadores.store');
 
-Route::get('/cadastro/cliente', function () {
-    return view('pages.public.cadastro-cliente');
-})->name('cadastro.cliente');
-
-Route::get('/cadastro/prestador', function () {
-    return view('pages.public.cadastro-prestador');
-})->name('cadastro.prestador');
-
-Route::post('/prestadores', [ProfileController::class, 'storePrestador'])->name('prestadores.store');
-Route::post('/clientes', [ProfileController::class, 'storeCliente'])->name('clientes.store');
-
+Route::post('/clientes', [ClienteController::class, 'storeCliente'])
+    ->name('clientes.store');
