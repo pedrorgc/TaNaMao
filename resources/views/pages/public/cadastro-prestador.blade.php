@@ -9,21 +9,7 @@
 
     @vite(['resources/scss/app.scss', 'resources/js/dialog.js'])
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <script>
-        function togglePassword(id, icon) {
-            const input = document.getElementById(id);
-
-            if (input.type === "password") {
-                input.type = "text";
-                icon.classList.remove("ph-eye");
-                icon.classList.add("ph-eye-slash");
-            } else {
-                input.type = "password";
-                icon.classList.remove("ph-eye-slash");
-                icon.classList.add("ph-eye");
-            }
-        }
-    </script>
+    <script src="{{ asset('js/localidades.js') }}"></script>
 
     <style>
         .logo {
@@ -212,7 +198,48 @@
                             <span class="section-title">ENDEREÇO</span>
                         </div>
 
-                        @include('components.input-field', ['label' => 'CEP', 'icon' => 'ph-map-pin', 'type' => 'text', 'id' => 'cep', 'placeholder' => '00000-000', 'name' => 'cep'])
+
+                        @include('components.input-field', [
+                        'label' => 'CEP',
+                        'icon' => 'ph-map-pin',
+                        'type' => 'text',
+                        'id' => 'cep',
+                        'placeholder' => '00000-000',
+                        'name' => 'cep'
+                        ])
+
+                        <div class="row-field mb-1">
+
+                            <div class="col-small">
+                                <label for="estado" class="form-label">Estado</label>
+                                <div class="input-group">
+                                    <i class="ph ph-map-trifold"></i>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="estado"
+                                        name="estado"
+                                        placeholder="Estado"
+                                        readonly
+                                        disabled>
+                                </div>
+                            </div>
+
+                            <div class="col-small">
+                                <label for="cidade" class="form-label">Cidade</label>
+                                <div class="input-group">
+                                    <i class="ph ph-buildings"></i>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="cidade"
+                                        name="cidade"
+                                        placeholder="Cidade"
+                                        readonly
+                                        disabled>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="row-field mb-3">
                             <div class="col-large">
@@ -235,121 +262,15 @@
 
                         @include('components.input-field', ['label' => 'Bairro', 'icon' => 'ph-buildings', 'type' => 'text', 'id' => 'bairro', 'placeholder' => 'Nome do bairro', 'name' => 'bairro'])
 
-                        <div class="row-field mb-3">
-                            <div class="col-large">
-                                <label for="cidade" class="form-label">Cidade</label>
-                                <div class="input-group">
-                                    <i class="ph ph-buildings"></i>
-                                    <input type="text" class="form-control" id="cidade" placeholder="Sua cidade" name="cidade">
-                                </div>
-                            </div>
-                            <div class="col-small">
-                                <label for="estado" class="form-label">Estado</label>
-                                <div class="input-group">
-                                    <i class="ph ph-map-trifold"></i>
-                                    <select class="form-control form-select" id="estado" name="estado">
-                                        <option value="">UF</option>
-                                        <option value="AC">AC</option>
-                                        <option value="AL">AL</option>
-                                        <option value="AP">AP</option>
-                                        <option value="AM">AM</option>
-                                        <option value="BA">BA</option>
-                                        <option value="CE">CE</option>
-                                        <option value="DF">DF</option>
-                                        <option value="ES">ES</option>
-                                        <option value="GO">GO</option>
-                                        <option value="MA">MA</option>
-                                        <option value="MT">MT</option>
-                                        <option value="MS">MS</option>
-                                        <option value="MG">MG</option>
-                                        <option value="PA">PA</option>
-                                        <option value="PB">PB</option>
-                                        <option value="PR">PR</option>
-                                        <option value="PE">PE</option>
-                                        <option value="PI">PI</option>
-                                        <option value="RJ">RJ</option>
-                                        <option value="RN">RN</option>
-                                        <option value="RS">RS</option>
-                                        <option value="RO">RO</option>
-                                        <option value="RR">RR</option>
-                                        <option value="SC">SC</option>
-                                        <option value="SP">SP</option>
-                                        <option value="SE">SE</option>
-                                        <option value="TO">TO</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
 
-                        <button type="submit" class="btn btn-primary w-100 mt-3">Cadastrar</button>
+
+                        <button type="submit" class="btn btn-primary w-100 mt-5">Cadastrar</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        document.getElementById('documento').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-
-
-            if (value.length <= 11) {
-                value = value.replace(/(\d{3})(\d)/, '$1.$2');
-                value = value.replace(/(\d{3})(\d)/, '$1.$2');
-                value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-            } else if (value.length <= 14) {
-                value = value.replace(/^(\d{2})(\d)/, '$1.$2');
-                value = value.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
-                value = value.replace(/\.(\d{3})(\d)/, '.$1/$2');
-                value = value.replace(/(\d{4})(\d)/, '$1-$2');
-            }
-
-            e.target.value = value;
-        });
-
-
-        document.getElementById('cep').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-
-            if (value.length <= 8) {
-                value = value.replace(/(\d{5})(\d)/, '$1-$2');
-            }
-
-            e.target.value = value;
-        });
-
-
-        document.getElementById('telefone').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-
-            if (value.length <= 11) {
-                value = value.replace(/(\d{2})(\d)/, '($1) $2');
-                value = value.replace(/(\d{5})(\d)/, '$1-$2');
-            }
-
-            e.target.value = value;
-        });
-
-
-        document.getElementById('cep').addEventListener('blur', function(e) {
-            const cep = e.target.value.replace(/\D/g, '');
-
-            if (cep.length === 8) {
-                fetch(`https://viacep.com.br/ws/${cep}/json/`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (!data.erro) {
-                            document.getElementById('rua').value = data.logradouro;
-                            document.getElementById('bairro').value = data.bairro;
-                            document.getElementById('cidade').value = data.localidade;
-                            document.getElementById('estado').value = data.uf;
-                            document.getElementById('numero').focus();
-                        }
-                    })
-                    .catch(error => console.error('Erro ao buscar CEP:', error));
-            }
-        });
-    </script>
+    <script src="{{ asset('js/formats.js') }}" defer></script>
 </body>
 
 </html>
