@@ -10,6 +10,21 @@
     @vite(['resources/scss/app.scss', 'resources/js/dialog.js'])
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <script src="{{ asset('js/localidades.js') }}"></script>
+    <script>
+        function togglePassword(id, icon) {
+            const input = document.getElementById(id);
+
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.remove("ph-eye");
+                icon.classList.add("ph-eye-slash");
+            } else {
+                input.type = "password";
+                icon.classList.remove("ph-eye-slash");
+                icon.classList.add("ph-eye");
+            }
+        }
+    </script>
 
     <style>
         .logo {

@@ -22,7 +22,7 @@
         <!-- Conteúdo principal -->
         <main class="flex-fill container ">
                 <!-- Alertas -->
-                @include('components.alert')
+
 
                 <!-- Conteúdo da página -->
                 @yield('content')

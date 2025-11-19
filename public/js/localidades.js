@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
-                // Preenche os inputs automaticamente
                 campoEstado.value = data.uf;
                 campoCidade.value = data.localidade;
             })
