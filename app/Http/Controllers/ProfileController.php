@@ -3,19 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
-use App\Http\Requests\StoreClienteRequest;
 use App\Models\Categoria;
-use App\Models\Cliente;
-use App\Models\Endereco;
-use App\Models\Prestador;
-use App\Models\User;
+
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
-use Illuminate\Support\Facades\Log; // <--- adicionado
 
 class ProfileController extends Controller
 {

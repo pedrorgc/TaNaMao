@@ -6,7 +6,6 @@ use App\Http\Requests\StorePrestadorRequest;
 use App\Services\EnderecoService;
 use App\Services\PrestadorService;
 use App\Services\UserService;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class PrestadorController extends Controller
