@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Categoria;
+
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,13 +16,20 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
+
+    public function createPrestador()
+    {
+        $categorias = Categoria::all();
+
+        return view('pages.public.cadastro-prestador', compact('categorias'));
+    }
+
     public function edit(Request $request): View
     {
         $user = $request->user();
 
 
         if ($user->isAdmin()) {
-
         }
 
         if ($user->isPrestador()) {
@@ -34,11 +43,7 @@ class ProfileController extends Controller
         ]);
     }
 
-
-    /**
-     * Update the user's profile information.
-     */
-     public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $user = $request->user();
 
@@ -60,7 +65,7 @@ class ProfileController extends Controller
 
 
 
-      public function destroy(Request $request): RedirectResponse
+    public function destroy(Request $request): RedirectResponse
     {
         $request->validate([
             'password' => ['required', 'string', 'current_password'],

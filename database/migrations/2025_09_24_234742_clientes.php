@@ -16,9 +16,8 @@ return new class extends Migration
             $table->string('rg')->nullable();
             $table->date('data_nascimento')->nullable();
             $table->enum('genero', ['M', 'F'])->nullable();
-            $table->foreignId('role_id')->nullable()->constrained('roles')->onDelete('set null');
             $table->string('telefone')->nullable();
-            $table->foreignId('endereco_id')->nullable()->constrained('endereco')->onDelete('cascade');
+            $table->foreignId('endereco_id')->nullable()->constrained('enderecos')->onDelete('cascade');
             $table->timestamps();
         });
     }

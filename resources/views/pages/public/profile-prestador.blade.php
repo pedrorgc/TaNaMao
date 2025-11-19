@@ -105,7 +105,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Modal para Editar Perfil - ESTRUTURA CORRIGIDA -->
                 <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable">
@@ -340,7 +340,7 @@
             document.getElementById('editLocalizacao').value = localizacao;
         });
     }
-    
+
     document.getElementById('saveProfileBtn').addEventListener('click', function() {
         const form = document.getElementById('editProfileForm');
         if (form.checkValidity()) {
@@ -357,7 +357,7 @@
             form.reportValidity();
         }
     });
-    
+
     // Carregar categorias do JSON
     fetch('{{ asset("data/categorias.json") }}')
         .then(response => response.json())

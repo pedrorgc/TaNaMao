@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,149 +9,152 @@
 
     @vite(['resources/scss/app.scss', 'resources/js/dialog.js'])
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    
-<style>
-    .logo {
-        width: 150px;
-        height: auto;
-    }
+    <script src="{{ asset('js/localidades.js') }}"></script>
 
-    /* ====== LAYOUT GERAL ====== */
-body {
-  background-color: #f8f9fb;
-  font-family: "Inter", sans-serif;
-}
 
-.auth-header {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
+    <style>
+        .logo {
+            width: 150px;
+            height: auto;
+        }
 
-.auth-body {
-  background: #fff;
-  padding: 2.5rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-}
+        /* ====== LAYOUT GERAL ====== */
+        body {
+            background-color: #f8f9fb;
+            font-family: "Inter", sans-serif;
+        }
 
-/* ====== TÍTULOS ====== */
-.auth-body h1 {
-  text-align: center;
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin-bottom: 0.3rem;
-}
+        .auth-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
 
-.auth-body p {
-  text-align: center;
-  color: #6c757d;
-  font-size: 0.95rem;
-  margin-bottom: 2rem;
-}
+        .auth-body {
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
 
-/* ====== CAMPOS ====== */
-.form-label {
-  font-weight: 600;
-  font-size: 0.9rem;
-  margin-bottom: 0.3rem;
-}
+        /* ====== TÍTULOS ====== */
+        .auth-body h1 {
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
 
-.input-group {
-  position: relative;
-  margin-bottom: 1.25rem; /* espaçamento entre campos */
-}
+        .auth-body p {
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
 
-.input-group i {
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #adb5bd;
-  font-size: 1.1rem;
-  pointer-events: none;
-}
+        /* ====== CAMPOS ====== */
+        .form-label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
 
-.input-group .form-control,
-.input-group select {
-  width: 100%;
-  padding: 0.85rem 0.75rem 0.85rem 2.5rem;
-  border: 1px solid #dee2e6;
-  border-radius: 0.6rem;
-  font-size: 0.95rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  background-color: #fff;
-}
+        .input-group {
+            position: relative;
+            margin-bottom: 1.25rem;
+            /* espaçamento entre campos */
+        }
 
-.input-group .form-control:focus,
-.input-group select:focus {
-  border-color: #6c63ff;
-  box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.1);
-  outline: none;
-}
+        .input-group i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #adb5bd;
+            font-size: 1.1rem;
+            pointer-events: none;
+        }
 
-/* ====== SEÇÃO DE ENDEREÇO ====== */
-.section-divider {
-  margin: 2.5rem 0 1.5rem;
-  border-top: 2px solid #e9ecef;
-  position: relative;
-}
+        .input-group .form-control,
+        .input-group select {
+            width: 100%;
+            padding: 0.85rem 0.75rem 0.85rem 2.5rem;
+            border: 1px solid #dee2e6;
+            border-radius: 0.6rem;
+            font-size: 0.95rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background-color: #fff;
+        }
 
-.section-title {
-  background: #fff;
-  padding: 0 1rem;
-  position: absolute;
-  top: -13px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-weight: 600;
-  color: #495057;
-  font-size: 0.85rem;
-}
+        .input-group .form-control:focus,
+        .input-group select:focus {
+            border-color: #6c63ff;
+            box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.1);
+            outline: none;
+        }
 
-/* ====== CAMPOS EM LINHA ====== */
-.row-field {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1.25rem;
-}
+        /* ====== SEÇÃO DE ENDEREÇO ====== */
+        .section-divider {
+            margin: 2.5rem 0 1.5rem;
+            border-top: 2px solid #e9ecef;
+            position: relative;
+        }
 
-.row-field > div {
-  flex: 1;
-}
+        .section-title {
+            background: #fff;
+            padding: 0 1rem;
+            position: absolute;
+            top: -13px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.85rem;
+        }
 
-/* ====== BOTÃO ====== */
-.btn-primary {
-  width: 100%;
-  background-color: #6c63ff;
-  border: none;
-  border-radius: 0.6rem;
-  padding: 0.9rem;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
+        /* ====== CAMPOS EM LINHA ====== */
+        .row-field {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
 
-.btn-primary:hover {
-  background-color: #5a52e0;
-}
+        .row-field>div {
+            flex: 1;
+        }
 
-/* ====== RESPONSIVIDADE ====== */
-@media (max-width: 768px) {
-  .auth-body {
-    padding: 2rem 1.5rem;
-  }
+        /* ====== BOTÃO ====== */
+        .btn-primary {
+            width: 100%;
+            background-color: #6c63ff;
+            border: none;
+            border-radius: 0.6rem;
+            padding: 0.9rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
 
-  .row-field {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-}
+        .btn-primary:hover {
+            background-color: #5a52e0;
+        }
 
-</style>
+        /* ====== RESPONSIVIDADE ====== */
+        @media (max-width: 768px) {
+            .auth-body {
+                padding: 2rem 1.5rem;
+            }
+
+            .row-field {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+        }
+    </style>
 
 </head>
+
 <body>
     <div class="container d-flex align-items-center justify-content-center min-vh-100">
         <div class="row w-100 justify-content-center">
@@ -161,19 +165,19 @@ body {
                 <div class="auth-body">
                     <h1>Cadastro - Cliente</h1>
                     <p>Preencha os dados abaixo para criar sua conta</p>
-                    <form>
+                    <form method="POST" action="{{ route('clientes.store') }}">
+                        @csrf
                         <!-- Dados Pessoais -->
-                        @include('components.input-field', ['label' => 'Nome Completo', 'icon' => 'ph-user', 'type' => 'text', 'id' => 'nome', 'placeholder' => 'Seu nome completo'])
+                        @include('components.input-field', ['label' => 'Nome Completo', 'icon' => 'ph-user', 'type' => 'text', 'id' => 'nome', 'placeholder' => 'Seu nome completo', 'name' => 'name'])
 
-                        @include('components.input-field', ['label' => 'E-mail', 'icon' => 'ph-envelope-simple', 'type' => 'email', 'id' => 'email', 'placeholder' => 'seu@email.com'])
+                        @include('components.input-field', ['label' => 'E-mail', 'icon' => 'ph-envelope-simple', 'type' => 'email', 'id' => 'email', 'placeholder' => 'seu@email.com', 'name' => 'email'])
 
-                        @include('components.input-field', ['label' => 'CPF', 'icon' => 'ph-identification-card', 'type' => 'text', 'id' => 'cpf', 'placeholder' => '000.000.000-00'])
+                        @include('components.input-field', ['label' => 'CPF', 'icon' => 'ph-identification-card', 'type' => 'text', 'id' => 'cpf', 'placeholder' => '000.000.000-00', 'name' => 'cpf'])
 
-                        @include('components.input-field', ['label' => 'Telefone', 'icon' => 'ph-phone', 'type' => 'tel', 'id' => 'telefone', 'placeholder' => '(99) 99999-9999'])
+                        @include('components.input-field', ['label' => 'Telefone', 'icon' => 'ph-phone', 'type' => 'tel', 'id' => 'telefone', 'placeholder' => '(99) 99999-9999', 'name' => 'telefone'])
+                        @include('components.input-field', ['label' => 'Senha', 'icon' => 'ph-lock', 'type' => 'password', 'id' => 'senha', 'placeholder' => 'Mínimo 8 caracteres', 'name' => 'password'])
 
-                        @include('components.input-field', ['label' => 'Senha', 'icon' => 'ph-lock', 'type' => 'password', 'id' => 'senha', 'placeholder' => 'Mínimo 8 caracteres'])
-
-                        @include('components.input-field', ['label' => 'Confirmar Senha', 'icon' => 'ph-lock', 'type' => 'password', 'id' => 'confirmar-senha', 'placeholder' => 'Confirme sua senha'])
+                        @include('components.input-field', ['label' => 'Confirmar Senha', 'icon' => 'ph-lock', 'type' => 'password', 'id' => 'confirmar-senha', 'placeholder' => 'Confirme sua senha', 'name' => 'password_confirmation'])
 
                         <!-- Divisor de Seção -->
                         <div class="section-divider">
@@ -181,74 +185,68 @@ body {
                         </div>
 
                         <!-- Endereço -->
-                        @include('components.input-field', ['label' => 'CEP', 'icon' => 'ph-map-pin', 'type' => 'text', 'id' => 'cep', 'placeholder' => '00000-000'])
+                        @include('components.input-field', [
+                        'label' => 'CEP',
+                        'icon' => 'ph-map-pin',
+                        'type' => 'text',
+                        'id' => 'cep',
+                        'placeholder' => '00000-000',
+                        'name' => 'cep'
+                        ])
+
+                        <div class="row-field mb-1">
+
+                            <div class="col-small">
+                                <label for="estado" class="form-label">Estado</label>
+                                <div class="input-group">
+                                    <i class="ph ph-map-trifold"></i>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="estado"
+                                        name="estado"
+                                        placeholder="Estado"
+                                        readonly
+                                        disabled>
+                                </div>
+                            </div>
+
+                            <div class="col-small">
+                                <label for="cidade" class="form-label">Cidade</label>
+                                <div class="input-group">
+                                    <i class="ph ph-buildings"></i>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="cidade"
+                                        name="cidade"
+                                        placeholder="Cidade"
+                                        readonly
+                                        disabled>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="row-field mb-3">
                             <div class="col-large">
                                 <label for="rua" class="form-label">Rua</label>
                                 <div class="input-group">
                                     <i class="ph ph-road-horizon"></i>
-                                    <input type="text" class="form-control" id="rua" placeholder="Nome da rua">
+                                    <input type="text" class="form-control" id="rua" placeholder="Nome da rua" name="logradouro">
                                 </div>
                             </div>
                             <div class="col-small">
                                 <label for="numero" class="form-label">Número</label>
                                 <div class="input-group">
                                     <i class="ph ph-hash"></i>
-                                    <input type="text" class="form-control" id="numero" placeholder="123">
+                                    <input type="text" class="form-control" id="numero" placeholder="123" name="numero">
                                 </div>
                             </div>
                         </div>
 
-                        @include('components.input-field', ['label' => 'Complemento', 'icon' => 'ph-info', 'type' => 'text', 'id' => 'complemento', 'placeholder' => 'Apto, bloco, etc (opcional)'])
+                        @include('components.input-field', ['label' => 'Complemento', 'icon' => 'ph-info', 'type' => 'text', 'id' => 'complemento', 'placeholder' => 'Apto, bloco, etc (opcional)', 'name' => 'complemento' ])
 
-                        @include('components.input-field', ['label' => 'Bairro', 'icon' => 'ph-buildings', 'type' => 'text', 'id' => 'bairro', 'placeholder' => 'Nome do bairro'])
-
-                        <div class="row-field mb-3">
-                            <div class="col-large">
-                                <label for="cidade" class="form-label">Cidade</label>
-                                <div class="input-group">
-                                    <i class="ph ph-buildings"></i>
-                                    <input type="text" class="form-control" id="cidade" placeholder="Sua cidade">
-                                </div>
-                            </div>
-                            <div class="col-small">
-                                <label for="estado" class="form-label">Estado</label>
-                                <div class="input-group">
-                                    <i class="ph ph-map-trifold"></i>
-                                    <select class="form-control" id="estado">
-                                        <option value="">UF</option>
-                                        <option value="AC">AC</option>
-                                        <option value="AL">AL</option>
-                                        <option value="AP">AP</option>
-                                        <option value="AM">AM</option>
-                                        <option value="BA">BA</option>
-                                        <option value="CE">CE</option>
-                                        <option value="DF">DF</option>
-                                        <option value="ES">ES</option>
-                                        <option value="GO">GO</option>
-                                        <option value="MA">MA</option>
-                                        <option value="MT">MT</option>
-                                        <option value="MS">MS</option>
-                                        <option value="MG">MG</option>
-                                        <option value="PA">PA</option>
-                                        <option value="PB">PB</option>
-                                        <option value="PR">PR</option>
-                                        <option value="PE">PE</option>
-                                        <option value="PI">PI</option>
-                                        <option value="RJ">RJ</option>
-                                        <option value="RN">RN</option>
-                                        <option value="RS">RS</option>
-                                        <option value="RO">RO</option>
-                                        <option value="RR">RR</option>
-                                        <option value="SC">SC</option>
-                                        <option value="SP">SP</option>
-                                        <option value="SE">SE</option>
-                                        <option value="TO">TO</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+                        @include('components.input-field', ['label' => 'Bairro', 'icon' => 'ph-buildings', 'type' => 'text', 'id' => 'bairro', 'placeholder' => 'Nome do bairro', 'name' => 'bairro'])
 
                         <button type="submit" class="btn btn-primary w-100 mt-3">Cadastrar</button>
                     </form>
@@ -256,63 +254,7 @@ body {
             </div>
         </div>
     </div>
-    
-    <script>
-        // Formatação de CPF
-        document.getElementById('cpf').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            
-            if (value.length <= 11) {
-                value = value.replace(/(\d{3})(\d)/, '$1.$2');
-                value = value.replace(/(\d{3})(\d)/, '$1.$2');
-                value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-            }
-            
-            e.target.value = value;
-        });
-
-        // Formatação de CEP
-        document.getElementById('cep').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            
-            if (value.length <= 8) {
-                value = value.replace(/(\d{5})(\d)/, '$1-$2');
-            }
-            
-            e.target.value = value;
-        });
-
-        // Formatação de Telefone
-        document.getElementById('telefone').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            
-            if (value.length <= 11) {
-                value = value.replace(/(\d{2})(\d)/, '($1) $2');
-                value = value.replace(/(\d{5})(\d)/, '$1-$2');
-            }
-            
-            e.target.value = value;
-        });
-
-        // Busca automática de endereço por CEP (ViaCEP)
-        document.getElementById('cep').addEventListener('blur', function(e) {
-            const cep = e.target.value.replace(/\D/g, '');
-            
-            if (cep.length === 8) {
-                fetch(`https://viacep.com.br/ws/${cep}/json/`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (!data.erro) {
-                            document.getElementById('rua').value = data.logradouro;
-                            document.getElementById('bairro').value = data.bairro;
-                            document.getElementById('cidade').value = data.localidade;
-                            document.getElementById('estado').value = data.uf;
-                            document.getElementById('numero').focus();
-                        }
-                    })
-                    .catch(error => console.error('Erro ao buscar CEP:', error));
-            }
-        });
-    </script>
+    <script src="{{ asset('js/formats.js') }}" defer></script>
 </body>
+
 </html>

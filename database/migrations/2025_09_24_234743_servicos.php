@@ -16,10 +16,10 @@ return new class extends Migration
         $table->id();
         $table->foreignId('cliente_id')->constrained('clientes')->onDelete('cascade');$table->string('titulo')->nullable();
         $table->string('descricao')->nullable();
-        $table->foreignId('endereco_id')->nullable()->constrained('endereco')->onDelete('cascade');    
+        $table->foreignId('endereco_id')->nullable()->constrained('enderecos')->onDelete('cascade');
         $table->timestamps();
 });
-        
+
     }
 
     /**

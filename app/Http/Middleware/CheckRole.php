@@ -15,19 +15,15 @@ class CheckRole
         if (!$user) {
             abort(403);
         }
-
         if ($role === 'prestador' && !$user->isPrestador()) {
             abort(403);
         }
-
         if ($role === 'cliente' && !$user->isCliente()) {
             abort(403);
         }
-
         if ($role === 'admin' && !$user->isAdmin()) {
             abort(403);
         }
-
         return $next($request);
     }
 }

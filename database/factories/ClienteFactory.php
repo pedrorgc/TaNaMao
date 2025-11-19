@@ -21,7 +21,6 @@ class ClienteFactory extends Factory
             'rg' => $this->faker->numerify('#########'),
             'data_nascimento' => $this->faker->date(),
             'genero' => $this->faker->randomElement(['M', 'F']),
-            'role_id'=>null,
             'telefone' => $this->faker->phoneNumber(),
             'endereco_id' => null,
         ];
