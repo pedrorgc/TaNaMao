@@ -72,8 +72,9 @@
         }
     </style>
 </head>
-
 <body>
+    <x-form-errors />
+    <x-flash-success />
     <div class="container-fluid login-wrapper d-flex align-items-center justify-content-center">
         <div class="row w-100 d-flex justify-content-center align-items-center">
 
@@ -154,8 +155,6 @@
     <footer>
         Copyright © 2024 TaNaMão. Todos os direitos reservados.
     </footer>
-
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

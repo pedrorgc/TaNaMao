@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 <body class="d-flex flex-column min-vh-100" style="overflow-x: hidden; padding-top: 50px; ">
+    <x-form-errors />
+    <x-flash-success />
 
     <!-- Navbar -->
     @include('components.navbar')

@@ -6,6 +6,7 @@ use App\Http\Requests\StoreClienteRequest;
 use App\Services\ClienteService;
 use App\Services\EnderecoService;
 use App\Services\UserService;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class ClienteController extends Controller
