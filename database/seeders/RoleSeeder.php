@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class RoleSeeder extends Seeder
 {
-   
+
     public function run(): void
     {
         $roles = [

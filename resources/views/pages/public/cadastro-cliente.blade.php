@@ -156,6 +156,8 @@
 </head>
 
 <body>
+    <x-form-errors />
+    <x-flash-success />
     <div class="container d-flex align-items-center justify-content-center min-vh-100">
         <div class="row w-100 justify-content-center">
             <div class="col-12 col-md-8 col-lg-6">
