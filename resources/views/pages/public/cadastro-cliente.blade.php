@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,149 +9,152 @@
 
     @vite(['resources/scss/app.scss', 'resources/js/dialog.js'])
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="{{ asset('js/localidades.js') }}"></script>
 
-<style>
-    .logo {
-        width: 150px;
-        height: auto;
-    }
 
-    /* ====== LAYOUT GERAL ====== */
-body {
-  background-color: #f8f9fb;
-  font-family: "Inter", sans-serif;
-}
+    <style>
+        .logo {
+            width: 150px;
+            height: auto;
+        }
 
-.auth-header {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
+        /* ====== LAYOUT GERAL ====== */
+        body {
+            background-color: #f8f9fb;
+            font-family: "Inter", sans-serif;
+        }
 
-.auth-body {
-  background: #fff;
-  padding: 2.5rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-}
+        .auth-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
 
-/* ====== TÍTULOS ====== */
-.auth-body h1 {
-  text-align: center;
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin-bottom: 0.3rem;
-}
+        .auth-body {
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
 
-.auth-body p {
-  text-align: center;
-  color: #6c757d;
-  font-size: 0.95rem;
-  margin-bottom: 2rem;
-}
+        /* ====== TÍTULOS ====== */
+        .auth-body h1 {
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
 
-/* ====== CAMPOS ====== */
-.form-label {
-  font-weight: 600;
-  font-size: 0.9rem;
-  margin-bottom: 0.3rem;
-}
+        .auth-body p {
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
 
-.input-group {
-  position: relative;
-  margin-bottom: 1.25rem; /* espaçamento entre campos */
-}
+        /* ====== CAMPOS ====== */
+        .form-label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
 
-.input-group i {
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #adb5bd;
-  font-size: 1.1rem;
-  pointer-events: none;
-}
+        .input-group {
+            position: relative;
+            margin-bottom: 1.25rem;
+            /* espaçamento entre campos */
+        }
 
-.input-group .form-control,
-.input-group select {
-  width: 100%;
-  padding: 0.85rem 0.75rem 0.85rem 2.5rem;
-  border: 1px solid #dee2e6;
-  border-radius: 0.6rem;
-  font-size: 0.95rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  background-color: #fff;
-}
+        .input-group i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #adb5bd;
+            font-size: 1.1rem;
+            pointer-events: none;
+        }
 
-.input-group .form-control:focus,
-.input-group select:focus {
-  border-color: #6c63ff;
-  box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.1);
-  outline: none;
-}
+        .input-group .form-control,
+        .input-group select {
+            width: 100%;
+            padding: 0.85rem 0.75rem 0.85rem 2.5rem;
+            border: 1px solid #dee2e6;
+            border-radius: 0.6rem;
+            font-size: 0.95rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background-color: #fff;
+        }
 
-/* ====== SEÇÃO DE ENDEREÇO ====== */
-.section-divider {
-  margin: 2.5rem 0 1.5rem;
-  border-top: 2px solid #e9ecef;
-  position: relative;
-}
+        .input-group .form-control:focus,
+        .input-group select:focus {
+            border-color: #6c63ff;
+            box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.1);
+            outline: none;
+        }
 
-.section-title {
-  background: #fff;
-  padding: 0 1rem;
-  position: absolute;
-  top: -13px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-weight: 600;
-  color: #495057;
-  font-size: 0.85rem;
-}
+        /* ====== SEÇÃO DE ENDEREÇO ====== */
+        .section-divider {
+            margin: 2.5rem 0 1.5rem;
+            border-top: 2px solid #e9ecef;
+            position: relative;
+        }
 
-/* ====== CAMPOS EM LINHA ====== */
-.row-field {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1.25rem;
-}
+        .section-title {
+            background: #fff;
+            padding: 0 1rem;
+            position: absolute;
+            top: -13px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.85rem;
+        }
 
-.row-field > div {
-  flex: 1;
-}
+        /* ====== CAMPOS EM LINHA ====== */
+        .row-field {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
 
-/* ====== BOTÃO ====== */
-.btn-primary {
-  width: 100%;
-  background-color: #6c63ff;
-  border: none;
-  border-radius: 0.6rem;
-  padding: 0.9rem;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
+        .row-field>div {
+            flex: 1;
+        }
 
-.btn-primary:hover {
-  background-color: #5a52e0;
-}
+        /* ====== BOTÃO ====== */
+        .btn-primary {
+            width: 100%;
+            background-color: #6c63ff;
+            border: none;
+            border-radius: 0.6rem;
+            padding: 0.9rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
 
-/* ====== RESPONSIVIDADE ====== */
-@media (max-width: 768px) {
-  .auth-body {
-    padding: 2rem 1.5rem;
-  }
+        .btn-primary:hover {
+            background-color: #5a52e0;
+        }
 
-  .row-field {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-}
+        /* ====== RESPONSIVIDADE ====== */
+        @media (max-width: 768px) {
+            .auth-body {
+                padding: 2rem 1.5rem;
+            }
 
-</style>
+            .row-field {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+        }
+    </style>
 
 </head>
+
 <body>
     <div class="container d-flex align-items-center justify-content-center min-vh-100">
         <div class="row w-100 justify-content-center">
@@ -181,6 +185,29 @@ body {
                         </div>
 
                         <!-- Endereço -->
+                        <div class="row-field mb-1">
+
+                            <div class="col-small">
+                                <label for="estado" class="form-label">Estado</label>
+                                <div class="input-group">
+                                    <i class="ph ph-map-trifold"></i>
+                                    <select class="form-control" id="estado" name="estado">
+                                        <option value="">Selecione o estado</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="col-small">
+                                <div class="input-group">
+                                    <i class="ph ph-buildings"></i>
+                                    <label for="cidade" class="form-label">Cidade</label>
+                                    <select class="form-control" id="cidade" name="cidade">
+                                        <option value="">Selecione o estado primeiro</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                         @include('components.input-field', ['label' => 'CEP', 'icon' => 'ph-map-pin', 'type' => 'text', 'id' => 'cep', 'placeholder' => '00000-000' , 'name' => 'cep'])
 
                         <div class="row-field mb-3">
@@ -204,115 +231,13 @@ body {
 
                         @include('components.input-field', ['label' => 'Bairro', 'icon' => 'ph-buildings', 'type' => 'text', 'id' => 'bairro', 'placeholder' => 'Nome do bairro', 'name' => 'bairro'])
 
-                        <div class="row-field mb-3">
-                            <div class="col-large">
-                                <label for="cidade" class="form-label">Cidade</label>
-                                <div class="input-group">
-                                    <i class="ph ph-buildings"></i>
-                                    <input type="text" class="form-control" id="cidade" placeholder="Sua cidade" name="cidade">
-                                </div>
-                            </div>
-                            <div class="col-small">
-                                <label for="estado" class="form-label">Estado</label>
-                                <div class="input-group">
-                                    <i class="ph ph-map-trifold"></i>
-                                    <select class="form-control" id="estado" name="estado">
-                                        <option value="">UF</option>
-                                        <option value="AC">AC</option>
-                                        <option value="AL">AL</option>
-                                        <option value="AP">AP</option>
-                                        <option value="AM">AM</option>
-                                        <option value="BA">BA</option>
-                                        <option value="CE">CE</option>
-                                        <option value="DF">DF</option>
-                                        <option value="ES">ES</option>
-                                        <option value="GO">GO</option>
-                                        <option value="MA">MA</option>
-                                        <option value="MT">MT</option>
-                                        <option value="MS">MS</option>
-                                        <option value="MG">MG</option>
-                                        <option value="PA">PA</option>
-                                        <option value="PB">PB</option>
-                                        <option value="PR">PR</option>
-                                        <option value="PE">PE</option>
-                                        <option value="PI">PI</option>
-                                        <option value="RJ">RJ</option>
-                                        <option value="RN">RN</option>
-                                        <option value="RS">RS</option>
-                                        <option value="RO">RO</option>
-                                        <option value="RR">RR</option>
-                                        <option value="SC">SC</option>
-                                        <option value="SP">SP</option>
-                                        <option value="SE">SE</option>
-                                        <option value="TO">TO</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
                         <button type="submit" class="btn btn-primary w-100 mt-3">Cadastrar</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        // Formatação de CPF
-        document.getElementById('cpf').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-
-            if (value.length <= 11) {
-                value = value.replace(/(\d{3})(\d)/, '$1.$2');
-                value = value.replace(/(\d{3})(\d)/, '$1.$2');
-                value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-            }
-
-            e.target.value = value;
-        });
-
-        // Formatação de CEP
-        document.getElementById('cep').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-
-            if (value.length <= 8) {
-                value = value.replace(/(\d{5})(\d)/, '$1-$2');
-            }
-
-            e.target.value = value;
-        });
-
-        // Formatação de Telefone
-        document.getElementById('telefone').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-
-            if (value.length <= 11) {
-                value = value.replace(/(\d{2})(\d)/, '($1) $2');
-                value = value.replace(/(\d{5})(\d)/, '$1-$2');
-            }
-
-            e.target.value = value;
-        });
-
-        // Busca automática de endereço por CEP (ViaCEP)
-        document.getElementById('cep').addEventListener('blur', function(e) {
-            const cep = e.target.value.replace(/\D/g, '');
-
-            if (cep.length === 8) {
-                fetch(`https://viacep.com.br/ws/${cep}/json/`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (!data.erro) {
-                            document.getElementById('rua').value = data.logradouro;
-                            document.getElementById('bairro').value = data.bairro;
-                            document.getElementById('cidade').value = data.localidade;
-                            document.getElementById('estado').value = data.uf;
-                            document.getElementById('numero').focus();
-                        }
-                    })
-                    .catch(error => console.error('Erro ao buscar CEP:', error));
-            }
-        });
-    </script>
+    <script src="{{ asset('js/formats.js') }}" defer></script>
 </body>
+
 </html>
