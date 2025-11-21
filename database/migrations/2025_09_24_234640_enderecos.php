@@ -15,9 +15,8 @@ return new class extends Migration {
             $table->string('logradouro');
             $table->string('numero');
             $table->string('complemento')->nullable();
-            $table->string('bairro');
-            $table->string('cidade');
-            $table->string('estado');
+            $table->string('cidade')->nullable();
+            $table->string('estado')->nullable();
             $table->string('cep');
             $table->string('pais')->default('Brasil');
             $table->timestamps();

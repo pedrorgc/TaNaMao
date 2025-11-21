@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entrar - TaNaMão</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css">
+
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -44,7 +46,6 @@
             height: 45px;
         }
 
-        /* Botão Google moderno */
         .btn-google {
             background-color: #ffffff;
             border: 1px solid #dadce0;
@@ -85,6 +86,21 @@
             font-size: 0.9rem;
             color: #6c757d;
         }
+
+        .toast-message {
+            transition: all 0.3s ease-in-out !important;
+            align-items: center !important;
+        }
+
+        .toast-message * {
+            box-sizing: border-box;
+        }
+
+        .mdi {
+            display: inline-block;
+            font-size: inherit;
+            line-height: 1;
+        }
     </style>
 </head>
 
@@ -101,12 +117,9 @@
                     <p class="text-muted small">Acesse sua conta</p>
                 </div>
 
-                <form method="POST" action="{{ route('login') }}">
+                <form method="POST" action="{{ route('login.post') }}">
                     @csrf
-
                     @include('components.input-field', ['label' => 'E-mail', 'icon' => 'ph-envelope-simple', 'type' => 'email', 'id' => 'email', 'placeholder' => 'seu@email.com', 'name' => 'email'])
-
-
                     @include('components.input-field', ['label' => 'Senha', 'icon' => 'ph-lock', 'type' => 'password', 'id' => 'senha', 'placeholder' => 'Mínimo 8 caracteres', 'name' => 'password'])
 
                     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -147,11 +160,15 @@
             </div>
         </div>
     </div>
-
     <footer>
         Copyright © 2024 TaNaMão. Todos os direitos reservados.
     </footer>
+    <div class="toast-container">
+        <x-flash-success />
+        <x-form-errors />
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer></script>
 </body>
 
 </html>

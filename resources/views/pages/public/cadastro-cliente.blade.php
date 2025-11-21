@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Cadastro - Cliente</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css">
 
     @vite(['resources/scss/app.scss', 'resources/js/dialog.js'])
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -165,6 +166,22 @@
                 gap: 0.75rem;
             }
         }
+
+    .toast-message {
+        transition: all 0.3s ease-in-out !important;
+        align-items: center !important;
+    }
+
+    .toast-message * {
+        box-sizing: border-box;
+    }
+
+    /* Garantir que todos os ícones MDI tenham o mesmo tamanho base */
+    .mdi {
+        display: inline-block;
+        font-size: inherit;
+        line-height: 1;
+    }
     </style>
 
 </head>
@@ -270,7 +287,12 @@
             </div>
         </div>
     </div>
+    <div class="toast-container">
+        <x-flash-success />
+        <x-form-errors />
+    </div>
     <script src="{{ asset('js/formats.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer></script>
 </body>
 
 </html>
