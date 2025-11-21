@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('numero');
             $table->string('complemento')->nullable();
             $table->string('cidade')->nullable();
+            $table->string('bairro')->nullable();
             $table->string('estado')->nullable();
             $table->string('cep');
             $table->string('pais')->default('Brasil');
