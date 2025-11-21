@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\PrestadorController;
@@ -10,6 +11,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PublicController::class, 'home']);
 Route::get('/home', [PublicController::class, 'home'])->name('home');
 Route::get('/login', [PublicController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 Route::get('/contact', [PublicController::class, 'contact'])->name('contact');
 
 Route::get('/servicos/create', [PublicController::class, 'serviceCreate']);
