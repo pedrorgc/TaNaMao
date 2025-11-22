@@ -33,7 +33,7 @@
                         @if ($role_id === 1)
                         <li><a class="dropdown-item" href="{{ url('/admin') }}">Painel Administrativo</a></li>
                         @elseif ($role_id === 2)
-                        <li><a class="dropdown-item" href="{{ url('/profile/prestador') }}">Meu Perfil de Prestador</a></li>
+                        <li><a class="dropdown-item" href="{{ url('/profile') }}">Meu Perfil de Prestador</a></li>
                         <li><a class="dropdown-item" href="{{ url('/servicos/create') }}">Cadastrar Serviço</a></li>
                         @elseif ($role_id === 3)
                         <li><a class="dropdown-item" href="{{ url('/profile') }}">Meu Perfil</a></li>

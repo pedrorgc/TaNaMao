@@ -71,7 +71,7 @@ class AuthController extends Controller
         return redirect('/')->with('success', 'Logout realizado com sucesso!');
     }
 
-   
+
     public function apiLogout(Request $request): JsonResponse
     {
         try {
