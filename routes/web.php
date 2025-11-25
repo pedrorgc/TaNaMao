@@ -6,6 +6,7 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\PrestadorController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ServicePublicController;
 
 
 Route::get('/', [PublicController::class, 'home']);
@@ -17,7 +18,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/contact', [PublicController::class, 'contact'])->name('contact');
 
 Route::get('/servicos/create', [PublicController::class, 'serviceCreate']);
-Route::get('/servicos', [PublicController::class, 'serviceArea']);
+Route::get('/servicos', [ServicePublicController::class, 'list'])->name('servicos.list');
 
 Route::get('/admin', [PublicController::class, 'adminProfile']);
 Route::get('/profile', [PublicController::class, 'profile']);

@@ -45,7 +45,7 @@
     </div>
 </div>
 
-<div class=" bg bg-body-secondary full-width-bg d-flex flex-column justify-content-center" style="min-height: 400px;">
+<div id="como-funciona" class=" bg bg-body-secondary full-width-bg d-flex flex-column justify-content-center" style="min-height: 400px;">
     <h1 class='fw-bold text-center'>Como Funciona</h1>
     <div class="container text-center">
         <div class="row justify-content-center">
@@ -119,7 +119,7 @@
     </div>
 </div>
 
-<div class="bg bg-body-secondary text-center mt-3 py-3 full-width-bg d-flex flex-column justify-content-center" style="min-height: 400px;">
+<div id="sobre" class="bg bg-body-secondary text-center mt-3 py-3 full-width-bg d-flex flex-column justify-content-center" style="min-height: 400px;">
     <h1>Sobre Nós</h1>
     <div class="container mt-2">
         <div class="d-flex justify-content-center align-items-center">
