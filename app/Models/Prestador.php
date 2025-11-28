@@ -19,18 +19,18 @@ class Prestador extends Model
         'endereco_id',
     ];
 
-
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-
 
     public function endereco()
     {
         return $this->belongsTo(Endereco::class);
     }
 
-
-
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class, 'categoria_id');
+    }
 }

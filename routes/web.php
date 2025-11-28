@@ -20,9 +20,14 @@ Route::get('/servicos/create', [PublicController::class, 'serviceCreate']);
 Route::get('/servicos', [PublicController::class, 'serviceArea']);
 
 Route::get('/admin', [PublicController::class, 'adminProfile']);
-Route::get('/profile', [PublicController::class, 'profile']);
-Route::get('/profile/prestador', [PublicController::class, 'profilePrestador']);
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/settings', [ProfileController::class, 'updateSettings'])->name('profile.settings.update');
+
+    Route::post('/prestador/agenda', [ProfileController::class, 'updateAgenda'])->name('prestador.agenda.update');
+});
 
 Route::get('/cadastro', [PublicController::class, 'preCadastro'])->name('cadastro');
 Route::get('/cadastro/cliente', [PublicController::class, 'cadastroCliente'])->name('cadastro.cliente');
