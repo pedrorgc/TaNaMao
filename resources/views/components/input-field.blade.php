@@ -1,3 +1,4 @@
+@props(['label', 'id', 'name', 'placeholder' => '', 'type' => 'text', 'icon' => null, 'value' => null])
 <div class="form-group" style="margin-bottom: 1.25rem;">
     <label for="{{ $id }}" style="font-weight: 600; margin-bottom: 0.3rem; display:block;">
         {{ $label }}
@@ -26,6 +27,7 @@
             id="{{ $id }}"
             name="{{ $name }}"
             placeholder="{{ $placeholder }}"
+            value="{{ $value }}"
             class="form-control"
             style="
                 width: 100%;
