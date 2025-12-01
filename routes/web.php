@@ -19,6 +19,7 @@ Route::get('/contact', [PublicController::class, 'contact'])->name('contact');
 
 Route::get('/servicos/create', [PublicController::class, 'serviceCreate']);
 Route::get('/servicos', [ServicePublicController::class, 'list'])->name('servicos.list');
+Route::get('/servicos/{id}', [ServicePublicController::class, 'show'])->name('servicos.show');
 
 Route::get('/admin', [PublicController::class, 'adminProfile']);
 
