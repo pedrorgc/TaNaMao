@@ -38,4 +38,9 @@ class PublicController extends Controller
     {
         return view('pages.public.cadastro-cliente');
     }
+
+    public function adminProfile()
+    {
+        return view('pages.admin.dashboard');
+    }
 }

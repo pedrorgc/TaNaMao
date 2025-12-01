@@ -7,6 +7,8 @@ use App\Http\Controllers\PrestadorController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServicePublicController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ServicosController;
 
 
 Route::get('/', [PublicController::class, 'home']);
@@ -20,7 +22,10 @@ Route::get('/contact', [PublicController::class, 'contact'])->name('contact');
 Route::get('/servicos/create', [PublicController::class, 'serviceCreate']);
 Route::get('/servicos', [ServicePublicController::class, 'list'])->name('servicos.list');
 
-Route::get('/admin', [PublicController::class, 'adminProfile']);
+Route::get('/admin', [AdminController::class, 'profile'])->name('admin.dashboard');
+Route::get('/admin/servicos', [ServicosController::class, 'dashboard'])->name('servicos.dashboard');
+Route::get('/admin/servicos/{id}', [ServicosController::class, 'show'])->name('servicos.show');
+Route::put('/admin/servicos/{id}/status', [ServicosController::class, 'updateStatus'])->name('servicos.updateStatus');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
