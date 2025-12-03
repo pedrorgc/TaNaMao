@@ -2,15 +2,15 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Role;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class RoleSeeder extends Seeder
 {
-
     public function run(): void
     {
+        $this->command->info('Criando roles...');
+
         $roles = [
             [
                 'id' => 1,
@@ -30,13 +30,16 @@ class RoleSeeder extends Seeder
         ];
 
         foreach ($roles as $role) {
-            DB::table('roles')->insert([
-                'id' => $role['id'],
-                'name' => $role['name'],
-                'description' => $role['description'],
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+            Role::updateOrCreate(
+                ['id' => $role['id']],
+                [
+                    'name' => $role['name'],
+                    'description' => $role['description'],
+                ]
+            );
+            $this->command->info("Role '{$role['name']}' processado.");
         }
+
+        $this->command->info('Roles criados/atualizados com sucesso! Total: ' . Role::count() . ' roles.');
     }
 }
