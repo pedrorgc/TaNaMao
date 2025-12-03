@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('enderecos', function (Blueprint $table) {
             $table->id();
             $table->string('logradouro');
-            $table->string('numero');
+            $table->string('numero')->nullable();
             $table->string('complemento')->nullable();
             $table->string('cidade')->nullable();
             $table->string('bairro')->nullable();

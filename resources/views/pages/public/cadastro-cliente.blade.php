@@ -33,7 +33,6 @@
             height: auto;
         }
 
-        /* ====== LAYOUT GERAL ====== */
         body {
             background-color: #f8f9fb;
             font-family: "Inter", sans-serif;
@@ -51,7 +50,6 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
 
-        /* ====== TÍTULOS ====== */
         .auth-body h1 {
             text-align: center;
             font-size: 1.6rem;
@@ -66,7 +64,6 @@
             margin-bottom: 2rem;
         }
 
-        /* ====== CAMPOS ====== */
         .form-label {
             font-weight: 600;
             font-size: 0.9rem;
@@ -76,7 +73,6 @@
         .input-group {
             position: relative;
             margin-bottom: 1.25rem;
-            /* espaçamento entre campos */
         }
 
         .input-group i {
@@ -107,7 +103,6 @@
             outline: none;
         }
 
-        /* ====== SEÇÃO DE ENDEREÇO ====== */
         .section-divider {
             margin: 2.5rem 0 1.5rem;
             border-top: 2px solid #e9ecef;
@@ -126,7 +121,6 @@
             font-size: 0.85rem;
         }
 
-        /* ====== CAMPOS EM LINHA ====== */
         .row-field {
             display: flex;
             gap: 1rem;
@@ -137,7 +131,6 @@
             flex: 1;
         }
 
-        /* ====== BOTÃO ====== */
         .btn-primary {
             width: 100%;
             background-color: #6c63ff;
@@ -155,7 +148,6 @@
             background-color: #5a52e0;
         }
 
-        /* ====== RESPONSIVIDADE ====== */
         @media (max-width: 768px) {
             .auth-body {
                 padding: 2rem 1.5rem;
@@ -176,7 +168,6 @@
         box-sizing: border-box;
     }
 
-    /* Garantir que todos os ícones MDI tenham o mesmo tamanho base */
     .mdi {
         display: inline-block;
         font-size: inherit;
@@ -200,7 +191,6 @@
                     <p>Preencha os dados abaixo para criar sua conta</p>
                     <form method="POST" action="{{ route('clientes.store') }}">
                         @csrf
-                        <!-- Dados Pessoais -->
                         @include('components.input-field', ['label' => 'Nome Completo', 'icon' => 'ph-user', 'type' => 'text', 'id' => 'nome', 'placeholder' => 'Seu nome completo', 'name' => 'name'])
 
                         @include('components.input-field', ['label' => 'E-mail', 'icon' => 'ph-envelope-simple', 'type' => 'email', 'id' => 'email', 'placeholder' => 'seu@email.com', 'name' => 'email'])
@@ -212,12 +202,10 @@
 
                         @include('components.input-field', ['label' => 'Confirmar Senha', 'icon' => 'ph-lock', 'type' => 'password', 'id' => 'confirmar-senha', 'placeholder' => 'Confirme sua senha', 'name' => 'password_confirmation'])
 
-                        <!-- Divisor de Seção -->
                         <div class="section-divider">
                             <span class="section-title">ENDEREÇO</span>
                         </div>
 
-                        <!-- Endereço -->
                         @include('components.input-field', [
                         'label' => 'CEP',
                         'icon' => 'ph-map-pin',

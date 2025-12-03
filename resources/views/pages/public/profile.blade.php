@@ -1,4 +1,4 @@
-@extends('components.layouts.app')
+@extends('layouts.app')
 
 @section('content')
 <div style="background-color: #EAEAEA; min-height: calc(100vh - 60px); padding-top: 80px; padding-bottom: 40px;">
@@ -37,7 +37,6 @@
         </ul>
 
         <div class="tab-content">
-            <!-- ABA INFORMAÇÕES -->
             <div class="tab-pane fade show active" id="info">
                 <div class="card border-0 shadow-sm rounded-4 mb-4">
                     <div class="card-body">
@@ -104,7 +103,6 @@
                     </div>
                 </div>
 
-                <!-- Modal para Editar Perfil -->
                 <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable">
                         <div class="modal-content">
@@ -178,11 +176,10 @@
                     </div>
                 </div>
 
-                <!-- Configurações da Conta -->
                 <div class="bg-white shadow-sm rounded p-4 mt-4 mb-5">
                     <h5 class="fw-bold mb-3">Configurações da Conta</h5>
 
-                    <form action="{{ route('profile.settings.update') }}" method="POST">
+                    <form method="POST">
                         @csrf
                         <div class="border-bottom py-2">
                             <div class="d-flex justify-content-between align-items-center">
@@ -219,7 +216,7 @@
                 </div>
             </div>
 
-            <!-- ABA HISTÓRICO -->
+            
             <div class="tab-pane fade" id="history">
                 <div class="card border-0 shadow-sm rounded-4 mb-4">
                     <div class="card-body">
@@ -228,7 +225,7 @@
                         </h5>
 
                         @if($isPrestador)
-                        <!-- Histórico para Prestador -->
+                        
                         <div class="row gy-4 mb-4">
                             <div class="col-12">
                                 <div class="p-3 border rounded-3 shadow-sm bg-white">
@@ -285,7 +282,6 @@
                             </div>
                         </div>
                         @else
-                        <!-- Histórico para Cliente -->
                         <div class="row gy-4 mb-4">
                             <div class="col-12">
                                 <div class="p-3 border rounded-3 shadow-sm bg-white">
@@ -346,7 +342,6 @@
                 </div>
             </div>
 
-            <!-- ABA AVALIAÇÕES -->
             <div class="tab-pane fade" id="reviews">
                 <div class="card border-0 shadow-sm rounded-4 mb-4">
                     <div class="card-body">
@@ -356,7 +351,6 @@
 
                         <div class="row gy-4 mb-4">
                             @if($isPrestador)
-                            <!-- Avaliações para Prestador -->
                             <div class="col-12">
                                 <div class="p-3 border rounded-3 shadow-sm bg-white">
                                     <div class="d-flex justify-content-between align-items-start">
@@ -461,7 +455,7 @@
                     <div class="card-body">
                         <h5 class="fw-bold mb-4">Agenda de Horários</h5>
 
-                        <form action="{{ route('prestador.agenda.update') }}" method="POST">
+                        <form method="POST">
                             @csrf
                             <div class="row g-3">
                                 @php
