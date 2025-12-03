@@ -1,54 +1,32 @@
-@props(['label', 'id', 'name', 'placeholder' => '', 'type' => 'text', 'icon' => null, 'value' => null])
-<div class="form-group" style="margin-bottom: 1.25rem;">
-    <label for="{{ $id }}" style="font-weight: 600; margin-bottom: 0.3rem; display:block;">
-        {{ $label }}
-    </label>
+{{-- resources/views/components/input-field.blade.php --}}
+@props([
+    'label',
+    'icon',
+    'type',
+    'id',
+    'placeholder',
+    'name',
+    'value' => null,
+    'required' => false,
+    'readonly' => false,
+    'auto' => false
+])
 
-    <div style="
-        position: relative;
-        display: flex;
-        align-items: center;
-        width: 100%;
-    ">
-        @if($icon)
-            <i class="ph {{ $icon }}"
-               style="
-                    position:absolute;
-                    left:14px;
-                    color:#adb5bd;
-                    font-size:1.2rem;
-                    pointer-events:none;
-               ">
-            </i>
-        @endif
-
-        <input
-            type="{{ $type }}"
-            id="{{ $id }}"
-            name="{{ $name }}"
-            placeholder="{{ $placeholder }}"
-            value="{{ $value }}"
-            class="form-control"
-            style="
-                width: 100%;
-                padding-left: {{ $icon ? '2.8rem' : '0.85rem' }};
-                padding-right: {{ $type === 'password' ? '3rem' : '0.85rem' }};
-                height: 2.9rem;
-                border-radius: .6rem;
-            "
-        >
-
-        @if($type === 'password')
-            <i class="ph ph-eye"
-               onclick="togglePassword('{{ $id }}', this)"
-               style="
-                    position: absolute;
-                    right: 14px;
-                    font-size: 1.35rem;
-                    color: #6c757d;
-                    cursor: pointer;
-               ">
-            </i>
+<div class="mb-3 position-relative">
+    <label for="{{ $id }}" class="form-label">{{ $label }}</label>
+    <div class="input-group">
+        <i class="ph {{ $icon }}"></i>
+        <input 
+            type="{{ $type }}" 
+            class="form-control @if($auto) campo-auto-preenchido @endif" 
+            id="{{ $id }}" 
+            name="{{ $name }}" 
+            value="{{ old($name, $value) }}" 
+            placeholder="{{ $placeholder }}" 
+            {{ $required ? 'required' : '' }}
+            {{ $readonly ? 'readonly' : '' }}>
+        @if($auto)
+        <span class="badge-auto">Automático</span>
         @endif
     </div>
 </div>

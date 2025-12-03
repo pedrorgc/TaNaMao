@@ -1,156 +1,242 @@
-@extends('components.layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Página Inicial')
 
 @section('content')
 
-<div class="bg bg-body-secondary text-center mt-3 full-width-bg d-flex flex-column justify-content-center" style="min-height: 400px;">
-    <h1>Encontre o profissional <span class="text-primary">certo para você</span></h1>
-    <p>Conectamos você aos melhores prestadores de serviço da sua região.
-       Rápido, confiável e na palma da sua mão.</p>
+@include('components.category-selector', [
+'categories' => $categories
+])
 
-    <div class="d-flex gap-3 justify-content-center mt-3">
-        @include('components.button', [
+<div class="bg-light text-center py-5 full-width-bg">
+    <div class="container">
+        <h1 class="display-5 fw-bold mb-3">Encontre o profissional <span class="text-primary">certo para você</span></h1>
+        <p class="lead mb-4">Conectamos você aos melhores prestadores de serviço da sua região.
+            Rápido, confiável e na palma da sua mão.</p>
+
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+
+            @if ($showFindServices)
+            @include('components.button', [
             'slot' => 'Encontrar Serviços',
-            'class' => 'btn-primary',
-            'style' => 'font-size: 0.9rem; padding: 6px 18px;',
-            'href' => '/login'
-        ])
+            'class' => 'btn-primary btn-lg px-4 py-2',
+            'href' => $findServicesRoute
+            ])
+            @endif
 
-        @include('components.button', [
+            @if ($showOfferServices)
+            @include('components.button', [
             'slot' => 'Prestar Serviços',
-            'class' => 'btn-secondary',
-            'style' => 'font-size: 0.9rem; padding: 6px 18px;',
-            'href' => '/login'
-        ])
-    </div>
-</div>
+            'class' => 'btn-outline-primary btn-lg px-4 py-2',
+            'href' => $offerServicesRoute
+            ])
+            @endif
 
-<div class="fw-bold text-center mt-5 d-flex flex-column justify-content-center" style="min-height: 400px;">
-    <h1>Categorias de Serviços</h1>
-
-    <div class="row mt-5">
-        <div class="col-md-3 mt-5">
-            @include('components.card', ['icon' => 'bi-wrench', 'title' => 'Encanador', 'slot' => 'Reparos hidráulicos'])
-        </div>
-        <div class="col-md-3 mt-5">
-            @include('components.card', ['icon' => 'bi-lightning-charge-fill', 'title' => 'Eletricista', 'slot' => 'Instalações elétricas'])
-        </div>
-        <div class="col-md-3 mt-5">
-            @include('components.card', ['icon' => 'bi-house-door-fill', 'title' => 'Diarista', 'slot' => 'Limpeza Residencial'])
-        </div>
-        <div class="col-md-3 mt-5">
-            @include('components.card', ['icon' => 'bi-gear-fill', 'title' => 'Mecânico', 'slot' => 'Manutenção Automotiva'])
         </div>
     </div>
 </div>
 
-<div id="como-funciona" class=" bg bg-body-secondary full-width-bg d-flex flex-column justify-content-center" style="min-height: 400px;">
-    <h1 class='fw-bold text-center'>Como Funciona</h1>
-    <div class="container text-center">
-        <div class="row justify-content-center">
-            <div class="col-md-4 mt-5">
-                <i class="bi bi-geo-alt-fill fs-1"></i>
-                <h3>1. Busque</h3>
-                <p>Procure o serviço que precisa na sua região</p>
-            </div>
-            <div class="col-md-4 mt-5">
-                <i class="bi bi-people-fill fs-1"></i>
-                <h3>2. Compare</h3>
-                <p>Veja perfis, avaliações e escolha o melhor</p>
-            </div>
-            <div class="col-md-4 mt-5">
-                <i class="bi bi-check-lg fs-1"></i>
-                <h3>3. Contrate</h3>
-                <p>Contrate direto pela plataforma</p>
-            </div>
-        </div>
-    </div>
-</div>
+<div class="py-5">
+    <div class="container">
+    <h2 class="text-center fw-bold mb-5">Categorias Populares</h2>
 
-<div class="text-center mt-5 d-flex flex-column justify-content-center" style="min-height: 400px;">
-    <h1 class="fw-bold">O que nossos usuários dizem</h1>
-
-    <div class="row justify-content-center mt-5">
-        <div class="col-md-3 m-2 mt-5">
-            <div class="p-4 bg-body-secondary rounded-3 shadow-sm h-100">
-                <div class="mb-2">
-                    <i class="bi bi-star-fill text-dark"></i>
-                    <i class="bi bi-star-fill text-dark"></i>
-                    <i class="bi bi-star-fill text-dark"></i>
-                    <i class="bi bi-star-fill text-dark"></i>
-                    <i class="bi bi-star-fill text-dark"></i>
+    <div class="row g-4">
+        @foreach($featuredCategories as $category)
+        <div class="col-lg-3 col-md-6">
+            @php
+                $categoriaRoute = null;
+                
+                if (Route::has('categorias.show')) {
+                    $categoriaRoute = route('categorias.show', $category->slug);
+                } elseif (Route::has('servicos.categoria')) {
+                    $categoriaRoute = route('servicos.categoria', $category->slug);
+                } elseif (Route::has('servicos.index')) {
+                    $categoriaRoute = route('servicos.index', ['categoria' => $category->slug]);
+                } else {
+                    $categoriaRoute = '/servicos?categoria=' . $category->slug;
+                }
+            @endphp
+            
+            <a href="{{ $categoriaRoute }}" class="text-decoration-none">
+                <div class="card border-0 shadow-sm h-100 text-center hover-shadow">
+                    <div class="card-body py-4">
+                        <i class="bi {{ $category->icone }} fs-1 text-primary mb-3"></i>
+                        <h5 class="card-title fw-bold text-dark">{{ $category->nome }}</h5>
+                        <p class="card-text text-muted small">{{ $category->descricao }}</p>
+                    </div>
                 </div>
-                <p class="fst-italic">“Encontrei um eletricista excelente em poucos minutos”</p>
-                <p class="fw-bold mb-0">Raí</p>
-                <a href="#" class="text-primary text-decoration-none">Cliente</a>
-            </div>
+            </a>
         </div>
+        @endforeach
+    </div>
 
-        <div class="col-md-3 m-2 mt-5">
-            <div class="p-4 bg-body-secondary rounded-3 shadow-sm h-100">
-                <div class="mb-2">
-                    <i class="bi bi-star-fill text-dark"></i>
-                    <i class="bi bi-star-fill text-dark"></i>
-                    <i class="bi bi-star-fill text-dark"></i>
-                    <i class="bi bi-star-fill text-dark"></i>
-                    <i class="bi bi-star-fill text-dark"></i>
+    @if($allCategories->count() > 4)
+    <div class="text-center mt-5">
+        @php
+            $todasCategoriasRoute = null;
+            
+            if (Route::has('categorias.index')) {
+                $todasCategoriasRoute = route('categorias.index');
+            } elseif (Route::has('servicos.index')) {
+                $todasCategoriasRoute = route('servicos.index');
+            } else {
+                $todasCategoriasRoute = '/servicos';
+            }
+        @endphp
+        
+        <a href="{{ $todasCategoriasRoute }}" class="btn btn-outline-primary">
+            Ver Todas as Categorias <i class="bi bi-arrow-right ms-1"></i>
+        </a>
+    </div>
+    @endif
+</div>
+</div>
+
+<div id="como-funciona" class="bg-light py-5 full-width-bg">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-5">Como Funciona</h2>
+
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-4 col-md-6">
+                <div class="text-center p-4">
+                    <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                        <i class="bi bi-search fs-3 text-primary"></i>
+                    </div>
+                    <h4 class="fw-bold">1. Busque</h4>
+                    <p class="text-muted">Procure o serviço que precisa na sua região</p>
                 </div>
-                <p class="fst-italic">“Consegui mais clientes e organizei melhor meu negócio”</p>
-                <p class="fw-bold mb-0">Pedro</p>
-                <a href="#" class="text-primary text-decoration-none">Prestador</a>
             </div>
-        </div>
 
-        <div class="col-md-3 m-2 mt-5">
-            <div class="p-4 bg-body-secondary rounded-3 shadow-sm h-100">
-                <div class="mb-2">
-                    <i class="bi bi-star-fill text-dark"></i>
-                    <i class="bi bi-star-fill text-dark"></i>
-                    <i class="bi bi-star-fill text-dark"></i>
-                    <i class="bi bi-star-fill text-dark"></i>
-                    <i class="bi bi-star-fill text-dark"></i>
+            <div class="col-lg-4 col-md-6">
+                <div class="text-center p-4">
+                    <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                        <i class="bi bi-compare fs-3 text-primary"></i>
+                    </div>
+                    <h4 class="fw-bold">2. Compare</h4>
+                    <p class="text-muted">Veja perfis, avaliações e escolha o melhor</p>
                 </div>
-                <p class="fst-italic">“Serviço rápido e confiável, recomendo”</p>
-                <p class="fw-bold mb-0">Luiz</p>
-                <a href="#" class="text-primary text-decoration-none">Cliente</a>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="text-center p-4">
+                    <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                        <i class="bi bi-check-circle fs-3 text-primary"></i>
+                    </div>
+                    <h4 class="fw-bold">3. Contrate</h4>
+                    <p class="text-muted">Contrate direto pela plataforma</p>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<div id="sobre" class="bg bg-body-secondary text-center mt-3 py-3 full-width-bg d-flex flex-column justify-content-center" style="min-height: 400px;">
-    <h1>Sobre Nós</h1>
-    <div class="container mt-2">
-        <div class="d-flex justify-content-center align-items-center">
-            <img src="{{ asset('assets/TaNaMao-3D.png') }}" class="me-5" alt="TaNaMao" style="width: 350px;">
-            <div class="text-start" style="max-width: 400px;">
-                <p class="fs-3 card-text m-0">
+<div class="py-5">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-5">O que dizem nossos usuários</h2>
+
+        <div class="row g-4 justify-content-center">
+            @foreach([
+            ['name' => 'Raí', 'type' => 'Cliente', 'comment' => 'Encontrei um eletricista excelente em poucos minutos', 'rating' => 5],
+            ['name' => 'Pedro', 'type' => 'Prestador', 'comment' => 'Consegui mais clientes e organizei melhor meu negócio', 'rating' => 5],
+            ['name' => 'Luiz', 'type' => 'Cliente', 'comment' => 'Serviço rápido e confiável, recomendo', 'rating' => 5]
+            ] as $testimonial)
+            <div class="col-lg-4 col-md-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body p-4">
+                        <div class="mb-3">
+                            @for($i = 0; $i < $testimonial['rating']; $i++)
+                                <i class="bi bi-star-fill text-warning"></i>
+                                @endfor
+                        </div>
+                        <p class="fst-italic mb-4">"{{ $testimonial['comment'] }}"</p>
+                        <div class="d-flex align-items-center">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                <span class="text-white fw-bold">{{ substr($testimonial['name'], 0, 1) }}</span>
+                            </div>
+                            <div>
+                                <p class="fw-bold mb-0">{{ $testimonial['name'] }}</p>
+                                <span class="text-muted small">{{ $testimonial['type'] }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+
+<div id="sobre" class="bg-light py-5 full-width-bg">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 text-center mb-4 mb-lg-0">
+                <img src="{{ asset('assets/TaNaMao-3D.png') }}" alt="TaNaMão" class="img-fluid" style="max-height: 300px;">
+            </div>
+            <div class="col-lg-6">
+                <h2 class="fw-bold mb-4">Sobre Nós</h2>
+                <p class="lead mb-4">
                     O TaNaMão surgiu com o propósito de conectar quem precisa com quem sabe fazer.
                     Somos um sistema que conecta clientes e profissionais que buscam um mesmo propósito.
                 </p>
+                <div class="d-flex gap-3 flex-wrap">
+                    @include('components.button', [
+                    'slot' => 'Cadastre-se Grátis',
+                    'class' => 'btn-primary px-4 py-2',
+                    'href' => '/pre-cadastro'
+                    ])
+                    @include('components.button', [
+                    'slot' => 'Conheça Mais',
+                    'class' => 'btn-outline-primary px-4 py-2',
+                    'href' => '#'
+                    ])
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <style>
-  .custom-btn {
-    min-width: 160px !important;
-    min-height: 35px !important;
-    padding: 6px 0 !important;
-    font-size: 0.95rem !important;
-  }
+    .full-width-bg {
+        position: relative;
+        width: 100vw;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        overflow-x: hidden;
+    }
 
-  .full-width-bg {
-    position: relative;
-    width: 100vw;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    overflow-x: hidden;
-  }
+    .hover-shadow {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hover-shadow:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    html {
+        scroll-padding-top: 120px;
+    }
+
+    @media (max-width: 768px) {
+        .display-5 {
+            font-size: 2rem;
+        }
+
+        .lead {
+            font-size: 1rem;
+        }
+
+        .btn-lg {
+            padding: 0.5rem 1rem !important;
+            font-size: 0.9rem !important;
+        }
+
+        html {
+            scroll-padding-top: 100px;
+        }
+    }
 </style>
 
 @endsection

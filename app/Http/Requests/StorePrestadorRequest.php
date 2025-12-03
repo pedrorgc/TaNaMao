@@ -17,11 +17,9 @@ class StorePrestadorRequest extends FormRequest
             'name'              => 'required|string|max:255',
             'email'             => 'required|email|unique:users,email',
             'password'          => 'required|min:8|confirmed',
-
             'documento'         => 'nullable|string|unique:prestadores,documento',
             'telefone'          => 'nullable|string',
             'categoria_id'      => 'nullable|exists:categorias,id',
-
             'cep'        => 'nullable|string',
             'logradouro' => 'nullable|string',
             'numero'     => 'nullable|string',
