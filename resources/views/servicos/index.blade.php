@@ -148,16 +148,16 @@
         border-color: #0d6efd;
     }
 
-    
+
     @media (max-width: 768px) {
         .service-card .card-title {
             font-size: 1rem;
         }
-        
+
         .service-card .card-text {
             font-size: 0.85rem;
         }
-        
+
         .col-md-4 {
             margin-bottom: 1rem;
         }
@@ -175,10 +175,10 @@
             @php
             $selectedCategory = null;
             foreach($categoriesForCard ?? [] as $category) {
-                if (($category['slug'] ?? $category->slug ?? '') == request('categoria')) {
-                    $selectedCategory = $category;
-                    break;
-                }
+            if (($category['slug'] ?? $category->slug ?? '') == request('categoria')) {
+            $selectedCategory = $category;
+            break;
+            }
             }
             @endphp
 
@@ -232,15 +232,15 @@
                 @endif
 
                 @foreach(range(1, $servicos->lastPage()) as $page)
-                    @if($page == $servicos->currentPage())
-                    <li class="page-item active" aria-current="page">
-                        <span class="page-link">{{ $page }}</span>
-                    </li>
-                    @else
-                    <li class="page-item">
-                        <a class="page-link" href="{{ $servicos->url($page) }}">{{ $page }}</a>
-                    </li>
-                    @endif
+                @if($page == $servicos->currentPage())
+                <li class="page-item active" aria-current="page">
+                    <span class="page-link">{{ $page }}</span>
+                </li>
+                @else
+                <li class="page-item">
+                    <a class="page-link" href="{{ $servicos->url($page) }}">{{ $page }}</a>
+                </li>
+                @endif
                 @endforeach
 
                 @if($servicos->hasMorePages())
@@ -254,7 +254,7 @@
                 @endif
             </ul>
         </nav>
-        
+
         <div class="text-center mt-3">
             <small class="text-muted">
                 Mostrando {{ $servicos->firstItem() }} - {{ $servicos->lastItem() }} de {{ $servicos->total() }} serviços
@@ -283,61 +283,42 @@
 </div>
 
 <div class="container py-5">
-    <div class="row mb-4">
-        <div class="col-md-8 mx-auto">
-            <form action="{{ route('servicos.index') }}" method="GET" class="d-flex" id="searchForm">
-                <div class="input-group search-container">
-                    <div class="position-relative w-100">
-                        <input type="text"
-                            name="search"
-                            class="form-control"
-                            placeholder="Buscar serviço, categoria ou prestador..."
-                            value="{{ request('search') }}"
-                            id="searchInput"
-                            autocomplete="off"
-                            aria-label="Buscar serviços">
-
-                        <div class="autocomplete-suggestions" id="searchSuggestions" style="display: none;"></div>
-                    </div>
-
-                    <select name="categoria" class="form-select" style="max-width: 200px;" id="categorySelect">
-                        <option value="">Todas as categorias</option>
-                        @foreach($categoriesForCard ?? [] as $category)
-                        <option value="{{ $category['slug'] }}"
-                            {{ request('categoria') == $category['slug'] ? 'selected' : '' }}>
-                            {{ $category['nome'] }}
-                        </option>
-                        @endforeach
-                    </select>
-
-                    <button class="btn btn-primary" type="submit">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
-            </form>
-
-            @if(isset($sugestoesPopulares) && count($sugestoesPopulares) > 0 && !request('search'))
-            <div class="mt-2">
-                <small class="text-muted">Sugestões:</small>
-                @foreach($sugestoesPopulares as $sugestao)
-                <a href="{{ route('servicos.index', ['search' => $sugestao]) }}"
-                    class="badge bg-light text-dark text-decoration-none me-1">
-                    {{ $sugestao }}
-                </a>
-                @endforeach
-            </div>
-            @endif
+    <div class="input-group search-container mb-4">
+        <div class="position-relative flex-grow-1" style="width: 350px;">
+            <input type="text"
+                name="search"
+                class="form-control"
+                placeholder="Buscar serviço, categoria ou prestador..."
+                value="{{ request('search') }}"
+                id="searchInput"
+                autocomplete="off"
+                aria-label="Buscar serviços">
+            <div class="autocomplete-suggestions" id="searchSuggestions" style="display: none;"></div>
         </div>
+
+        <select name="categoria" class="form-select" style="max-width: 250px;">
+            <option value="">Todas as categorias</option>
+            @foreach($categoriesForCard ?? [] as $category)
+            <option value="{{ $category['slug'] }}"
+                {{ request('categoria') == $category['slug'] ? 'selected' : '' }}>
+                {{ $category['nome'] }}
+            </option>
+            @endforeach
+        </select>
+
+        <button class="btn btn-primary" type="submit">
+            <i class="bi bi-search"></i>
+        </button>
     </div>
 
     <div class="content-toggle-buttons text-center mb-4">
         <div class="btn-group" role="group" aria-label="Alternar entre categorias e serviços">
-            <button type="button" class="btn btn-outline-primary {{ $showCategoriasSection ? 'active' : '' }}" 
-                    id="toggleCategorias" onclick="toggleContent('categorias')">
+            <button type="button" class="btn btn-outline-primary {{ $showCategoriasSection ? 'active' : '' }}"
+                id="toggleCategorias" onclick="toggleContent('categorias')">
                 <i class="bi bi-grid-3x3-gap"></i> Categorias
             </button>
-            <button type="button" class="btn btn-outline-primary {{ !$showCategoriasSection ? 'active' : '' }}" 
-                    id="toggleServicos" onclick="toggleContent('servicos')">
+            <button type="button" class="btn btn-outline-primary {{ !$showCategoriasSection ? 'active' : '' }}"
+                id="toggleServicos" onclick="toggleContent('servicos')">
                 <i class="bi bi-briefcase"></i> Serviços
             </button>
         </div>
@@ -352,104 +333,89 @@
         </div>
 
         @include('components.card-categoria', [
-            'categories' => $categoriesForCard ?? [],
-            'selectedCategory' => $selectedCategory ?? null
+        'categories' => $categoriesForCard ?? [],
+        'selectedCategory' => $selectedCategory ?? null
         ])
     </div>
 
     <div id="servicosContent" style="display: {{ !$showCategoriasSection ? 'block' : 'none' }};">
         @if(isset($servicos) && $servicos->count() > 0)
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <div>
-                    <h2 class="fw-bold mb-0">Serviços Disponíveis</h2>
-                    <p class="text-muted">Encontre profissionais qualificados para seu projeto</p>
-                </div>
-                <div>
-                    <small class="text-muted">
-                        {{ $servicos->total() }} serviço{{ $servicos->total() != 1 ? 's' : '' }} encontrado{{ $servicos->total() != 1 ? 's' : '' }}
-                    </small>
-                </div>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="fw-bold mb-0">Serviços Disponíveis</h2>
+                <p class="text-muted">Encontre profissionais qualificados para seu projeto</p>
             </div>
-
-            <div class="row">
-                @foreach($servicos as $servico)
-                <div class="col-md-4 mb-4">
-                    <div class="card service-card h-100 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $servico->titulo }}</h5>
-                            <p class="card-text">{{ Str::limit($servico->descricao, 100) }}</p>
-                            @if($servico->categoria)
-                            <span class="badge category-badge bg-primary">{{ $servico->categoria->nome }}</span>
-                            @endif
-                            <div class="prestador-info">
-                                <small class="text-muted">
-                                    <i class="bi bi-person"></i> {{ $servico->prestador->user->name ?? 'Prestador' }}
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
+            <div>
+                <small class="text-muted">
+                    {{ $servicos->total() }} serviço{{ $servicos->total() != 1 ? 's' : '' }} encontrado{{ $servicos->total() != 1 ? 's' : '' }}
+                </small>
             </div>
+        </div>
+        @include('components.card-servico', [
+        'items' => $servicos,
+        'routeName' => 'servicos.show',
+        'titleField' => 'titulo',
+        'descriptionField' => 'descricao',
+        'badgeField' => 'categoria.nome'
+        ])
 
-            @if($servicos->hasPages())
-            <div class="mt-5">
-                <nav aria-label="Navegação de páginas">
-                    <ul class="pagination">
-                        {{-- Previous Page Link --}}
-                        @if($servicos->onFirstPage())
-                        <li class="page-item disabled">
-                            <span class="page-link" aria-hidden="true">&laquo;</span>
-                        </li>
-                        @else
-                        <li class="page-item">
-                            <a class="page-link" href="{{ $servicos->previousPageUrl() }}" rel="prev" aria-label="Anterior">&laquo;</a>
-                        </li>
-                        @endif
+        @if($servicos->hasPages())
+        <div class="mt-5">
+            <nav aria-label="Navegação de páginas">
+                <ul class="pagination">
+                    @if($servicos->onFirstPage())
+                    <li class="page-item disabled">
+                        <span class="page-link" aria-hidden="true">&laquo;</span>
+                    </li>
+                    @else
+                    <li class="page-item">
+                        <a class="page-link" href="{{ $servicos->previousPageUrl() }}" rel="prev" aria-label="Anterior">&laquo;</a>
+                    </li>
+                    @endif
 
-                        @foreach(range(1, $servicos->lastPage()) as $page)
-                            @if($page == $servicos->currentPage())
-                            <li class="page-item active" aria-current="page">
-                                <span class="page-link">{{ $page }}</span>
-                            </li>
-                            @else
-                            <li class="page-item">
-                                <a class="page-link" href="{{ $servicos->url($page) }}">{{ $page }}</a>
-                            </li>
-                            @endif
-                        @endforeach
+                    @foreach(range(1, $servicos->lastPage()) as $page)
+                    @if($page == $servicos->currentPage())
+                    <li class="page-item active" aria-current="page">
+                        <span class="page-link">{{ $page }}</span>
+                    </li>
+                    @else
+                    <li class="page-item">
+                        <a class="page-link" href="{{ $servicos->url($page) }}">{{ $page }}</a>
+                    </li>
+                    @endif
+                    @endforeach
 
-                        {{-- Next Page Link --}}
-                        @if($servicos->hasMorePages())
-                        <li class="page-item">
-                            <a class="page-link" href="{{ $servicos->nextPageUrl() }}" rel="next" aria-label="Próxima">&raquo;</a>
-                        </li>
-                        @else
-                        <li class="page-item disabled">
-                            <span class="page-link" aria-hidden="true">&raquo;</span>
-                        </li>
-                        @endif
-                    </ul>
-                </nav>
-                
-                <div class="text-center mt-3">
-                    <small class="text-muted">
-                        Mostrando {{ $servicos->firstItem() }} - {{ $servicos->lastItem() }} de {{ $servicos->total() }} serviços
-                    </small>
-                </div>
+                    {{-- Next Page Link --}}
+                    @if($servicos->hasMorePages())
+                    <li class="page-item">
+                        <a class="page-link" href="{{ $servicos->nextPageUrl() }}" rel="next" aria-label="Próxima">&raquo;</a>
+                    </li>
+                    @else
+                    <li class="page-item disabled">
+                        <span class="page-link" aria-hidden="true">&raquo;</span>
+                    </li>
+                    @endif
+                </ul>
+            </nav>
+
+            <div class="text-center mt-3">
+                <small class="text-muted">
+                    Mostrando {{ $servicos->firstItem() }} - {{ $servicos->lastItem() }} de {{ $servicos->total() }} serviços
+                </small>
             </div>
-            @endif
+        </div>
+        @endif
         @else
-            <div class="text-center py-5">
-                <div class="alert alert-info">
-                    Nenhum serviço encontrado.
-                </div>
-                @if(request('search') || request('categoria'))
-                <a href="{{ route('servicos.index') }}" class="btn btn-primary">
-                    <i class="bi bi-arrow-left"></i> Ver todos os serviços
-                </a>
-                @endif
+        <div class="text-center py-5">
+            <div class="alert alert-info">
+                Nenhum serviço encontrado.
             </div>
+            @if(request('search') || request('categoria'))
+            <a href="{{ route('servicos.index') }}" class="btn btn-primary">
+                <i class="bi bi-arrow-left"></i> Ver todos os serviços
+            </a>
+            @endif
+        </div>
         @endif
     </div>
 </div>
@@ -490,7 +456,7 @@
             servicosContent.style.display = 'none';
             toggleCategorias.classList.add('active');
             toggleServicos.classList.remove('active');
-            
+
             const url = new URL(window.location.href);
             url.searchParams.set('show_categorias', 'true');
             url.searchParams.delete('page');
@@ -500,7 +466,7 @@
             servicosContent.style.display = 'block';
             toggleCategorias.classList.remove('active');
             toggleServicos.classList.add('active');
-            
+
             const url = new URL(window.location.href);
             url.searchParams.delete('show_categorias');
             history.replaceState({}, '', url);
