@@ -28,7 +28,8 @@ Route::get('/servicos/{slug}', [ServicePublicController::class, 'showByCategory'
 Route::get('/servico/{id}', [ServicePublicController::class, 'show'])->name('servicos.show');
 Route::get('/contact', [PublicController::class, 'contact'])->name('contact');
 
-
+Route::get('/servicos/busca-rapida', [ServicePublicController::class, 'buscarRapido'])
+    ->name('servicos.busca-rapida');
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/quero-criar-servico', function () {

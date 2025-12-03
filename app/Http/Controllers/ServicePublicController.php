@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use App\Services\CategoriaService;
 use App\Services\ServicoService;
 use App\Http\Requests\StoreServicoRequest;
-use App\Models\Prestador;
 use Illuminate\Support\Facades\Auth;
 
 class ServicePublicController extends Controller
@@ -39,7 +38,7 @@ class ServicePublicController extends Controller
     {
         try {
             $user = Auth::user();
-            
+
 
             $prestador = $user->prestador;
 
@@ -111,10 +110,19 @@ class ServicePublicController extends Controller
             'search' => $request->search,
             'categoria_slug' => $request->categoria,
             'ordenar' => $request->ordenar,
+            'cidade' => $request->cidade,
+            'estado' => $request->estado,
+            'tipo_valor' => $request->tipo_valor,
+            'tipo_servico' => $request->tipo_servico,
+            'preco_min' => $request->preco_min,
+            'preco_max' => $request->preco_max,
         ];
 
         $servicos = $this->servicoService->buscarServicosComFiltros($filtros);
         $categoriesForCard = $this->categoriaService->getCategoriesForCards();
+
+        $estatisticas = $this->servicoService->getEstatisticasBusca();
+        $sugestoesPopulares = $this->servicoService->getSugestoesPopulares();
 
         $showCategoriasSection = $request->has('show_categorias') && $request->show_categorias == 'true';
 
@@ -124,30 +132,23 @@ class ServicePublicController extends Controller
             'categoriesForCard' => $categoriesForCard,
             'categories' => $categoriesForCard,
             'showCategoriasSection' => $showCategoriasSection,
+            'estatisticas' => $estatisticas,
+            'sugestoesPopulares' => $sugestoesPopulares,
+            'filtrosAtivos' => array_filter($filtros),
         ]);
     }
 
-    public function show($id)
+
+    public function buscarRapido(Request $request)
     {
-        $servico = Servico::with(['prestador.user', 'categoria', 'avaliacoes.cliente.user', 'categorias'])
-            ->where('status', 'ativo')
-            ->where('verificado', true)
-            ->findOrFail($id);
+        $termo = $request->get('q', '');
 
-        $servico->increment('visualizacoes');
+        if (strlen($termo) < 2) {
+            return response()->json([]);
+        }
 
-        $relatedServices = Servico::with('prestador')
-            ->where('categoria_id', $servico->categoria_id)
-            ->where('id', '!=', $servico->id)
-            ->where('status', 'ativo')
-            ->where('verificado', true)
-            ->limit(3)
-            ->get();
+        $resultados = $this->servicoService->buscarRapido($termo);
 
-        $categories = Categoria::where('ativo', true)
-            ->orderBy('nome')
-            ->get();
-
-        return view('servicos.show', compact('servico', 'categories', 'relatedServices'));
+        return response()->json($resultados);
     }
 }

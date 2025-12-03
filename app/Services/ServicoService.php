@@ -22,6 +22,8 @@ class ServicoService
         return $query->get();
     }
 
+
+
     public function prepararDadosPrestador(Prestador $prestador)
     {
         $dados = [
@@ -176,31 +178,159 @@ class ServicoService
             return $servico;
         });
     }
+    public function getEstatisticasBusca(): array
+{
+    $servicosPorCategoria = \App\Models\Categoria::withCount(['servicos' => function ($query) {
+        $query->where('status', 'ativo')->where('verificado', true);
+    }])
+    ->where('ativo', true)
+    ->orderBy('servicos_count', 'desc')
+    ->limit(10)
+    ->get()
+    ->pluck('servicos_count', 'nome')
+    ->toArray();
+
+    return [
+        'total_servicos' => \App\Models\Servico::where('status', 'ativo')
+            ->where('verificado', true)
+            ->count(),
+        'total_categorias' => \App\Models\Categoria::where('ativo', true)->count(),
+        'servicos_por_categoria' => $servicosPorCategoria,
+    ];
+}
+    public function getSugestoesPopulares(int $limit = 8): array
+    {
+        return [
+            'eletricista',
+            'encanador',
+            'pintor',
+            'pedreiro',
+            'limpeza',
+            'mecânico',
+            'informática',
+            'jardineiro',
+        ];
+    }
+    private function formatarPreco(Servico $servico): string
+    {
+        if ($servico->tipo_valor === 'hora' && $servico->valor_hora) {
+            return 'R$ ' . number_format($servico->valor_hora, 2, ',', '.') . '/hora';
+        }
+
+        if ($servico->tipo_valor === 'fixo' && $servico->valor_fixo) {
+            return 'R$ ' . number_format($servico->valor_fixo, 2, ',', '.');
+        }
+
+        return 'Orçamento';
+    }
+    public function buscarRapido(string $term, int $limit = 10): array
+    {
+        if (strlen($term) < 2) {
+            return [];
+        }
+
+        $servicos = Servico::with('categoria')
+            ->where('status', 'ativo')
+            ->where('verificado', true)
+            ->where(function ($query) use ($term) {
+                $query->where('titulo', 'like', "%{$term}%")
+                    ->orWhere('descricao', 'like', "%{$term}%")
+                    ->orWhereHas('categoria', function ($catQuery) use ($term) {
+                        $catQuery->where('nome', 'like', "%{$term}%");
+                    })
+                    ->orWhereHas('prestador.user', function ($userQuery) use ($term) {
+                        $userQuery->where('name', 'like', "%{$term}%");
+                    });
+            })
+            ->limit($limit)
+            ->get();
+
+        return $servicos->map(function ($servico) {
+            return [
+                'id' => $servico->id,
+                'titulo' => $servico->titulo,
+                'categoria' => $servico->categoria->nome ?? 'Sem categoria',
+                'preco' => $this->formatarPreco($servico),
+                'url' => route('servicos.show', $servico->id),
+                'descricao_resumida' => Str::limit($servico->descricao, 60),
+            ];
+        })->toArray();
+    }
+
 
     public function buscarServicosComFiltros(array $filtros = [], $perPage = 8)
     {
-        $query = Servico::with(['prestador', 'categoria'])
+        $query = Servico::with(['prestador.user', 'categoria'])
             ->where('status', 'ativo')
             ->where('verificado', true);
 
-        if (isset($filtros['search']) && $filtros['search']) {
+        if (!empty($filtros['categoria_slug'])) {
+            $query->whereHas('categoria', function ($q) use ($filtros) {
+                $q->where('slug', $filtros['categoria_slug']);
+            });
+        }
+
+        if (!empty($filtros['search'])) {
             $search = $filtros['search'];
             $query->where(function ($q) use ($search) {
                 $q->where('titulo', 'like', "%{$search}%")
                     ->orWhere('descricao', 'like', "%{$search}%")
                     ->orWhere('tipo_servico', 'like', "%{$search}%")
-                    ->orWhereHas('prestador.user', function ($q) use ($search) {
-                        $q->where('name', 'like', "%{$search}%");
+
+                    ->orWhereHas('categoria', function ($catQuery) use ($search) {
+                        $catQuery->where('nome', 'like', "%{$search}%")
+                            ->orWhere('descricao', 'like', "%{$search}%");
+                    })
+
+                    ->orWhereHas('prestador.user', function ($userQuery) use ($search) {
+                        $userQuery->where('name', 'like', "%{$search}%");
                     });
             });
         }
 
-        if (isset($filtros['categoria_slug']) && $filtros['categoria_slug']) {
-            $query->whereHas('categoria', function ($q) use ($filtros) {
-                $q->where('slug', $filtros['categoria_slug']);
+        if (!empty($filtros['tipo_valor'])) {
+            $query->where('tipo_valor', $filtros['tipo_valor']);
+        }
+
+        if (!empty($filtros['tipo_servico'])) {
+            $query->where('tipo_servico', $filtros['tipo_servico']);
+        }
+
+        if (!empty($filtros['cidade'])) {
+            $query->where('cidade_servico', 'like', "%{$filtros['cidade']}%")
+                ->orWhereHas('prestador.endereco', function ($q) use ($filtros) {
+                    $q->where('cidade', 'like', "%{$filtros['cidade']}%");
+                });
+        }
+
+        if (!empty($filtros['estado'])) {
+            $query->where('estado_servico', $filtros['estado'])
+                ->orWhereHas('prestador.endereco', function ($q) use ($filtros) {
+                    $q->where('estado', $filtros['estado']);
+                });
+        }
+
+        if (!empty($filtros['preco_min']) || !empty($filtros['preco_max'])) {
+            $query->where(function ($q) use ($filtros) {
+                $q->where(function ($hourQuery) use ($filtros) {
+                    $hourQuery->where('tipo_valor', 'hora')
+                        ->when(!empty($filtros['preco_min']), function ($subQuery) use ($filtros) {
+                            $subQuery->where('valor_hora', '>=', $filtros['preco_min']);
+                        })
+                        ->when(!empty($filtros['preco_max']), function ($subQuery) use ($filtros) {
+                            $subQuery->where('valor_hora', '<=', $filtros['preco_max']);
+                        });
+                })
+                    ->orWhere(function ($fixedQuery) use ($filtros) {
+                        $fixedQuery->where('tipo_valor', 'fixo')
+                            ->when(!empty($filtros['preco_min']), function ($subQuery) use ($filtros) {
+                                $subQuery->where('valor_fixo', '>=', $filtros['preco_min']);
+                            })
+                            ->when(!empty($filtros['preco_max']), function ($subQuery) use ($filtros) {
+                                $subQuery->where('valor_fixo', '<=', $filtros['preco_max']);
+                            });
+                    });
             });
-        } elseif (isset($filtros['categoria_id']) && $filtros['categoria_id']) {
-            $query->where('categoria_id', $filtros['categoria_id']);
         }
 
         $ordenacao = $filtros['ordenar'] ?? 'recentes';
@@ -214,17 +344,17 @@ class ServicoService
             case 'preco_desc':
                 $query->orderByRaw('COALESCE(valor_fixo, valor_hora) DESC');
                 break;
-            case 'recentes':
-                $query->orderBy('created_at', 'desc');
-                break;
-            default:
+            case 'visualizacoes':
                 $query->orderBy('visualizacoes', 'desc');
+                break;
+            case 'recentes':
+            default:
+                $query->orderBy('created_at', 'desc');
                 break;
         }
 
         return $query->paginate($perPage);
     }
-
     public function getServicosPorCategoria($categoriaId, $perPage = 12)
     {
         return Servico::with(['prestador', 'categoria'])

@@ -24,13 +24,24 @@ class CategoriaService
             ->get();
     }
 
-    public function getCategoriesForCards($limit = 8)
+    public function getCategoriesForCards(): Collection
     {
         return Categoria::where('ativo', true)
             ->orderBy('ordem')
-            ->orderBy('nome')
-            ->limit($limit)
-            ->get();
+            ->get()
+            ->map(function ($categoria) {
+                return [
+                    'id' => $categoria->id,
+                    'nome' => $categoria->nome,
+                    'slug' => $categoria->slug,
+                    'icone' => $categoria->icone,
+                    'descricao' => $categoria->descricao,
+                    'quantidade_servicos' => $categoria->servicos()
+                        ->where('status', 'ativo')
+                        ->where('verificado', true)
+                        ->count(),
+                ];
+            });
     }
 
     public function getAllActiveCategories()
@@ -64,14 +75,36 @@ class CategoriaService
         });
     }
 
-    public function getCategoryBySlug(?string $slug): ?Categoria
+    public function getCategoryBySlug(?string $slug = null): ?Categoria
     {
-        if (empty($slug)) {
+        if (!$slug) {
             return null;
         }
 
-        return Categoria::where('slug', $slug)
+        return Categoria::where('slug', $slug)->first();
+    }
+
+    public function getCategoriesWithServiceCount(int $limit = 10): Collection
+    {
+        return Categoria::withCount(['servicos' => function ($query) {
+            $query->where('status', 'ativo')->where('verificado', true);
+        }])
             ->where('ativo', true)
-            ->first();
+            ->orderBy('servicos_count', 'desc')
+            ->limit($limit)
+            ->get();
+    }
+
+    public function searchCategories(string $term, int $limit = 10): Collection
+    {
+        return Categoria::where('ativo', true)
+            ->where(function ($query) use ($term) {
+                $query->where('nome', 'LIKE', "%{$term}%")
+                    ->orWhere('descricao', 'LIKE', "%{$term}%")
+                    ->orWhere('slug', 'LIKE', "%{$term}%");
+            })
+            ->orderBy('ordem')
+            ->limit($limit)
+            ->get();
     }
 }
