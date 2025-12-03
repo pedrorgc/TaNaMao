@@ -36,9 +36,15 @@ class ProfileService
 
     private function getPrestadorData(User $user): array
     {
+        // Usa eager loading (with) para performance
         $prestador = Prestador::where('user_id', $user->id)
             ->with(['endereco', 'categoria'])
             ->first();
+
+        // Evita erro se prestador não existir (embora deva existir)
+        if (!$prestador) {
+            return []; 
+        }
 
         $endereco = $prestador->endereco ?? null;
         $categoria = $prestador->categoria ?? null;
@@ -46,7 +52,7 @@ class ProfileService
         return [
             'prestador' => $prestador,
             'telefone' => $prestador->telefone ?? '',
-            'descricao' => $prestador->descricao ?? '',
+            'descricao' => $prestador->descricao ?? '', // <--- O CAMPO NOVO
             'categoria' => $categoria->nome ?? 'Não definida',
             'categoria_id' => $prestador->categoria_id ?? null,
             'localizacao' => $endereco ? "{$endereco->cidade} - {$endereco->estado}" : 'Endereço não cadastrado',
@@ -59,6 +65,10 @@ class ProfileService
         $cliente = Cliente::where('user_id', $user->id)
             ->with('endereco')
             ->first();
+            
+        if (!$cliente) {
+            return [];
+        }
 
         $endereco = $cliente->endereco ?? null;
 
@@ -94,11 +104,12 @@ class ProfileService
                 'telefone' => $data['telefone'] ?? $prestador->telefone,
             ];
 
-            if (isset($data['descricao'])) {
+            // Verifica se a chave existe (mesmo que seja null/vazio) para permitir apagar
+            if (array_key_exists('descricao', $data)) {
                 $updateData['descricao'] = $data['descricao'];
             }
 
-            if (isset($data['categoria_id'])) {
+            if (array_key_exists('categoria_id', $data)) {
                 $updateData['categoria_id'] = $data['categoria_id'];
             }
 
