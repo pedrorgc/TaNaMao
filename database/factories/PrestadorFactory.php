@@ -18,8 +18,12 @@ class PrestadorFactory extends Factory
             'user_id' => User::factory(),
             'documento' => $this->gerarDocumento(),
             'telefone' => $this->gerarTelefone(),
-            'categoria_id' => Categoria::factory(),
-            'endereco_id' => Endereco::factory(),
+            'categoria_id' => function () {
+                return Categoria::inRandomOrder()->first()->id;
+            },
+            'endereco_id' => function () {
+                return Endereco::inRandomOrder()->first()->id;
+            },
             'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'updated_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
         ];

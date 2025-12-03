@@ -12,30 +12,69 @@ class CategoriaFactory extends Factory
 
     public function definition(): array
     {
-        $categorias = [
-            'Eletricista' => ['icone' => 'bi-lightning-charge-fill', 'descricao' => 'Instalações e reparos elétricos'],
-            'Encanador' => ['icone' => 'bi-wrench', 'descricao' => 'Reparos hidráulicos e encanamento'],
-            'Pedreiro' => ['icone' => 'bi-hammer', 'descricao' => 'Construção e reformas em alvenaria'],
-            'Pintor' => ['icone' => 'bi-brush-fill', 'descricao' => 'Pintura residencial e comercial'],
-            'Marceneiro' => ['icone' => 'bi-tools', 'descricao' => 'Móveis sob medida e marcenaria'],
-            'Jardineiro' => ['icone' => 'bi-flower1', 'descricao' => 'Paisagismo e manutenção de jardins'],
-            'Limpeza' => ['icone' => 'bi-house-door-fill', 'descricao' => 'Serviços de limpeza residencial'],
-            'Climatização' => ['icone' => 'bi-thermometer-half', 'descricao' => 'Instalação e manutenção de ar condicionado'],
-            'Chaveiro' => ['icone' => 'bi-key-fill', 'descricao' => 'Serviços de chaveiro 24 horas'],
-            'Vidraceiro' => ['icone' => 'bi-window', 'descricao' => 'Reparo e instalação de vidros'],
-            'Mecânico' => ['icone' => 'bi-gear-fill', 'descricao' => 'Manutenção automotiva em geral'],
-            'Conserto de Eletrodomésticos' => ['icone' => 'bi-plug-fill', 'descricao' => 'Reparo de eletrodomésticos'],
-            'Técnico em Informática' => ['icone' => 'bi-laptop-fill', 'descricao' => 'Manutenção de computadores e redes'],
+        $nomesCategorias = [
+            'Eletricista', 'Encanador', 'Pedreiro', 'Pintor', 'Marceneiro',
+            'Jardineiro', 'Limpeza', 'Climatização', 'Chaveiro', 'Vidraceiro',
+            'Mecânico', 'Conserto de Eletrodomésticos', 'Técnico em Informática', 'Outros'
         ];
 
-        $nome = $this->faker->randomElement(array_keys($categorias));
-        $dados = $categorias[$nome];
+        $nome = $this->faker->randomElement($nomesCategorias);
+        $slug = Str::slug($nome);
+        
+        $categoriaExistente = Categoria::where('nome', $nome)->orWhere('slug', $slug)->first();
+        
+        if ($categoriaExistente) {
+            return [
+                'nome' => $categoriaExistente->nome,
+                'slug' => $categoriaExistente->slug,
+                'icone' => $categoriaExistente->icone,
+                'descricao' => $categoriaExistente->descricao,
+                'ordem' => $categoriaExistente->ordem,
+                'ativo' => $categoriaExistente->ativo,
+                'created_at' => $categoriaExistente->created_at,
+                'updated_at' => $categoriaExistente->updated_at,
+            ];
+        }
+
+        $icones = [
+            'Eletricista' => 'bi-lightning-charge-fill',
+            'Encanador' => 'bi-wrench',
+            'Pedreiro' => 'bi-hammer',
+            'Pintor' => 'bi-brush-fill',
+            'Marceneiro' => 'bi-tools',
+            'Jardineiro' => 'bi-flower1',
+            'Limpeza' => 'bi-house-door-fill',
+            'Climatização' => 'bi-thermometer-half',
+            'Chaveiro' => 'bi-key-fill',
+            'Vidraceiro' => 'bi-window',
+            'Mecânico' => 'bi-gear-fill',
+            'Conserto de Eletrodomésticos' => 'bi-plug-fill',
+            'Técnico em Informática' => 'bi-laptop-fill',
+            'Outros' => 'bi-briefcase-fill'
+        ];
+
+        $descricoes = [
+            'Eletricista' => 'Instalações e reparos elétricos',
+            'Encanador' => 'Reparos hidráulicos e encanamento',
+            'Pedreiro' => 'Construção e reformas em alvenaria',
+            'Pintor' => 'Pintura residencial e comercial',
+            'Marceneiro' => 'Móveis sob medida e marcenaria',
+            'Jardineiro' => 'Paisagismo e manutenção de jardins',
+            'Limpeza' => 'Serviços de limpeza residencial',
+            'Climatização' => 'Instalação e manutenção de ar condicionado',
+            'Chaveiro' => 'Serviços de chaveiro 24 horas',
+            'Vidraceiro' => 'Reparo e instalação de vidros',
+            'Mecânico' => 'Manutenção automotiva em geral',
+            'Conserto de Eletrodomésticos' => 'Reparo de eletrodomésticos',
+            'Técnico em Informática' => 'Manutenção de computadores e redes',
+            'Outros' => 'Demais serviços especializados'
+        ];
 
         return [
             'nome' => $nome,
-            'slug' => Str::slug($nome),
-            'icone' => $dados['icone'],
-            'descricao' => $dados['descricao'],
+            'slug' => $slug,
+            'icone' => $icones[$nome] ?? 'bi-briefcase-fill',
+            'descricao' => $descricoes[$nome] ?? 'Serviços especializados',
             'ordem' => $this->faker->numberBetween(1, 20),
             'ativo' => true,
             'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
