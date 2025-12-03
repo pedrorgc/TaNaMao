@@ -53,6 +53,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
+    Route::post('/profile/settings', [ProfileController::class, 'updateSettings'])->name('profile.settings.update');
+    Route::post('/prestador/agenda', [PrestadorController::class, 'updateAgenda'])->name('prestador.agenda.update');
+    
     Route::middleware(['role:prestador'])->group(function () {
         Route::get('/prestador/dashboard', [PrestadorController::class, 'dashboard'])->name('prestador.dashboard');
         Route::get('/prestador/servicos', [ServicePublicController::class, 'myServices'])->name('prestador.servicos.index');

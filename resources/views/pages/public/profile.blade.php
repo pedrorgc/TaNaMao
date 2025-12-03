@@ -1,4 +1,4 @@
-@extends('components.layouts.app')
+@extends('layouts.app')
 
 @section('content')
 <div style="background-color: #EAEAEA; min-height: calc(100vh - 60px); padding-top: 80px; padding-bottom: 40px;">
