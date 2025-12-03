@@ -9,13 +9,18 @@ class DatabaseSeeder extends Seeder
 {
 
     public function run(): void
-    {
+    {   
+         $this->command->info('Iniciando seeding do banco de dados...');
 
-        $this->call([
+        $this->criarUsuariosPrincipais();
+
+         $this->call([
             RoleSeeder::class,
             CategoriaSeeder::class,
+            EnderecoSeeder::class,
             ClienteSeeder::class,
-            
+            PrestadorSeeder::class,  
+            ServicoSeeder::class,     
         ]);
 
         User::factory()->create([
