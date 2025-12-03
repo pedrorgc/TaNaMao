@@ -1,5 +1,5 @@
 @php
-$categories = $categories ?? $categoriesForCard ?? $formattedCategories ?? [];
+$categories = $categories ?? [];
 @endphp
 
 @if(count($categories) > 0)
@@ -48,6 +48,8 @@ $categories = $categories ?? $categoriesForCard ?? $formattedCategories ?? [];
         </div>
     </div>
 </div>
+
+
 
 <style>
     .category-selector-container {
@@ -132,14 +134,15 @@ $categories = $categories ?? $categoriesForCard ?? $formattedCategories ?? [];
         transition: all 0.2s ease;
         flex-shrink: 0;
         z-index: 10;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .category-nav-btn:hover {
         background-color: #f8f9fa;
         border-color: #0d6efd;
         color: #0d6efd;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        transform: translateY(-1px);
     }
 
     .category-nav-btn i {
@@ -239,8 +242,13 @@ $categories = $categories ?? $categoriesForCard ?? $formattedCategories ?? [];
             selectorItems.forEach(item => item.classList.remove('active'));
 
             if (!currentCategory) {
-                const allCategoriesItem = document.querySelector('a[href="{{ url(' / servicos ') }}"]');
-                if (allCategoriesItem) allCategoriesItem.classList.add('active');
+                const allCategoriesItem = document.querySelector('a[href*="/servicos"]');
+                if (allCategoriesItem) {
+                    if (allCategoriesItem.textContent.includes('Todas') || 
+                        allCategoriesItem.querySelector('i.bi-grid-fill')) {
+                        allCategoriesItem.classList.add('active');
+                    }
+                }
                 return;
             }
 
@@ -265,7 +273,6 @@ $categories = $categories ?? $categoriesForCard ?? $formattedCategories ?? [];
                 const itemLeft = activeItem.offsetLeft;
                 const itemWidth = activeItem.offsetWidth;
 
-                // Centralizar o item ativo
                 scrollContainer.scrollLeft = itemLeft - (containerWidth / 2) + (itemWidth / 2);
             }
         }

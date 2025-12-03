@@ -356,9 +356,10 @@
         'routeName' => 'servicos.show',
         'titleField' => 'titulo',
         'descriptionField' => 'descricao',
-        'badgeField' => 'categoria.nome'
+        'badgeField' => 'categoria.nome',
+        'showPrestador' => true,
+        'prestadorNameField' => 'prestador.user.name'
         ])
-
         @if($servicos->hasPages())
         <div class="mt-5">
             <nav aria-label="Navegação de páginas">
@@ -385,7 +386,6 @@
                     @endif
                     @endforeach
 
-                    {{-- Next Page Link --}}
                     @if($servicos->hasMorePages())
                     <li class="page-item">
                         <a class="page-link" href="{{ $servicos->nextPageUrl() }}" rel="next" aria-label="Próxima">&raquo;</a>

@@ -14,6 +14,7 @@ Route::get('/home', [PublicController::class, 'home'])->name('home');
 Route::get('/login', [PublicController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/sobre', [PublicController::class, 'sobre'])->name('sobre');
 
 Route::get('/cadastro', [PublicController::class, 'preCadastro'])->name('cadastro');
 Route::get('/cadastro/cliente', [PublicController::class, 'cadastroCliente'])->name('cadastro.cliente');
@@ -30,24 +31,7 @@ Route::get('/contact', [PublicController::class, 'contact'])->name('contact');
 
 Route::get('/servicos/busca-rapida', [ServicePublicController::class, 'buscarRapido'])
     ->name('servicos.busca-rapida');
-Route::middleware(['auth'])->group(function () {
 
-    Route::get('/quero-criar-servico', function () {
-        $user = Auth::user();
-
-        if ($user->role_id == 2) {
-            if ($user->prestador) {
-                return redirect()->route('servicos.create');
-            } else {
-                return redirect()->route('cadastro.prestador')
-                    ->with('info', 'Complete seu cadastro como prestador para criar serviços.');
-            }
-        } else {
-            return redirect()->route('cadastro.prestador')
-                ->with('info', 'Cadastre-se como prestador para começar a oferecer serviços.');
-        }
-    })->name('quero.criar.servico');
-});
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
@@ -56,7 +40,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/profile/settings', [ProfileController::class, 'updateSettings'])->name('profile.settings.update');
     Route::post('/prestador/agenda', [PrestadorController::class, 'updateAgenda'])->name('prestador.agenda.update');
-    
+
     Route::middleware(['role:prestador'])->group(function () {
         Route::get('/prestador/dashboard', [PrestadorController::class, 'dashboard'])->name('prestador.dashboard');
         Route::get('/prestador/servicos', [ServicePublicController::class, 'myServices'])->name('prestador.servicos.index');

@@ -5,12 +5,23 @@
         </a>
 
         <div class="d-none d-lg-flex mx-auto" style="max-width: 500px; width: 100%;">
-            <form class="w-100" action="#" method="GET">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Buscar serviços..." 
-                           aria-label="Buscar" style="border-radius: 25px 0 0 25px;">
-                    <button class="btn btn-light" type="submit" 
-                            style="border-radius: 0 25px 25px 0;">
+            <form class="w-100" action="/servicos" method="GET">
+                <div class="input-group search-container">
+                    <div class="position-relative flex-grow-1">
+                        <input type="text"
+                            name="search"
+                            class="form-control"
+                            placeholder="Buscar serviço, categoria ou prestador..."
+                            value="{{ request('search') }}"
+                            id="searchInputNav"
+                            autocomplete="off"
+                            aria-label="Buscar serviços"
+                            style="border-radius: 25px 0 0 25px;">
+                        <div class="autocomplete-suggestions" id="searchSuggestionsNav" style="display: none;"></div>
+                    </div>
+
+                    <button class="btn btn-light" type="submit"
+                        style="border-radius: 0 25px 25px 0;">
                         <i class="bi bi-search"></i>
                     </button>
                 </div>
@@ -25,8 +36,8 @@
             <div class="d-lg-none mb-3 mt-2">
                 <form action="#" method="GET">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Buscar serviços..." 
-                               aria-label="Buscar">
+                        <input type="text" class="form-control" placeholder="Buscar serviços..."
+                            aria-label="Buscar">
                         <button class="btn btn-light" type="submit">
                             <i class="bi bi-search"></i>
                         </button>
@@ -42,7 +53,7 @@
                     <a class="nav-link" href="#como-funciona" style="font-size: 1.1rem;">Como Funciona</a>
                 </li>
                 <li class="nav-item mx-3">
-                    <a class="nav-link" href="#sobre" style="font-size: 1.1rem;">Sobre</a>
+                    <a class="nav-link" href="/sobre" style="font-size: 1.1rem;">Sobre</a>
                 </li>
                 @auth
                 @php
@@ -61,7 +72,7 @@
                         @if ($role_id === 1)
                         <li><a class="dropdown-item" href="{{ url('/admin') }}">Painel Administrativo</a></li>
                         @elseif ($role_id === 2)
-                        <li><a class="dropdown-item" href="{{ url('/profile') }}">Meu Perfil de Prestador</a></li>
+                        <li><a class="dropdown-item" href="{{ url('/profile') }}">Meu Perfil </a></li>
                         <li><a class="dropdown-item" href="{{ url('/servicos/create') }}">Cadastrar Serviço</a></li>
                         @elseif ($role_id === 3)
                         <li><a class="dropdown-item" href="{{ url('/profile') }}">Meu Perfil</a></li>
@@ -81,13 +92,61 @@
                     </ul>
                 </li>
                 @else
-                  <li class="nav-item mx-3">
-                        <a class="nav-link d-flex align-items-center" href="{{ route('login') }}" style="font-size: 1.1rem;">
-                            <i class="bi bi-person-fill me-2 fs-5"></i> Entrar
-                        </a>
-                    </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link d-flex align-items-center" href="{{ route('login') }}" style="font-size: 1.1rem;">
+                        <i class="bi bi-person-fill me-2 fs-5"></i> Entrar
+                    </a>
+                </li>
                 @endauth
             </ul>
         </div>
     </div>
 </nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInputNav = document.getElementById('searchInputNav');
+        const suggestionsNav = document.getElementById('searchSuggestionsNav');
+
+        if (searchInputNav) {
+            searchInputNav.addEventListener('input', function(e) {
+                const query = e.target.value;
+
+                if (query.length < 2) {
+                    suggestionsNav.style.display = 'none';
+                    return;
+                }
+
+                fetch(`/api/buscar-sugestoes?q=${encodeURIComponent(query)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length > 0) {
+                            suggestionsNav.innerHTML = data.map(item =>
+                                `<div class="suggestion-item">${item.nome}</div>`
+                            ).join('');
+                            suggestionsNav.style.display = 'block';
+                        } else {
+                            suggestionsNav.style.display = 'none';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro ao buscar sugestões:', error);
+                        suggestionsNav.style.display = 'none';
+                    });
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!searchInputNav.contains(e.target) && !suggestionsNav.contains(e.target)) {
+                    suggestionsNav.style.display = 'none';
+                }
+            });
+
+            suggestionsNav.addEventListener('click', function(e) {
+                if (e.target.classList.contains('suggestion-item')) {
+                    searchInputNav.value = e.target.textContent;
+                    suggestionsNav.style.display = 'none';
+                }
+            });
+        }
+    });
+</script>

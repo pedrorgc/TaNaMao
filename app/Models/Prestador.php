@@ -19,10 +19,14 @@ class Prestador extends Model
         'endereco_id',
         'descricao'
     ];
-
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class);
     }
 
     public function endereco()
@@ -30,8 +34,8 @@ class Prestador extends Model
         return $this->belongsTo(Endereco::class);
     }
 
-    public function categoria()
+    public function servicos()
     {
-        return $this->belongsTo(Categoria::class, 'categoria_id');
+        return $this->hasMany(Servico::class);
     }
 }

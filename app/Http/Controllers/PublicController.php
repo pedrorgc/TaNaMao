@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
+use App\Models\Servico;
 use App\Services\CategoriaService;
+use App\Services\ServicoService;
 use Illuminate\Support\Facades\Auth;
 
 class PublicController extends Controller
@@ -15,14 +18,26 @@ class PublicController extends Controller
     }
 
 
-    public function home(CategoriaService $categoriaService)
+    public function home(CategoriaService $categoriaService, ServicoService $servicoService)
     {
         $categoriesForCard = $categoriaService->getCategoriesForCards(8);
         $featuredCategories = $categoriaService->getFeaturedCategories(4);
         $allCategories = $categoriaService->getActiveCategories();
-        $categoriesForCard = $allCategories->take(8);
-        $formattedCategories = $categoriaService->formatCategoriesForDisplay()->take(8);
 
+        $categories = $allCategories->take(8)->map(function ($category) {;
+
+            return [
+                'slug' => $category->slug,
+                'nome' => $category->nome,
+                'icone' => $category->icone,
+            ];
+        });
+
+        $servicos = $servicoService->buscarServicosComFiltros([]);
+        $estatisticas = $servicoService->getEstatisticasBusca();
+        $sugestoesPopulares = $servicoService->getSugestoesPopulares();
+
+        $filtrosAtivos = [];
         $user = Auth::user();
 
         $showFindServices = true;
@@ -30,6 +45,16 @@ class PublicController extends Controller
         $findServicesRoute = '/servicos';
         $offerServicesRoute = '/login';
 
+        $servicosDestaque = Servico::with(['categoria', 'prestador.user'])
+            ->where('status', 'ativo')
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
+
+        $featuredCategories = Categoria::withCount('servicos')
+            ->orderBy('servicos_count', 'desc')
+            ->limit(4)
+            ->get();
         if (!$user) {
             $findServicesRoute = '/login';
             $offerServicesRoute = '/login';
@@ -37,30 +62,38 @@ class PublicController extends Controller
             $findServicesRoute = '/servicos';
 
             if ($user->role_id == 2) {
-                $offerServicesRoute = route('quero.criar.servico');
+                $offerServicesRoute = '/servicos/create';
             } elseif ($user->role_id == 3) {
                 $offerServicesRoute = '/cadastro/prestador';
             } elseif ($user->role_id == 1) {
                 $showOfferServices = false;
             }
         }
-        $categories = $formattedCategories;
-        $selectedCategory = $formattedCategories;
-        $showCategoriasSection = $formattedCategories->count() > 0;
 
-        return view('pages.public.home', compact(
-            'categoriesForCard',
-            'categories',
-            'featuredCategories',
-            'formattedCategories',
-            'allCategories',
-            'showFindServices',
-            'showOfferServices',
-            'findServicesRoute',
-            'offerServicesRoute',
-            'selectedCategory',
-            'showCategoriasSection'
-        ));
+        $selectedCategory = null;
+        $showCategoriasSection = $categories->count() > 0;
+
+        return view('pages.public.home', [
+            'servicos' => $servicos,
+            'selectedCategory' => $selectedCategory,
+            'categories' => $categories,
+            'showCategoriasSection' => $showCategoriasSection,
+            'estatisticas' => $estatisticas,
+            'sugestoesPopulares' => $sugestoesPopulares,
+            'filtrosAtivos' => $filtrosAtivos,
+
+            'categoriesForCard' => $categoriesForCard,
+            'featuredCategories' => $featuredCategories,
+            'allCategories' => $allCategories,
+            'formattedCategories' => $categories,
+
+            'showFindServices' => $showFindServices,
+            'showOfferServices' => $showOfferServices,
+            'findServicesRoute' => $findServicesRoute,
+            'offerServicesRoute' => $offerServicesRoute,
+            'servicosDestaque' => $servicosDestaque,
+            'todasServicosRoute' => route('servicos.index'),
+        ]);
     }
 
     public function login()
@@ -96,5 +129,9 @@ class PublicController extends Controller
     public function areaServicos()
     {
         return view('pages.public.servicos.area-servicos');
+    }
+    public function sobre()
+    {
+        return view('pages.public.about');
     }
 }

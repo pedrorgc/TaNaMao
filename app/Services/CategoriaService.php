@@ -69,6 +69,7 @@ class CategoriaService
                 'id' => $category->id,
                 'name' => $category->nome,
                 'icon' => $category->icone,
+                'href' => url('/servicos?categoria=' . $category->slug),
                 'description' => $category->descricao,
                 'slug' => $category->slug,
             ];

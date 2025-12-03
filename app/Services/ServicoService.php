@@ -22,8 +22,6 @@ class ServicoService
         return $query->get();
     }
 
-
-
     public function prepararDadosPrestador(Prestador $prestador)
     {
         $dados = [
@@ -178,26 +176,28 @@ class ServicoService
             return $servico;
         });
     }
-    public function getEstatisticasBusca(): array
-{
-    $servicosPorCategoria = \App\Models\Categoria::withCount(['servicos' => function ($query) {
-        $query->where('status', 'ativo')->where('verificado', true);
-    }])
-    ->where('ativo', true)
-    ->orderBy('servicos_count', 'desc')
-    ->limit(10)
-    ->get()
-    ->pluck('servicos_count', 'nome')
-    ->toArray();
 
-    return [
-        'total_servicos' => \App\Models\Servico::where('status', 'ativo')
-            ->where('verificado', true)
-            ->count(),
-        'total_categorias' => \App\Models\Categoria::where('ativo', true)->count(),
-        'servicos_por_categoria' => $servicosPorCategoria,
-    ];
-}
+    public function getEstatisticasBusca(): array
+    {
+        $servicosPorCategoria = Categoria::withCount(['servicos' => function ($query) {
+            $query->where('status', 'ativo')->where('verificado', true);
+        }])
+            ->where('ativo', true)
+            ->orderBy('servicos_count', 'desc')
+            ->limit(10)
+            ->get()
+            ->pluck('servicos_count', 'nome')
+            ->toArray();
+
+        return [
+            'total_servicos' => Servico::where('status', 'ativo')
+                ->where('verificado', true)
+                ->count(),
+            'total_categorias' => Categoria::where('ativo', true)->count(),
+            'servicos_por_categoria' => $servicosPorCategoria,
+        ];
+    }
+
     public function getSugestoesPopulares(int $limit = 8): array
     {
         return [
@@ -211,7 +211,8 @@ class ServicoService
             'jardineiro',
         ];
     }
-    private function formatarPreco(Servico $servico): string
+
+    public function formatarPreco(Servico $servico): string
     {
         if ($servico->tipo_valor === 'hora' && $servico->valor_hora) {
             return 'R$ ' . number_format($servico->valor_hora, 2, ',', '.') . '/hora';
@@ -223,6 +224,7 @@ class ServicoService
 
         return 'Orçamento';
     }
+
     public function buscarRapido(string $term, int $limit = 10): array
     {
         if (strlen($term) < 2) {
@@ -257,7 +259,6 @@ class ServicoService
         })->toArray();
     }
 
-
     public function buscarServicosComFiltros(array $filtros = [], $perPage = 8)
     {
         $query = Servico::with(['prestador.user', 'categoria'])
@@ -276,12 +277,10 @@ class ServicoService
                 $q->where('titulo', 'like', "%{$search}%")
                     ->orWhere('descricao', 'like', "%{$search}%")
                     ->orWhere('tipo_servico', 'like', "%{$search}%")
-
                     ->orWhereHas('categoria', function ($catQuery) use ($search) {
                         $catQuery->where('nome', 'like', "%{$search}%")
                             ->orWhere('descricao', 'like', "%{$search}%");
                     })
-
                     ->orWhereHas('prestador.user', function ($userQuery) use ($search) {
                         $userQuery->where('name', 'like', "%{$search}%");
                     });
@@ -355,6 +354,7 @@ class ServicoService
 
         return $query->paginate($perPage);
     }
+
     public function getServicosPorCategoria($categoriaId, $perPage = 12)
     {
         return Servico::with(['prestador', 'categoria'])
@@ -380,6 +380,168 @@ class ServicoService
             ->where('id', '!=', $servico->id)
             ->where('status', 'ativo')
             ->where('verificado', true)
+            ->limit($limit)
+            ->get();
+    }
+
+    public function buscarServicoParaVisualizacao($id)
+    {
+        return Servico::with([
+            'prestador' => function ($query) {
+                $query->with([
+                    'user:id,name',
+                    'categoria:id,nome',
+                    'endereco:id,cidade,estado'
+                ]);
+            },
+            'categoria:id,nome,slug,icone',
+            'enderecoServico:id,cidade,estado'
+        ])
+        ->where('id', $id)
+        ->where('status', 'ativo')
+        ->where('verificado', true)
+        ->firstOrFail();
+    }
+
+    public function prepararDadosVisiveisServico(Servico $servico)
+    {
+        $nomePrestador = $servico->prestador->user->name ?? 'Prestador';
+        
+        $fotos = [];
+        if (class_exists('App\Models\ServicoImagem')) {
+            $fotos = $servico->servicoImagens ?? [];
+        }
+        
+        $avaliacoes = [];
+        if (class_exists('App\Models\Avaliacao')) {
+            $avaliacoes = $servico->avaliacoes ?? [];
+        }
+
+        return [
+            'servico' => $servico,
+            'titulo' => $servico->titulo,
+            'descricao' => $servico->descricao,
+            'tipo_servico' => $servico->tipo_servico,
+            'tipo_valor' => $servico->tipo_valor,
+            'valor_formatado' => $this->formatarValorServico($servico),
+            'localizacao' => $this->formatarLocalizacaoServico($servico),
+            'telefone' => $this->formatarTelefoneServico($servico),
+            'visualizacoes' => $servico->visualizacoes,
+            'data_criacao' => $servico->created_at->format('d/m/Y'),
+            
+            'categoria' => $servico->categoria,
+            'fotos' => $fotos,
+            'avaliacoes' => $avaliacoes,
+            'comentarios' => $avaliacoes,
+            
+            'prestador' => [
+                'id' => $servico->prestador->id,
+                'nome' => $nomePrestador,
+                'user_id' => $servico->prestador->user_id,
+                'categoria' => $servico->prestador->categoria,
+                'endereco' => $servico->prestador->endereco,
+            ],
+            
+            'badges' => [
+                'verificado' => $servico->verificado,
+                'status_publico' => 'Disponível'
+            ]
+        ];
+    }
+
+
+    public function formatarValorServico(Servico $servico): string
+    {
+        switch ($servico->tipo_valor) {
+            case 'hora':
+                return $servico->valor_hora
+                    ? 'R$ ' . number_format($servico->valor_hora, 2, ',', '.') . '/hora'
+                    : 'Valor por hora a combinar';
+            case 'fixo':
+                return $servico->valor_fixo
+                    ? 'R$ ' . number_format($servico->valor_fixo, 2, ',', '.')
+                    : 'Valor fixo a combinar';
+            default:
+                return 'Orçamento sob consulta';
+        }
+    }
+
+    public function formatarLocalizacaoServico(Servico $servico): string
+    {
+        if ($servico->cidade_servico && $servico->estado_servico) {
+            return $servico->cidade_servico . '/' . $servico->estado_servico;
+        }
+
+        if ($servico->enderecoServico) {
+            return $servico->enderecoServico->cidade . '/' . $servico->enderecoServico->estado;
+        }
+
+        if ($servico->prestador->endereco) {
+            return $servico->prestador->endereco->cidade . '/' . $servico->prestador->endereco->estado;
+        }
+
+        return 'Localização não informada';
+    }
+
+    public function formatarTelefoneServico(Servico $servico): ?string
+    {
+        if ($servico->telefone_servico) {
+            $telefone = preg_replace('/[^0-9]/', '', $servico->telefone_servico);
+            
+            if (strlen($telefone) == 11) {
+                return preg_replace('/(\d{2})(\d{5})(\d{4})/', '($1) $2-$3', $telefone);
+            } elseif (strlen($telefone) == 10) {
+                return preg_replace('/(\d{2})(\d{4})(\d{4})/', '($1) $2-$3', $telefone);
+            }
+            
+            return $servico->telefone_servico;
+        }
+        if ($servico->prestador->telefone) {
+            $telefone = preg_replace('/[^0-9]/', '', $servico->prestador->telefone);
+            return '****-****' . substr($telefone, -4);
+        }
+
+        return null;
+    }
+    private function formatarNumeroTelefone($telefone): string
+    {
+        $telefone = preg_replace('/[^0-9]/', '', $telefone);
+
+        if (strlen($telefone) == 11) {
+            return preg_replace('/(\d{2})(\d{5})(\d{4})/', '($1) $2-$3', $telefone);
+        } elseif (strlen($telefone) == 10) {
+            return preg_replace('/(\d{2})(\d{4})(\d{4})/', '($1) $2-$3', $telefone);
+        }
+
+        return $telefone;
+    }
+
+
+    public function incrementarVisualizacoes(Servico $servico): void
+    {
+        $servico->increment('visualizacoes');
+    }
+
+    public function buscarServicosRelacionadosPorCategoria(Servico $servico, $limit = 6)
+    {
+        return Servico::with(['prestador', 'categoria'])
+            ->where('categoria_id', $servico->categoria_id)
+            ->where('id', '!=', $servico->id)
+            ->where('status', 'ativo')
+            ->where('verificado', true)
+            ->inRandomOrder()
+            ->limit($limit)
+            ->get();
+    }
+
+    public function buscarOutrosServicosDoPrestador(Servico $servico, $limit = 3)
+    {
+        return Servico::with(['categoria'])
+            ->where('prestador_id', $servico->prestador_id)
+            ->where('id', '!=', $servico->id)
+            ->where('status', 'ativo')
+            ->where('verificado', true)
+            ->inRandomOrder()
             ->limit($limit)
             ->get();
     }

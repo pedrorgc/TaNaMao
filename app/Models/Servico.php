@@ -48,11 +48,11 @@ class Servico extends Model
         if ($this->enderecoServico) {
             return $this->enderecoServico->formatado;
         }
-        
+
         if ($this->prestador->endereco) {
             return $this->prestador->endereco->formatado;
         }
-        
+
         return null;
     }
 

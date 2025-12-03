@@ -5,8 +5,34 @@
 @section('content')
 
 @include('components.category-selector', [
-'categories' => $categories
+'categories' => $categories ?? []
 ])
+@php
+    $servicosLimitados = $servicosDestaque->slice(0, 3);
+@endphp
+@if(isset($servicosDestaque) && $servicosDestaque->count() > 0)
+<div class="py-5">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-5">Serviços em Destaque</h2>
+        
+        @include('components.card-servico-destaque', [
+            'items' => $servicosDestaque,
+            'routeName' => 'servicos.show',
+            'titleField' => 'titulo',
+            'descriptionField' => 'descricao',
+            'badgeField' => 'categoria.nome',
+            'showPrestador' => true,
+            'prestadorNameField' => 'prestador.user.name'
+        ])
+        
+        <div class="text-center mt-4">
+            <a href="{{ route('servicos.index') }}" class="btn btn-outline-primary">
+                Ver Todos os Serviços <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+        </div>
+    </div>
+</div>
+@endif
 
 <div class="bg-light text-center py-5 full-width-bg">
     <div class="container">
