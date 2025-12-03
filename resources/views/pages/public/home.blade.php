@@ -14,7 +14,7 @@
 <div class="py-5">
     <div class="container">
         <h2 class="text-center fw-bold mb-5">Serviços em Destaque</h2>
-        
+
         @include('components.card-servico-destaque', [
             'items' => $servicosDestaque,
             'routeName' => 'servicos.show',
@@ -24,7 +24,7 @@
             'showPrestador' => true,
             'prestadorNameField' => 'prestador.user.name'
         ])
-        
+
         <div class="text-center mt-4">
             <a href="{{ route('servicos.index') }}" class="btn btn-outline-primary">
                 Ver Todos os Serviços <i class="bi bi-arrow-right ms-1"></i>
@@ -71,7 +71,7 @@
         <div class="col-lg-3 col-md-6">
             @php
                 $categoriaRoute = null;
-                
+
                 if (Route::has('categorias.show')) {
                     $categoriaRoute = route('categorias.show', $category->slug);
                 } elseif (Route::has('servicos.categoria')) {
@@ -82,7 +82,7 @@
                     $categoriaRoute = '/servicos?categoria=' . $category->slug;
                 }
             @endphp
-            
+
             <a href="{{ $categoriaRoute }}" class="text-decoration-none">
                 <div class="card border-0 shadow-sm h-100 text-center hover-shadow">
                     <div class="card-body py-4">
@@ -100,7 +100,7 @@
     <div class="text-center mt-5">
         @php
             $todasCategoriasRoute = null;
-            
+
             if (Route::has('categorias.index')) {
                 $todasCategoriasRoute = route('categorias.index');
             } elseif (Route::has('servicos.index')) {
@@ -109,7 +109,7 @@
                 $todasCategoriasRoute = '/servicos';
             }
         @endphp
-        
+
         <a href="{{ $todasCategoriasRoute }}" class="btn btn-outline-primary">
             Ver Todas as Categorias <i class="bi bi-arrow-right ms-1"></i>
         </a>
@@ -136,9 +136,9 @@
             <div class="col-lg-4 col-md-6">
                 <div class="text-center p-4">
                     <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                        <i class="bi bi-compare fs-3 text-primary"></i>
+                        <i class="bi bi-people fs-3 text-primary"></i>
                     </div>
-                    <h4 class="fw-bold">2. Compare</h4>
+                    <h4 class="fw-bold" >2. Compare</h4>
                     <p class="text-muted">Veja perfis, avaliações e escolha o melhor</p>
                 </div>
             </div>
