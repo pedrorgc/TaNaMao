@@ -39,9 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
               if (rua) rua.value = data.logradouro || '';
               if (bairro) bairro.value = data.bairro || '';
               if (cidade) {
-                // Se cidade for select, tenta selecionar; se for input, preenche
                 if (cidade.tagName.toLowerCase() === 'select') {
-                  // cria opção se não existir
                   let opt = Array.from(cidade.options).find(o => o.value === data.localidade);
                   if (!opt) {
                     opt = document.createElement('option');

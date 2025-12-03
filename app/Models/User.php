@@ -12,13 +12,18 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasApiTokens,HasFactory, Notifiable;
+
+    const ROLE_CLIENTE = 1;
+    const ROLE_PRESTADOR = 2;
+    const ROLE_ADMIN = 3;
+
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * @var list<string>
      *
      */
-    
+
     protected $fillable = [
         'name',
         'email',
@@ -49,7 +54,10 @@ class User extends Authenticatable
     {
         return $this->hasRole('prestador');
     }
-
+    public function prestador()
+    {
+        return $this->hasOne(Prestador::class, 'user_id');
+    }
     public function isCliente(): bool
     {
         return $this->hasRole('cliente');
