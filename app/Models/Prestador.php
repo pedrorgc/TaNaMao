@@ -17,6 +17,7 @@ class Prestador extends Model
         'telefone',
         'categoria_id',
         'endereco_id',
+        'descricao'
     ];
 
     public function user()
