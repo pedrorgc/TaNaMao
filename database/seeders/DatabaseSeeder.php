@@ -13,18 +13,24 @@ class DatabaseSeeder extends Seeder
     {
         $this->command->info('Iniciando seeding do banco de dados...');
         
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        // --- CORREÇÃO 1: Lógica Condicional para desativar Foreign Keys ---
+        if (DB::getDriverName() === 'sqlite') {
+            DB::statement('PRAGMA foreign_keys = OFF;'); // Comando correto para SQLite
+        } else {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;'); // Mantém o comando para MySQL/outros
+        }
+        // --- FIM CORREÇÃO 1 ---
         
         try {
             $this->criarUsuariosPrincipais();
             
             $this->call([
-                RoleSeeder::class,          
-                CategoriaSeeder::class,   
-                EnderecoSeeder::class,    
-                ClienteSeeder::class,     
-                PrestadorSeeder::class,   
-                ServicoSeeder::class,     
+                RoleSeeder::class,           
+                CategoriaSeeder::class,    
+                EnderecoSeeder::class,     
+                ClienteSeeder::class,      
+                PrestadorSeeder::class,    
+                ServicoSeeder::class,      
             ]);
             
             $this->command->info('Seeding concluído com sucesso!');
@@ -33,7 +39,13 @@ class DatabaseSeeder extends Seeder
             $this->command->error('Erro durante o seeding: ' . $e->getMessage());
             $this->command->error('Trace: ' . $e->getTraceAsString());
         } finally {
-            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+            // --- CORREÇÃO 2: Lógica Condicional para reativar Foreign Keys ---
+            if (DB::getDriverName() === 'sqlite') {
+                DB::statement('PRAGMA foreign_keys = ON;'); // Comando correto para SQLite
+            } else {
+                DB::statement('SET FOREIGN_KEY_CHECKS=1;'); // Mantém o comando para MySQL/outros
+            }
+            // --- FIM CORREÇÃO 2 ---
         }
         
         $this->mostrarResumo();

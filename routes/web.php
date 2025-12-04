@@ -25,7 +25,7 @@ Route::post('/prestadores', [PrestadorController::class, 'storePrestador'])->nam
 
 Route::get('/area-servicos', [ServicePublicController::class, 'list'])->name('area-servicos');
 Route::get('/servicos', [ServicePublicController::class, 'index'])->name('servicos.index');
-Route::get('/servicos/{slug}', [ServicePublicController::class, 'showByCategory'])->name('servicos.by-category');
+Route::get('/servico/{slug}', [ServicePublicController::class, 'showByCategory'])->name('servicos.by-category');
 Route::get('/servico/{id}', [ServicePublicController::class, 'show'])->name('servicos.show');
 Route::get('/contact', [PublicController::class, 'contact'])->name('contact');
 
@@ -44,7 +44,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['role:prestador'])->group(function () {
         Route::get('/prestador/dashboard', [PrestadorController::class, 'dashboard'])->name('prestador.dashboard');
         Route::get('/prestador/servicos', [ServicePublicController::class, 'myServices'])->name('prestador.servicos.index');
-
+        
         Route::get('/servicos/create', [ServicePublicController::class, 'create'])->name('servicos.create');
         Route::post('/servicos', [ServicePublicController::class, 'store'])->name('servicos.store');
         Route::get('/servicos/{id}/edit', [ServicePublicController::class, 'edit'])->name('servicos.edit');

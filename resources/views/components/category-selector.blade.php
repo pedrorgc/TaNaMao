@@ -257,7 +257,7 @@ $categories = $categories ?? [];
                 if (href) {
                     if (href.includes(`categoria=${currentCategory}`) ||
                         href.includes(`/categorias/${currentCategory}`) ||
-                        href.includes(`/servicos/${currentCategory}`)) {
+                        href.includes(`/servico/${currentCategory}`)) {
                         item.classList.add('active');
                     }
                 }

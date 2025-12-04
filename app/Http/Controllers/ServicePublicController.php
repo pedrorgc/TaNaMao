@@ -32,7 +32,7 @@ class ServicePublicController extends Controller
         $prestadores = $this->servicoService->buscarPrestadoresPorCategoria($categoria);
         $categorias = Categoria::all();
 
-        return view('pages.public.service-area', compact('prestadores', 'categorias', 'categoria', 'distancia'));
+        return view('servicos.service-area', compact('prestadores', 'categorias', 'categoria', 'distancia'));
     }
 
     public function create()
@@ -50,7 +50,7 @@ class ServicePublicController extends Controller
                 ? Categoria::find($prestador->categoria_id)
                 : null;
 
-            return view('pages.public.servicos.cadastrar', [
+            return view('pages.public.servicosCad.cadastrar', [
                 'categorias' => $categorias,
                 'prestador' => $prestador,
                 'dadosPrestador' => $dadosPrestador,
