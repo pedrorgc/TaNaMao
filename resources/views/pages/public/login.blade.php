@@ -161,7 +161,7 @@
         </div>
     </div>
     <footer>
-        Copyright © 2024 TaNaMão. Todos os direitos reservados.
+        Copyright © 2025 TaNaMão. Todos os direitos reservados.
     </footer>
     <div class="toast-container">
         <x-flash-success />

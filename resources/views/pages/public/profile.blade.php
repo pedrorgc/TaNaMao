@@ -499,7 +499,6 @@
                     </div>
                 </div>
 
-                <!-- SERVIÇOS OFERTADOS -->
                 <div class="card border-0 shadow-sm rounded-4 mb-4">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -510,7 +509,6 @@
                         </div>
 
                         <div class="row gy-4">
-                            <!-- Serviço 1 -->
                             <div class="col-md-6">
                                 <div class="card h-100 border-0 shadow-sm">
                                     <div class="card-body">
@@ -534,7 +532,6 @@
                                 </div>
                             </div>
 
-                            <!-- Serviço 2 -->
                             <div class="col-md-6">
                                 <div class="card h-100 border-0 shadow-sm">
                                     <div class="card-body">
@@ -566,7 +563,6 @@
     </div>
 </div>
 
-<!-- Modal para Adicionar Serviço -->
 @if($isPrestador)
 <div class="modal fade" id="addServiceModal" tabindex="-1">
     <div class="modal-dialog">

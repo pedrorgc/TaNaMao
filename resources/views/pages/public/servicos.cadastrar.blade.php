@@ -22,7 +22,6 @@
                     <form action="{{ route('servicos.store') }}" method="POST">
                         @csrf
                         
-                        <!-- Seção 1: Informações Básicas -->
                         <h5 class="border-bottom pb-2 mb-3">Informações do Serviço</h5>
                         
                         <div class="row">
@@ -72,7 +71,6 @@
                             </div>
                         </div>
                         
-                        <!-- Seção 2: Dados do Prestador -->
                         <h5 class="border-bottom pb-2 mb-3 mt-4">Dados para Contato</h5>
                         
                         <div class="row">
@@ -119,7 +117,6 @@
                             </div>
                         </div>
                         
-                        <!-- Seção 3: Localização -->
                         <h5 class="border-bottom pb-2 mb-3 mt-4">Localização do Serviço</h5>
                         
                         @if($dadosPrestador['tem_endereco_completo'])
@@ -176,7 +173,15 @@
                                         <option value="AC" {{ $dadosPrestador['estado'] == 'AC' ? 'selected' : '' }}>Acre</option>
                                         <option value="AL" {{ $dadosPrestador['estado'] == 'AL' ? 'selected' : '' }}>Alagoas</option>
                                         <option value="AP" {{ $dadosPrestador['estado'] == 'AP' ? 'selected' : '' }}>Amapá</option>
-                                        <!-- Adicione todos os estados -->
+                                        <option value="MG" {{ $dadosPrestador['estado'] == 'MG' ? 'selected' : '' }}>Minas Gerais</option>
+                                        <option value="AM" {{ $dadosPrestador['estado'] == 'AM' ? 'selected' : '' }}>Amazonas</option>
+                                        <option value="SP" {{ $dadosPrestador['estado'] == 'SP' ? 'selected' : '' }}>São Paulo</option>
+                                        <option value="RJ" {{ $dadosPrestador['estado'] == 'RJ' ? 'selected' : '' }}>Rio de Janeiro</option>
+                                        <option value="BA" {{ $dadosPrestador['estado'] == 'BA' ? 'selected' : '' }}>Bahia</option>
+                                        <option value="ES" {{ $dadosPrestador['estado'] == 'ES' ? 'selected' : '' }}>Espiríto Santo</option>
+                                        <option value="RS" {{ $dadosPrestador['estado'] == 'RS' ? 'selected' : '' }}>Rio Grande do Sul</option>
+                                        <option value="TO" {{ $dadosPrestador['estado'] == 'TO' ? 'selected' : '' }}>Tocantins</option>
+                                        <option value="PE" {{ $dadosPrestador['estado'] == 'PE' ? 'selected' : '' }}>Pernambuco</option>
                                     </select>
                                 </div>
                             </div>
@@ -185,7 +190,6 @@
                         </div>
                         @endif
                         
-                        <!-- Seção 4: Preços -->
                         <h5 class="border-bottom pb-2 mb-3 mt-4">Preços</h5>
                         
                         <div class="row">
@@ -217,7 +221,6 @@
                             </div>
                         </div>
                         
-                        <!-- Botões -->
                         <div class="d-flex justify-content-between mt-4 pt-3 border-top">
                             <a href="{{ url()->previous() }}" class="btn btn-outline-secondary">
                                 <i class="fas fa-arrow-left"></i> Voltar
@@ -236,7 +239,7 @@
 <!-- Script para mostrar/ocultar campos de endereço e preço -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Controle do endereço alternativo
+
     const usarEnderecoCheckbox = document.getElementById('usar_endereco_cadastro');
     const enderecoAlternativo = document.getElementById('endereco_alternativo');
     
@@ -244,20 +247,20 @@ document.addEventListener('DOMContentLoaded', function() {
         usarEnderecoCheckbox.addEventListener('change', function() {
             if (this.checked) {
                 enderecoAlternativo.style.display = 'none';
-                // Desabilita campos do endereço alternativo
+                // desabilita campos do endereço alternativo
                 enderecoAlternativo.querySelectorAll('input, select').forEach(el => {
                     el.disabled = true;
                 });
             } else {
                 enderecoAlternativo.style.display = 'block';
-                // Habilita campos do endereço alternativo
+                // habilita campos do endereço alternativo
                 enderecoAlternativo.querySelectorAll('input, select').forEach(el => {
                     el.disabled = false;
                 });
             }
         });
         
-        // Inicializa estado
+        // inicializa estado
         if (usarEnderecoCheckbox.checked) {
             enderecoAlternativo.querySelectorAll('input, select').forEach(el => {
                 el.disabled = true;
@@ -265,7 +268,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Controle dos campos de preço
+    // controle dos campos de preço
     const tipoValorSelect = document.querySelector('select[name="tipo_valor"]');
     const campoValorHora = document.getElementById('campo_valor_hora');
     const campoValorFixo = document.getElementById('campo_valor_fixo');

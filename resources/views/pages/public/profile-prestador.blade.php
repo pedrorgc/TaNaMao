@@ -1,10 +1,8 @@
-@extends('components.layouts.app')
+@extends('layouts.app')
 
 @section('content')
-<!-- Reduzido padding-top de 100px para 80px e ajustado min-height -->
 <div style="background-color: #EAEAEA; min-height: calc(100vh - 60px); padding-top: 80px; padding-bottom: 40px;">
 
-    <!-- Navbar superior azul -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #1D4ED8;">
         <div class="container d-flex justify-content-between align-items-center">
             <a href="home" class="text-white text-decoration-none">
@@ -19,7 +17,6 @@
         </div>
     </nav>
 
-    <!-- Reduzido margin-top de my-5 para my-4 -->
     <div class="container my-4">
         @include('components.card-pessoa',['sigla' => 'LF', 'nome' => 'Luiz Felipe', 'ocupacao' => 'Prestador', 'data' => 'Membro desde janeiro de 2024', 'status' => 'Status do perfil: Ativo'])
 
@@ -106,7 +103,6 @@
                     </div>
                 </div>
 
-                <!-- Modal para Editar Perfil - ESTRUTURA CORRIGIDA -->
                 <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable">
                         <div class="modal-content">
@@ -164,7 +160,7 @@
                                     </div>
                                 </form>
                             </div>
-                            <!-- modal-footer MOVIDO PARA DENTRO de modal-content -->
+
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                 <button type="button" class="btn btn-primary" id="saveProfileBtn">Salvar Alterações</button>
@@ -254,7 +250,6 @@
             </div>
 
             <div class="tab-pane fade" id="portfolio">
-                <!-- AGENDA DE HORÁRIOS -->
                 <div class="card border-0 shadow-sm rounded-4 mb-4">
                     <div class="card-body">
                         <h5 class="fw-bold mb-4">Agenda de Horários</h5>
@@ -292,7 +287,6 @@
                     </div>
                 </div>
 
-                <!-- SERVIÇOS OFERTADOS -->
                 <div class="card border-0 shadow-sm rounded-4 mb-4">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -358,7 +352,6 @@
         }
     });
 
-    // Carregar categorias do JSON
     fetch('{{ asset("data/categorias.json") }}')
         .then(response => response.json())
         .then(data => {

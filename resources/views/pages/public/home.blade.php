@@ -208,7 +208,7 @@
                     @include('components.button', [
                     'slot' => 'Cadastre-se Grátis',
                     'class' => 'btn-primary px-4 py-2',
-                    'href' => '/pre-cadastro'
+                    'href' => $findServicesRoute
                     ])
                     @include('components.button', [
                     'slot' => 'Conheça Mais',

@@ -138,7 +138,6 @@
         </div>
 
         <div class="row g-4">
-            <!-- Card Cliente -->
             <div class="col-md-6">
                 <div class="profile-card" onclick="selecionarPerfil('cliente')">
                     <div class="profile-icon">
@@ -155,7 +154,6 @@
                 </div>
             </div>
 
-            <!-- Card Prestador -->
             <div class="col-md-6">
                 <div class="profile-card" onclick="selecionarPerfil('prestador')">
                     <div class="profile-icon">
